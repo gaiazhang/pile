@@ -79,7 +79,7 @@ Toast.defaultProps = {
   content: '',
   iconType: '',
   duration: 3,
-  visible: true,
+  visible: false,
   onClose: null,
 };
 

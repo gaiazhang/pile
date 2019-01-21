@@ -1,7 +1,7 @@
-'use strict';
+// 'use strict';
 
-const condition = require('..');
+// const condition = require('..');
 
-describe('@pile/condition', () => {
-    it('needs tests');
-});
+// describe('@pile/condition', () => {
+//     it('needs tests');
+// });

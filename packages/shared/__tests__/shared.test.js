@@ -1,7 +1,7 @@
-'use strict';
+// 'use strict';
 
-const shared = require('..');
+// const shared = require('..');
 
-describe('shared', () => {
-    it('needs tests');
-});
+// describe('shared', () => {
+//     it('needs tests');
+// });

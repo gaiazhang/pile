@@ -16,6 +16,7 @@ module.exports = function (api) {
       debug: true,
     }], '@babel/preset-react'],
     plugins: [
+      '@babel/plugin-transform-modules-commonjs',
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-transform-runtime',
       // ['prismjs', {
