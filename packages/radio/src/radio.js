@@ -8,21 +8,26 @@ import {
   sizes,
 } from '@pile/shared';
 import { IfComponent } from '@pile/condition';
-import { compose as composed, withState, withHandlers } from 'recompose'
+import { compose as composed, withState, withHandlers, mapProps } from 'recompose'
 
 const enhanced = composed(
-  withState('value', 'updateValue', ''),
-  withState('id', 'updateId', ''),
+  // mapProps((props) => {
+  //   return props
+  // }),
+  withState('selectedValue', 'updateValue', (props) => {
+    return props.value
+  }),
+  withState('id', 'updateId', 'radio'),
   withHandlers({
-    onChange: props => event => {
-      props.updateValue(event.target.value)
+    onClick: props => value => event => {
+      props.updateValue(value)
+      props.onChange(value)
     }
   })
 )
 
-
 const Radio = enhanced(({
-  prefixCls, className, size, value, onChange,
+  prefixCls, className, size, onClick, options, selectedValue,
   ...props
 }) => {
   const cls = classNames({
@@ -31,12 +36,28 @@ const Radio = enhanced(({
     [`is-${size}`]: size,
   });
 
+  options && options.forEach((item, index) => {
+    if (item.value == selectedValue) {
+      item.clsicon = classNames({
+        [`${prefixCls}-radio-icon`]: true,
+        [`${prefixCls}-radio-checked`]: true,
+      });
+    } else {
+      item.clsicon = classNames({
+        [`${prefixCls}-radio-icon`]: true,
+        [`${prefixCls}-radio-no`]: true,
+      });
+    }
+  })
+
   return (
-    <div className={cls} onClick={onChange}>
-      <label className="label" htmlFor={props.id}>
-        <span id={props.id} className={classNames('icon', props.radioType)} />
-        {props.label + '12344'}
-      </label>
+    <div className={cls} >
+      {options && options.map( (item, index) => 
+        <label className="label" key={item.value + '' + index} htmlFor={item.value + index} onClick={onClick(item.value)}>
+          <span id={item.value + index} className={item.clsicon}></span>
+          <span style={{verticalAlign: 'middle'}}>{item.label}</span>
+        </label>
+      )}
     </div>)
 })
 

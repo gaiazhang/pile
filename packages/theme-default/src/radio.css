@@ -2,12 +2,49 @@
 @ns pile {
     @c radio{
         color: blue;
-        font-size: 23px;
-        @d content{
-            color: var(--color-white);
-            font-size: var(--font-size-base);
-            line-height: 20px;
+        font-size: 14px;
+        display: inline-block;
+        @d checked{
+            width:40px;
+            height:40px;
+            border-radius:42px ;
+            background: #1e96fa;
+            display:block;
+            position: relative;
+            
+            &::before, &::after {
+                content:"";
+                height:28px;
+                width:6px;
+                border-radius: 10px;
+                display:block;
+                background:white;
+                position: absolute;
+                top:6px;/*40-6=34*/
+                left:20px;/*make the two rects in the middle of the cycle */
+                transform:rotate(45deg);    
+                -ms-transform:rotate(45deg);    
+            }
+            &::before {
+                height:15px;
+                transform: rotate(-45deg);
+                -ms-transform:rotate(-45deg);
+                position: absolute;
+                top:18px;/*40-18=12  */
+                left:8px;       
+            }
+        }
+        @d no{
+            width:40px;
+            height:40px;
+            border-radius:42px ;
+            background: #fff;
+            border: 1px solid #ccc;
+        }
+        @d icon {
+            font-size: 24px;
             display: inline-block;
+            vertical-align: middle;
         }
     }
 }
