@@ -16,6 +16,7 @@ export default () => (
       <Route path="/alert" component={pages.Alert} />
       <Route path="/switch" component={pages.Switch} />
       <Route path="/input" component={pages.Input} />
+      <Route path="/radio" component={pages.Radio} />
       <Route path="/" exact render={() => <Redirect to="/button" />} />
     </Switch>
   </div>

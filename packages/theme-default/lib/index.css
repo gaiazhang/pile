@@ -2214,3 +2214,17 @@ template {
 .pile-input-fucos {
     display:block;
 }
+
+.pile-radio {
+        color: blue;
+        font-size: 23px;
+}
+
+.pile-radio-content {
+            color: #fff;
+            color: var(--color-white);
+            font-size: 14px;
+            font-size: var(--font-size-base);
+            line-height: 20px;
+            display: inline-block;
+}

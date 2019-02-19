@@ -31,8 +31,8 @@ class Switch extends React.Component {
    * 将 CSS 长度单位减去相应数值并转换
    * 如 getMinusedSize(1) => 1px
    * 如 getMinusedSize(3, 1) => 2px
-   * @param {*} size 
-   * @param {*} minusNum 
+   * @param {*} size
+   * @param {*} minusNum
    */
   getMinusedSize (size, minusNum = 0) {
     if (typeof size === 'number') {

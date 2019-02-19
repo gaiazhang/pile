@@ -4,6 +4,7 @@ import Totast from './toast';
 import Alert from './alert';
 import Switch from './switch';
 import Input from './input';
+import Radio from './radio';
 
 export default {
   Button,
@@ -12,4 +13,5 @@ export default {
   Alert,
   Switch,
   Input,
+  Radio,
 };
