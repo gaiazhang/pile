@@ -8,23 +8,23 @@ import {
 
 const InputLabel = ({
   prefixCls,
-  labelText,
+  labeltext,
 }) => {
   const labelCls = classNames({
     [`${prefixCls}-input-label`]: true,
   });
 
   return (
-    <div className={labelCls}>{labelText}</div>
+    <div className={labelCls}>{labeltext}</div>
   );
 };
 
 InputLabel.propTypes = {
-  labelText: PropTypes.string,
+  labeltext: PropTypes.string,
 };
 
 InputLabel.defaultProps = {
-  labelText: '',
+  labeltext: '',
 };
 
 export default prefixClsProperty(InputLabel);

@@ -5,8 +5,9 @@
 render () {
   return (
     <div>
-      <Input placeholder='请输入姓名'>姓名：</Input>
+      <Input placeholder='请输入姓名' value='我是谁'>姓名：</Input>
       <Input placeholder='请输入电话'>电话：</Input>
+      <Input placeholder='我要自动获取焦点' autoFocus={true}>自动对焦</Input>
     </div>
   )
 }

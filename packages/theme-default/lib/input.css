@@ -151,3 +151,14 @@
               appearance:none;
       background-color: rgba(0, 0, 0, 0);
     }
+
+
+.pile-input-clear {
+    cursor:pointer;
+    display:none;
+}
+
+
+.pile-input-fucos {
+    display:block;
+}

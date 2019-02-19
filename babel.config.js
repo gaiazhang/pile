@@ -9,8 +9,9 @@ module.exports = function config(api) {
             useBuiltIns: 'entry',
             debug: true,
           }],
-          '@babel/preset-react'],
-        plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-runtime'],
+          '@babel/preset-react',
+        ],
+        plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-runtime', '@babel/proposal-class-properties'],
       },
       test: {
         presets: [['@babel/preset-env'], '@babel/preset-react'],
@@ -34,7 +35,7 @@ module.exports = function config(api) {
           }],
           '@babel/preset-react',
         ],
-        plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-runtime'],
+        plugins: ['@babel/plugin-syntax-dynamic-import', '@babel/plugin-transform-runtime', '@babel/proposal-class-properties'],
       },
     },
   };

@@ -7,25 +7,18 @@ import {
 import InputLabel from './inputlabel';
 import InputContent from './inputContent';
 
-
 const Input = ({
   prefixCls,
-  type,
   children,
-  placeholder,
+  ...props
 }) => {
   const wrapCls = classNames({
     [`${prefixCls}-input-item`]: true,
   });
-  const labelCls = classNames({
-    [`${prefixCls}-input-label`]: true,
-  });
-  const inputCls = classNames({
-    [`${prefixCls}-input-input`]: true,
-  });
+
   return (
     <div className={wrapCls}>
-      <InputLabel labelText={children} />
+      <InputLabel labeltext={children} />
       <InputContent {...props} />
     </div>
   );
@@ -35,12 +28,21 @@ Input.propTypes = {
   type: PropTypes.string,
   children: PropTypes.string,
   placeholder: PropTypes.string,
+  clearable: PropTypes.bool,
+  autoFocus: PropTypes.bool,
+  name: PropTypes.string,
+  disabled: PropTypes.bool,
 };
+
 
 Input.defaultProps = {
   type: 'text',
   children: '',
   placeholder: '',
+  clearable: true,
+  name: '',
+  autoFocus: false,
+  disabled: false,
 };
 
 export default prefixClsProperty(Input);
