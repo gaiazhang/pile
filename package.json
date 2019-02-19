@@ -2,15 +2,7 @@
   "name": "root",
   "scripts": {
     "start": "webpack-dev-server --open --config ./site/config/webpack.config.dev ",
-    "test": "jest --no-cache"
-  },
-  "jest": {
-    "setupFiles": [
-      "./tests/setup.js"
-    ],
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ]
+    "test": "jest --verbose=true --no-cache packages/switch/ "
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
