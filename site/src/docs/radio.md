@@ -11,8 +11,19 @@ render () {
 	var onChange = (v) => console.log('onChange===>', v)
   return (
     <div>
-      <Radio options={options} value={1} onChange={onChange} ></Radio>
+      <Radio options={options} disabled={false} value={1} onChange={onChange} ></Radio>
     </div>
   )
 }
 ```
+
+## API
+
+### props
+
+|   参数    |   类型   |   默认  |   说明     |
+|-----------|----------|------------|-------------------|
+| options  |  object  |  -      | 需要配置的radio。value：radio值；label：radio文案 |
+| value  |  string，number  |  -      | 默认选中的radio值 |
+| disabled     | boolean |  false    | 是否禁用 |
+| onChange     | function |  -    | 选中回调函数 |

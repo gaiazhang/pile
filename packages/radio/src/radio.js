@@ -19,7 +19,8 @@ const enhanced = composed(
   }),
   withState('id', 'updateId', 'radio'),
   withHandlers({
-    onClick: props => value => event => {
+    onClick: props => (value) => event => {
+      if (props.disabled) return null
       props.updateValue(value)
       props.onChange(value)
     }
@@ -27,13 +28,12 @@ const enhanced = composed(
 )
 
 const Radio = enhanced(({
-  prefixCls, className, size, onClick, options, selectedValue,
+  prefixCls, className, onClick, options, selectedValue, disabled,
   ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-radio`]: true,
     [className]: className,
-    [`is-${size}`]: size,
   });
 
   options && options.forEach((item, index) => {
@@ -41,11 +41,13 @@ const Radio = enhanced(({
       item.clsicon = classNames({
         [`${prefixCls}-radio-icon`]: true,
         [`${prefixCls}-radio-checked`]: true,
+        [`${prefixCls}-radio-disabled`]: disabled,
       });
     } else {
       item.clsicon = classNames({
         [`${prefixCls}-radio-icon`]: true,
         [`${prefixCls}-radio-no`]: true,
+        [`${prefixCls}-radio-disabled-no`]: disabled,
       });
     }
   })
@@ -53,9 +55,9 @@ const Radio = enhanced(({
   return (
     <div className={cls} >
       {options && options.map( (item, index) => 
-        <label className="label" key={item.value + '' + index} htmlFor={item.value + index} onClick={onClick(item.value)}>
+        <label className={`${prefixCls}-radio-label`} key={item.value + '' + index} htmlFor={item.value + index} onClick={onClick(item.value)}>
           <span id={item.value + index} className={item.clsicon}></span>
-          <span style={{verticalAlign: 'middle'}}>{item.label}</span>
+          <span className={`${prefixCls}-radio-text`}>{item.label}</span>
         </label>
       )}
     </div>)
