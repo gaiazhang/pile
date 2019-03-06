@@ -56,7 +56,6 @@ class ToastContent extends React.Component {
           {content}
         </div>
       </div>
-
     );
   }
 }
