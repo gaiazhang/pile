@@ -23,7 +23,7 @@ class ToastContent extends React.Component {
   close() {
     this.clearCloseTimer();
     // 执行关闭操作
-    // this.props.onAnimateLeave();
+    this.props.onAnimateLeave();
   }
 
   startCloseTimer() {
@@ -48,11 +48,28 @@ class ToastContent extends React.Component {
   }
 
   render() {
-    const { content, iconType } = this.props;
+    let { content, iconType } = this.props;
+    let type = '';
+
+    switch (iconType) {
+      case 'success':
+        type = 'check-circle';
+        break;
+      case 'fail':
+        type = 'error-circle';
+        break;
+      case 'load':
+        type = 'loading';
+        content = '加载中...';
+        break;
+      default:
+        type = '';
+    }
+
     return (
       <div className="pile-toast">
-        {iconType ? (<Icon type="check-circle" size="large" />) : null }
-        <div className="pile-toast-content">
+        {iconType && type ? (<Icon type={type} size="large" />) : null }
+        <div className="pile-toast-content" ref={(t) => { this.toastContent = t; }}>
           {content}
         </div>
       </div>
