@@ -10,14 +10,15 @@ import pages from '../pages';
 export default () => (
   <div style={{ height: '100%' }}>
     <Switch>
-      <Route path="/button" component={pages.Button} />
-      <Route path="/icon" component={pages.Icon} />
-      <Route path="/totast" component={pages.Totast} />
-      <Route path="/alert" component={pages.Alert} />
-      <Route path="/switch" component={pages.Switch} />
-      <Route path="/input" component={pages.Input} />
-      <Route path="/radio" component={pages.Radio} />
-      <Route path="/" exact render={() => <Redirect to="/button" />} />
+      <Route path="/components/button" component={pages.Button} />
+      <Route path="/components/icon" component={pages.Icon} />
+      <Route path="/components/totast" component={pages.Totast} />
+      <Route path="/components/alert" component={pages.Alert} />
+      <Route path="/components/switch" component={pages.Switch} />
+      <Route path="/components/input" component={pages.Input} />
+      <Route path="/components/radio" component={pages.Radio} />
+      <Route path="/components/introduce" component={pages.Introduce} />
+      <Route path="/" exact render={() => <Redirect to="/components/introduce" />} />
     </Switch>
   </div>
 );

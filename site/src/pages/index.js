@@ -5,6 +5,7 @@ import Alert from './alert';
 import Switch from './switch';
 import Input from './input';
 import Radio from './radio';
+import Introduce from './introduce';
 
 export default {
   Button,
@@ -14,4 +15,5 @@ export default {
   Switch,
   Input,
   Radio,
+  Introduce,
 };
