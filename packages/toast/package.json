@@ -5,8 +5,8 @@
   "keywords": [],
   "author": "wutaosusan <wutaosusan@didichuxing.com>",
   "license": "ISC",
-  "main": "lib/toast.js",
-  "module": "src/index.js",
+  "main": "lib/toast.min.js",
+  "module": "lib/toast.esm.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -22,7 +22,8 @@
     "url": "git+https://github.com/zhixunqiu/pile.git"
   },
   "scripts": {
-    "test": "echo \"Error: run tests from root\" && exit 1"
+    "test": "echo \"Error: run tests from root\" && exit 1",
+    "build": "rollup -c config/rollup.prod.js"
   },
   "bugs": {
     "url": "https://github.com/zhixunqiu/pile/issues"
@@ -33,5 +34,21 @@
     "@pile/shared": "^0.1.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.6.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-preset-es2015-rollup": "^3.0.0",
+    "babel-preset-latest": "^6.24.1",
+    "rollup-plugin-alias": "^1.5.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-image": "^1.0.2",
+    "rollup-plugin-node-resolve": "^4.0.1",
+    "rollup-plugin-replace": "^2.1.0",
+    "rollup-plugin-uglify": "^6.0.2",
+    "uglify-es": "^3.3.9"
   }
 }
