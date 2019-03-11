@@ -1,7 +1,7 @@
-'use strict';
+// 'use strict';
 
-const icon = require('..');
+// const icon = require('..');
 
-describe('@pile/icon', () => {
-    it('needs tests');
-});
+// describe('@pile/icon', () => {
+//     it('needs tests');
+// });
