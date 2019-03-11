@@ -1,9 +1,10 @@
 /*!
- * @pile/shared.js v0.1.0
+ * @pile/shared.js v2.0.0
  * (c) 2018-2019 renmaomin <renmaomin@126.com> (https://github.com/renmm)
  * Released under the MIT License.
  */
 import PropTypes from 'prop-types';
+import { forwardRef, createElement, Component } from 'react';
 
 var XTINY = 'xtiny';
 var TINY = 'tiny';
@@ -35,6 +36,8 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+var defineProperty = _defineProperty;
+
 function _objectSpread(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
@@ -47,12 +50,14 @@ function _objectSpread(target) {
     }
 
     ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
+      defineProperty(target, key, source[key]);
     });
   }
 
   return target;
 }
+
+var objectSpread = _objectSpread;
 
 var curry = function curry(fn) {
   var optional = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -81,7 +86,7 @@ var sizeProperty = curry(function (sizes, defaultSize, Component) {
     defaultSize = null;
   }
 
-  Component.propTypes = _objectSpread({}, Component.propTypes, {
+  Component.propTypes = objectSpread({}, Component.propTypes, {
     size: PropTypes.oneOf(sizes)
   });
 
@@ -101,7 +106,7 @@ var prefixCls = curry(function (ns, Component) {
     ns = 'pile';
   }
 
-  Component.propTypes = _objectSpread({}, Component.propTypes, {
+  Component.propTypes = objectSpread({}, Component.propTypes, {
     prefixCls: PropTypes.string
   });
 
@@ -127,4 +132,217 @@ var compose = function compose() {
   return fns.reduce(compose2);
 };
 
-export { sizes, sizeProperty, prefixCls as prefixClsProperty, compose, compose2 };
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var _extends_1 = createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+});
+
+function _objectWithoutPropertiesLoose(source, excluded) {
+  if (source == null) return {};
+  var target = {};
+  var sourceKeys = Object.keys(source);
+  var key, i;
+
+  for (i = 0; i < sourceKeys.length; i++) {
+    key = sourceKeys[i];
+    if (excluded.indexOf(key) >= 0) continue;
+    target[key] = source[key];
+  }
+
+  return target;
+}
+
+var objectWithoutPropertiesLoose = _objectWithoutPropertiesLoose;
+
+function _objectWithoutProperties(source, excluded) {
+  if (source == null) return {};
+  var target = objectWithoutPropertiesLoose(source, excluded);
+  var key, i;
+
+  if (Object.getOwnPropertySymbols) {
+    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
+
+    for (i = 0; i < sourceSymbolKeys.length; i++) {
+      key = sourceSymbolKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
+      target[key] = source[key];
+    }
+  }
+
+  return target;
+}
+
+var objectWithoutProperties = _objectWithoutProperties;
+
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+var classCallCheck = _classCallCheck;
+
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
+
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+var createClass = _createClass;
+
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+});
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+var assertThisInitialized = _assertThisInitialized;
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+var possibleConstructorReturn = _possibleConstructorReturn;
+
+var getPrototypeOf = createCommonjsModule(function (module) {
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+});
+
+var setPrototypeOf = createCommonjsModule(function (module) {
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+});
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+var inherits = _inherits;
+
+/* eslint-disable no-param-reassign */
+
+var refProperty = curry(function (Component$1) {
+  var LogProps =
+  /*#__PURE__*/
+  function (_React$Component) {
+    inherits(LogProps, _React$Component);
+
+    function LogProps() {
+      classCallCheck(this, LogProps);
+
+      return possibleConstructorReturn(this, getPrototypeOf(LogProps).apply(this, arguments));
+    }
+
+    createClass(LogProps, [{
+      key: "render",
+      value: function render() {
+        var _this$props = this.props,
+            forwardedRef = _this$props.forwardedRef,
+            rest = objectWithoutProperties(_this$props, ["forwardedRef"]);
+
+        return createElement(Component$1, _extends_1({
+          ref: forwardedRef
+        }, rest));
+      }
+    }]);
+
+    return LogProps;
+  }(Component);
+
+  function forwardRef$1(props, ref) {
+    return createElement(LogProps, _extends_1({}, props, {
+      forwardedRef: ref
+    }));
+  }
+
+  var name = Component$1.displayName || Component$1.name;
+  forwardRef$1.displayName = "logProps(".concat(name, ")");
+  return forwardRef(forwardRef$1);
+}, 1);
+
+export { sizes, sizeProperty, prefixCls as prefixClsProperty, compose, compose2, refProperty };
+//# sourceMappingURL=shared.esm.js.map

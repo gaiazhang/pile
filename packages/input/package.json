@@ -1,12 +1,12 @@
 {
   "name": "@pile/input",
-  "version": "0.1.0",
+  "version": "2.0.0",
   "description": "Now I’m the model of a modern major general / The venerated Virginian veteran whose men are all / Lining up, to put me up on a pedestal / Writin’ letters to relatives / Embellishin’ my elegance and eloquence / But the elephant is in the room / The truth is in ya face when ya hear the British cannons go / BOOM",
   "keywords": [],
   "author": "huangping <huangping@didichuxing.com>",
   "license": "ISC",
+  "module": "lib/input.esm.js",
   "main": "lib/input.js",
-  "module": "src/index.js",
   "directories": {
     "lib": "lib",
     "test": "__tests__"
@@ -21,9 +21,9 @@
     "test": "echo \"Error: run tests from root\" && exit 1"
   },
   "dependencies": {
-    "@pile/condition": "^0.1.0",
-    "@pile/shared": "^0.1.0",
-    "@pile/icon": "^0.1.0",
+    "@pile/condition": "^2.0.0",
+    "@pile/shared": "^2.0.0",
+    "@pile/icon": "^2.0.0",
     "classnames": "^2.2.6",
     "prop-types": "^15.6.2"
   }

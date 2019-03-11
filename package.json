@@ -1,9 +1,14 @@
 {
   "name": "root",
   "scripts": {
+    "postinstall": "npm run bootstrap",
+    "bootstrap": "lerna bootstrap --hoist --no-ci",
     "start": "npm run watch:css | webpack-dev-server --open --config ./site/config/webpack.config.dev ",
     "test": "jest --verbose=true --no-cache packages/switch/ ",
-    "watch:css": "gulp watch-css --cwd ./packages/theme-default"
+    "watch:css": "gulp watch-css --cwd ./packages/theme-default",
+    "build": "rollup -c",
+    "watch": "rollup -cw",
+    "lerna": "lerna"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
@@ -46,9 +51,10 @@
     "jest": "^23.0.0",
     "jest-spec-reporter": "^1.0.3",
     "json-loader": "^0.5.7",
-    "lerna": "^3.10.5",
+    "lerna": "^3.13.1",
     "marked": "^0.5.2",
     "mini-css-extract-plugin": "^0.4.4",
+    "minimist": "^1.2.0",
     "mockdate": "^2.0.1",
     "postcss-loader": "^3.0.0",
     "prismjs": "^1.15.0",
@@ -61,6 +67,13 @@
     "react-router-dom": "^4.3.1",
     "recompose": "^0.30.0",
     "rimraf": "^2.6.2",
+    "rollup": "^1.5.0",
+    "rollup-plugin-alias": "^1.5.1",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-buble": "^0.19.6",
+    "rollup-plugin-commonjs": "^9.2.1",
+    "rollup-plugin-filesize": "^6.0.1",
+    "rollup-plugin-node-resolve": "^4.0.1",
     "style-loader": "^0.23.1",
     "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.20.2",
@@ -76,5 +89,6 @@
   "peerDependencies": {
     "react": ">=16.0.0",
     "react-dom": ">=16.0.0"
-  }
+  },
+  "dependencies": {}
 }

@@ -1,5 +1,5 @@
 /*!
- * @pile/toast.js v0.1.0
+ * @pile/toast.js v2.0.0
  * (c) 2018-2019 wutaosusan <wutaosusan@didichuxing.com>
  * Released under the MIT License.
  */
@@ -13,6 +13,8 @@ function _classCallCheck(instance, Constructor) {
     throw new TypeError("Cannot call a class as a function");
   }
 }
+
+var classCallCheck = _classCallCheck;
 
 function _defineProperties(target, props) {
   for (var i = 0; i < props.length; i++) {
@@ -30,6 +32,93 @@ function _createClass(Constructor, protoProps, staticProps) {
   return Constructor;
 }
 
+var createClass = _createClass;
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var _typeof_1 = createCommonjsModule(function (module) {
+function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
+
+function _typeof(obj) {
+  if (typeof Symbol === "function" && _typeof2(Symbol.iterator) === "symbol") {
+    module.exports = _typeof = function _typeof(obj) {
+      return _typeof2(obj);
+    };
+  } else {
+    module.exports = _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : _typeof2(obj);
+    };
+  }
+
+  return _typeof(obj);
+}
+
+module.exports = _typeof;
+});
+
+function _assertThisInitialized(self) {
+  if (self === void 0) {
+    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+  }
+
+  return self;
+}
+
+var assertThisInitialized = _assertThisInitialized;
+
+function _possibleConstructorReturn(self, call) {
+  if (call && (_typeof_1(call) === "object" || typeof call === "function")) {
+    return call;
+  }
+
+  return assertThisInitialized(self);
+}
+
+var possibleConstructorReturn = _possibleConstructorReturn;
+
+var getPrototypeOf = createCommonjsModule(function (module) {
+function _getPrototypeOf(o) {
+  module.exports = _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+    return o.__proto__ || Object.getPrototypeOf(o);
+  };
+  return _getPrototypeOf(o);
+}
+
+module.exports = _getPrototypeOf;
+});
+
+var setPrototypeOf = createCommonjsModule(function (module) {
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  };
+
+  return _setPrototypeOf(o, p);
+}
+
+module.exports = _setPrototypeOf;
+});
+
+function _inherits(subClass, superClass) {
+  if (typeof superClass !== "function" && superClass !== null) {
+    throw new TypeError("Super expression must either be null or a function");
+  }
+
+  subClass.prototype = Object.create(superClass && superClass.prototype, {
+    constructor: {
+      value: subClass,
+      writable: true,
+      configurable: true
+    }
+  });
+  if (superClass) setPrototypeOf(subClass, superClass);
+}
+
+var inherits = _inherits;
+
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -45,6 +134,8 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+var defineProperty = _defineProperty;
+
 function _objectSpread(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
@@ -57,74 +148,29 @@ function _objectSpread(target) {
     }
 
     ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
+      defineProperty(target, key, source[key]);
     });
   }
 
   return target;
 }
 
-function _inherits(subClass, superClass) {
-  if (typeof superClass !== "function" && superClass !== null) {
-    throw new TypeError("Super expression must either be null or a function");
-  }
-
-  subClass.prototype = Object.create(superClass && superClass.prototype, {
-    constructor: {
-      value: subClass,
-      writable: true,
-      configurable: true
-    }
-  });
-  if (superClass) _setPrototypeOf(subClass, superClass);
-}
-
-function _getPrototypeOf(o) {
-  _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
-    return o.__proto__ || Object.getPrototypeOf(o);
-  };
-  return _getPrototypeOf(o);
-}
-
-function _setPrototypeOf(o, p) {
-  _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  };
-
-  return _setPrototypeOf(o, p);
-}
-
-function _assertThisInitialized(self) {
-  if (self === void 0) {
-    throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
-  }
-
-  return self;
-}
-
-function _possibleConstructorReturn(self, call) {
-  if (call && (typeof call === "object" || typeof call === "function")) {
-    return call;
-  }
-
-  return _assertThisInitialized(self);
-}
+var objectSpread = _objectSpread;
 
 var IS_REACT_16 = !!ReactDOM.createPortal;
 
 var DialogWrap =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(DialogWrap, _React$Component);
+  inherits(DialogWrap, _React$Component);
 
   function DialogWrap(props) {
-    _classCallCheck(this, DialogWrap);
+    classCallCheck(this, DialogWrap);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(DialogWrap).call(this, props));
+    return possibleConstructorReturn(this, getPrototypeOf(DialogWrap).call(this, props));
   }
 
-  _createClass(DialogWrap, [{
+  createClass(DialogWrap, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.visible) {
@@ -169,7 +215,7 @@ function (_React$Component) {
     key: "getComponent",
     value: function getComponent() {
       var props = this.props;
-      return cloneElement(props.children, _objectSpread({
+      return cloneElement(props.children, objectSpread({
         onAnimateLeave: this.removeContainer.bind(this)
       }, props));
     }
@@ -214,15 +260,15 @@ function (_React$Component) {
 var ToastContent =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(ToastContent, _React$Component);
+  inherits(ToastContent, _React$Component);
 
   function ToastContent() {
-    _classCallCheck(this, ToastContent);
+    classCallCheck(this, ToastContent);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(ToastContent).apply(this, arguments));
+    return possibleConstructorReturn(this, getPrototypeOf(ToastContent).apply(this, arguments));
   }
 
-  _createClass(ToastContent, [{
+  createClass(ToastContent, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       this.startCloseTimer();
@@ -319,3 +365,4 @@ Toast.defaultProps = {
 // export { default as Mask } from './mask';
 
 export { Toast };
+//# sourceMappingURL=toast.esm.js.map
