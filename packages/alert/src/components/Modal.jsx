@@ -4,12 +4,11 @@ import PropTypes from 'prop-types';
 import DialogWrap from './DialogWrap';
 
 export default class Modal extends Component {
-  constructor(props) {
+  /* constructor(props) {
     super(props);
-    this.renderFooterButton = this.renderFooterButton.bind(this);
-  }
+  } */
 
-  renderFooterButton(button, prefixCls, i) {
+  renderFooterButton = (button, prefixCls, i) => {
     let buttonStyle = {};
     if (button.style) {
       buttonStyle = button.style;
@@ -32,14 +31,17 @@ export default class Modal extends Component {
 
     return (
       <div className={`${prefixCls}-button`} key={i}>
+        {/* eslint-disable  */}
         <a
           className={`${prefixCls}-button`}
           role="button"
           style={buttonStyle}
           onClick={onClickFn}
+          onKeyPress={onClickFn}
         >
           {button.text || 'Button'}
         </a>
+        { /* eslint-enable */}
       </div>
     );
   }
@@ -84,16 +86,18 @@ export default class Modal extends Component {
 
 Modal.defaultProps = {
   prefixCls: 'pile-modal',
-  style: {},
   onShow() {},
+  /* eslint-disable */
   footer: [],
-  closable: false,
+ /*  eslint-enable */
+
 };
 Modal.propTypes = {
+  /* eslint-disable */
+  footer: PropTypes.element.isRequired,
+  /*  eslint-enable */
   prefixCls: PropTypes.string,
-  className: PropTypes.string,
-  wrapClassName: PropTypes.string,
   onShow: PropTypes.func,
-  footer: PropTypes.array,
+
 };
 // export default WithPortal(Modal);
