@@ -9,7 +9,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var classnames = _interopDefault(require('classnames'));
 var React = _interopDefault(require('react'));
-var shared = require('@pile/shared');
+require('@pile/shared');
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -1431,7 +1431,8 @@ Switch.defaultProps = {
   checkedColor: '#343c5c',
   width: '50px',
   height: '30px',
-  onChange: function onChange() {}
+  onChange: function onChange() {},
+  prefixCls: 'pile'
 };
 Switch.propTypes = {
   checked: propTypes.bool,
@@ -1441,9 +1442,9 @@ Switch.propTypes = {
   checkedColor: propTypes.string,
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  onChange: propTypes.func
+  onChange: propTypes.func,
+  prefixCls: propTypes.string
 };
-var index = shared.prefixClsProperty();
 
-module.exports = index;
+module.exports = Switch;
 //# sourceMappingURL=switch.js.map
