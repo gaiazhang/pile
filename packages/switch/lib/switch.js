@@ -1443,7 +1443,7 @@ Switch.propTypes = {
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func
 };
-var index = shared.prefixClsProperty();
+var index = shared.prefixClsProperty(Switch);
 
 module.exports = index;
 //# sourceMappingURL=switch.js.map

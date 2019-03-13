@@ -1439,7 +1439,7 @@ Switch.propTypes = {
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func
 };
-var index = prefixClsProperty();
+var index = prefixClsProperty(Switch);
 
 export default index;
 //# sourceMappingURL=switch.esm.js.map

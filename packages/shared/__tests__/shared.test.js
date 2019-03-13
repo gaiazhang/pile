@@ -1,7 +1,15 @@
-// 'use strict';
+/**
+ * @author renmaomin@126.com
+ */
+import { expect } from 'chai';
+import { compose } from '../src';
 
-// const shared = require('..');
+describe('utils suite', () => {
+  it('compose function has the function of a composite function', () => {
+    const add = (a, b) => a + b;
+    const square = a => a * a;
 
-// describe('shared', () => {
-//     it('needs tests');
-// });
+    const c1 = compose(square, add);
+    expect(c1(1, 2)).to.equal(square(add(1, 2)));
+  });
+});
