@@ -2,7 +2,7 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -19,7 +19,7 @@ render () {
 
 ## size
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -33,7 +33,7 @@ render () {
 
 ## block
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -46,7 +46,7 @@ render () {
 
 ## disabled
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -69,7 +69,7 @@ render () {
 >
 > 使用`reverse`来反转，`reverse`一般与`type`同时使用
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -86,7 +86,7 @@ render () {
 
 ## icon
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -101,7 +101,7 @@ render () {
 
 ## loading
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -117,7 +117,7 @@ render () {
 
 ## text
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -134,7 +134,7 @@ render () {
 
 ## href
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -151,7 +151,7 @@ render () {
 
 ## radius
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -168,7 +168,7 @@ render () {
 
 ## circle
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -182,7 +182,7 @@ render () {
 
 ## Button.ButtonGroup
 
-```js
+```jsx harmony
 render () {
   return (
     <div>

@@ -20,13 +20,13 @@ With [npm](http://npmjs.com/):
 
 If React is not installed
 
-```jsx
+```js
 npm install --save react react-dom
 ```
 
 With React Installed
 
-```jsx
+```js
 npm install pile-ui --save
 ```
 
@@ -35,13 +35,13 @@ npm install pile-ui --save
 
 import css
 
-```jsx
+```js
 import 'pile/dist/styles/pile.min.css'
 ```
 
 import Pile
 
-```jsx
+```js
 // 引用方式一
 import Pile from 'pile'
 const {Button} = Pile
@@ -60,7 +60,7 @@ import Button from 'pile/dist/components/button'
 
 We have several examples on the documentation. Here is the first one to get you started:
 
-```jsx
+```js
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
@@ -86,7 +86,7 @@ ReactDOM.render((
 
 ## Development
 
-```jsx
+```js
 git clone git@github.com:didi/pile.js.git
 cd pile.js
 npm install

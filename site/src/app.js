@@ -20,6 +20,7 @@ const navList = [
       { label: 'Switch', nodeName: 'li', link: 'components/switch' },
       { label: 'Input', nodeName: 'li', link: 'components/input' },
       { label: 'Radio', nodeName: 'li', link: 'components/radio' },
+      { label: 'Alert', nodeName: 'li', link: 'components/alert' },
       {
         label: '交互',
         nodeName: 'dl',

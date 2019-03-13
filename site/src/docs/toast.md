@@ -2,7 +2,7 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 componentWillMount () {
   this.setState({content : "hi,jasmine"})
   setTimeout(() => {
