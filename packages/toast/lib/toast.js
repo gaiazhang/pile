@@ -300,7 +300,8 @@ function (_React$Component) {
     key: "close",
     value: function close() {
       this.clearCloseTimer(); // 执行关闭操作
-      // this.props.onAnimateLeave();
+
+      this.props.onAnimateLeave();
     }
   }, {
     key: "startCloseTimer",
@@ -332,16 +333,45 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var _this$props2 = this.props,
           content = _this$props2.content,
           iconType = _this$props2.iconType;
+      var type = '';
+
+      switch (iconType) {
+        case 'success':
+          type = 'check-circle';
+          break;
+
+        case 'fail':
+          type = 'error-circle';
+          break;
+
+        case 'load':
+          type = 'loading';
+          content = '加载中...';
+          break;
+
+        case 'warn':
+          type = 'warnning-solid-circle';
+          break;
+
+        default:
+          type = '';
+      }
+
       return React.createElement("div", {
         className: "pile-toast"
-      }, iconType ? React.createElement(Icon, {
-        type: "check-circle",
+      }, iconType && type ? React.createElement(Icon, {
+        type: type,
         size: "large"
       }) : null, React.createElement("div", {
-        className: "pile-toast-content"
+        className: "pile-toast-content",
+        ref: function ref(t) {
+          _this2.toastContent = t;
+        }
       }, content));
     }
   }]);
@@ -355,7 +385,7 @@ var Toast = function Toast(props) {
 
 Toast.propTypes = {
   content: PropTypes.string,
-  iconType: PropTypes.oneOf(['success', 'fail', 'load', '']),
+  iconType: PropTypes.oneOf(['success', 'fail', 'load', 'warn', '']),
   duration: PropTypes.number,
   visible: PropTypes.bool,
   onClose: PropTypes.func

@@ -62,6 +62,9 @@ class ToastContent extends React.Component {
         type = 'loading';
         content = '加载中...';
         break;
+      case 'warn':
+        type = 'warnning-solid-circle';
+        break;
       default:
         type = '';
     }
@@ -85,7 +88,7 @@ const Toast = props => (
 
 Toast.propTypes = {
   content: PropTypes.string,
-  iconType: PropTypes.oneOf(['success', 'fail', 'load', '']),
+  iconType: PropTypes.oneOf(['success', 'fail', 'load', 'warn', '']),
   duration: PropTypes.number,
   visible: PropTypes.bool,
   onClose: PropTypes.func,
