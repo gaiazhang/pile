@@ -1,7 +1,18 @@
-'use strict';
+import { render } from 'enzyme';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Toast } from '../src';
 
-const toast = require('..');
+describe('test toast component', () => {
+  beforeAll(() => {
+    ReactDOM.createPortal = jest.fn(element => element);
+  });
 
-describe('@pile/toast', () => {
-    it('needs tests');
+  afterEach(() => {
+    ReactDOM.createPortal.mockClear();
+  });
+  it('snapshot ui', () => {
+    const wrapper = render(<Toast content="hi,you" iconType="success" visible />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

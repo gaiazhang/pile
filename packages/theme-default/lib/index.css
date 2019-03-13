@@ -2109,6 +2109,10 @@ template {
       } */
 }
 
+.pile-switch--wrap:focus{
+        outline: none;
+      }
+
 .pile-switch--wrap.isDisabled {
         opacity: 0.4;
       }

@@ -34,8 +34,8 @@ render () {
       <Icon className='p10' type='star' />{' '}
       <Icon className='p10' type='time' />{' '}
       <Icon className='p10' type='user' />{' '}
-      <Icon className='p10' type='warnning-soid-circle' />{' '}
-      <Icon className='p10' type='icon-warnning' />{' '}
+      <Icon className='p10' type='warnning-solid-circle' />{' '}
+      <Icon className='p10' type='warnning' />{' '}
     </div>
   )
 }
