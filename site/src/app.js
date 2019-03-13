@@ -108,14 +108,6 @@ const App = () => (
       <div className="note-content">
         <Routes />
       </div>
-      <div className="note-aside">
-        <div className="note-example">
-          <div className="example-contant">
-            <iframe src={`//didi.github.io/pile.js/demo/#/${curnav.split('/')[1]}`} frameBorder="0" width="100%" height="100%" scrolling="no" />
-          </div>
-        </div>
-
-      </div>
 
     </div>
     <div className="note-footer">
