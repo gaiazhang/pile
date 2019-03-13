@@ -120,7 +120,6 @@ Switch.defaultProps = {
   width: '50px',
   height: '30px',
   onChange: () => {},
-  prefixCls: 'pile',
 };
 
 Switch.propTypes = {
@@ -138,7 +137,6 @@ Switch.propTypes = {
     PropTypes.number,
   ]),
   onChange: PropTypes.func,
-  prefixCls: PropTypes.string,
 };
 
-export default Switch;
+export default prefixClsProperty(Switch);

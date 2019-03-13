@@ -5,7 +5,7 @@
  */
 import classnames from 'classnames';
 import React from 'react';
-import '@pile/shared';
+import { prefixClsProperty } from '@pile/shared';
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -1427,8 +1427,7 @@ Switch.defaultProps = {
   checkedColor: '#343c5c',
   width: '50px',
   height: '30px',
-  onChange: function onChange() {},
-  prefixCls: 'pile'
+  onChange: function onChange() {}
 };
 Switch.propTypes = {
   checked: propTypes.bool,
@@ -1438,9 +1437,9 @@ Switch.propTypes = {
   checkedColor: propTypes.string,
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
-  onChange: propTypes.func,
-  prefixCls: propTypes.string
+  onChange: propTypes.func
 };
+var index = prefixClsProperty(Switch);
 
-export default Switch;
+export default index;
 //# sourceMappingURL=switch.esm.js.map

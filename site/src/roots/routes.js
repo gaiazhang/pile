@@ -12,7 +12,7 @@ export default () => (
     <Switch>
       <Route path="/components/button" component={pages.Button} />
       <Route path="/components/icon" component={pages.Icon} />
-      <Route path="/components/totast" component={pages.Totast} />
+      <Route path="/components/toast" component={pages.Toast} />
       <Route path="/components/alert" component={pages.Alert} />
       <Route path="/components/switch" component={pages.Switch} />
       <Route path="/components/input" component={pages.Input} />
