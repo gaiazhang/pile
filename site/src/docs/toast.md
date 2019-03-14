@@ -4,15 +4,17 @@
 
 ```js
 componentWillMount () {
-  this.setState({content : "hi,jasmine"})
+  //this.setState({content : "hi,jasmine"})
+  Toast.show({content : "hi,jasmine",iconType : "success",duration: 0})
   setTimeout(() => {
-        this.setState({content : "hei,potato",iconType : "warn"})
-  }, 0.3 * 1000);
+        //this.setState({content : "hei,potato",iconType : "warn"})
+        Toast.hide();
+  }, 1 * 1000);
 }
 render () {
   return (
     <div>
-      <Toast content={this.state.content} iconType={this.state.iconType} visible={true}/>
+      111
     </div>
   )
 }
