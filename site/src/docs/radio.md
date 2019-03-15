@@ -4,14 +4,47 @@
 
 ```js
 render () {
+	var onChange = (v) => console.log('onChange===>', v)
+  return (
+    <div>
+      <Radio value='1' onChange={onChange}>选项1</Radio>
+    </div>
+  )
+}
+```
+
+## 基本用法
+
+```js
+render () {
+	var onChange = (v) => console.log('onChange===>', v)
+  return (
+    <div>
+      <Radio.RadioGroup disabled={false} value={2} onChange={onChange} >
+      	<Radio value='1' disabled>选项1</Radio>
+      	<Radio value='2'>选项2</Radio>
+      	<Radio value='3'>选项3</Radio>
+      </Radio.RadioGroup>
+    </div>
+  )
+}
+```
+
+
+
+## 配置options用法
+
+```js
+render () {
 	var options = [
 	{value: 1, label: '选项1'}, 
 	{value: 2, label: '选项2'},
 	{value: 3, label: '选项3'}, ]
-	var onChange = (v) => console.log('onChange===>', v)
+	var onChange = (v) => console.log('options---onChange===>', v)
   return (
     <div>
-      <Radio options={options} disabled={false} value={1} onChange={onChange} ></Radio>
+      <Radio.RadioGroup options={options} disabled={false} value={1} onChange={onChange} >
+      </Radio.RadioGroup>
     </div>
   )
 }

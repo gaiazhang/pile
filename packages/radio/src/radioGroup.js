@@ -11,49 +11,61 @@ import { IfComponent } from '@pile/condition';
 import { compose as composed, withState, withHandlers } from 'recompose'
 
 const enhanced = composed(
-  withState('checked', 'updateValue', (props) => {
-    return props.checked
+  withState('selectedValue', 'updateValue', (props) => {
+    return props.value
   }),
   withHandlers({
-    onClick: props => (value) => event => {
-      if (props.disabled) return null
-      props.updateValue(true)
-      props.onChange(value)
+    onClick: props => (item) => event => {
+      if (props.disabled || item.disabled) return null
+      props.updateValue(item.value)
+      props.onChange(item.value)
     }
   })
 )
 
 const Radio = enhanced(({
-  prefixCls, className, onClick, checked, disabled, value, children, clsicon,
+  prefixCls, className, onClick, options, selectedValue, disabled, children, 
   ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-radio`]: true,
     [className]: className,
   });
-  
-  if (!clsicon) {
-    if (checked) {
-      clsicon = classNames({
+
+  if (!options) {
+    let opt = []
+    React.Children.map(children, child => {
+      opt.push({value: child.props.value, label: child.props.children, disabled: child.props.disabled})
+    })
+    console.log('opt', opt)
+    options = opt
+  }
+
+  options && options.forEach((item, index) => {
+    if (item.value == selectedValue) {
+      item.clsicon = classNames({
         [`${prefixCls}-radio-icon`]: true,
         [`${prefixCls}-radio-checked`]: true,
-        [`${prefixCls}-radio-disabled`]: disabled,
+        [`${prefixCls}-radio-disabled`]: disabled || item.disabled,
       });
     } else {
-      clsicon = classNames({
+      item.clsicon = classNames({
         [`${prefixCls}-radio-icon`]: true,
         [`${prefixCls}-radio-no`]: true,
-        [`${prefixCls}-radio-disabled-no`]: disabled,
+        [`${prefixCls}-radio-disabled-no`]: disabled || item.disabled,
       });
     }
-  }
+  })
+
 
   return (
     <div className={cls} >
-      <label className={`${prefixCls}-radio-label`} htmlFor={`${prefixCls}-radio-${value}`} onClick={onClick(value)}>
-        <span id={`${prefixCls}-radio-${value}`} className={clsicon}></span>
-        <span className={`${prefixCls}-radio-text`}>{children}</span>
-      </label>
+      {options && options.map( (item, index) => 
+        <label className={`${prefixCls}-radio-label`} key={item.value + '' + index} htmlFor={item.value + index} onClick={onClick(item)}>
+          <span id={item.value + index} className={item.clsicon}></span>
+          <span className={`${prefixCls}-radio-text`}>{item.label}</span>
+        </label>
+      )}
     </div>)
 })
 
@@ -98,3 +110,4 @@ const enhance = compose(
 );
 
 export default enhance(Radio);
+
