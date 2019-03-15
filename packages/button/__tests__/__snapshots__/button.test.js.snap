@@ -2,7 +2,7 @@
 
 exports[`Button suite render a button 1`] = `
 <button
-  className="pile-button pile-button--default is-radius"
+  className="pile-button pile-button--secondary"
   disabled={false}
   type="button"
 >
