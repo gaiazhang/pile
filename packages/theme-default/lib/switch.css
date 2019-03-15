@@ -1,7 +1,7 @@
 :root {
   /* base */
   --opacity: 0.65;
-  --border-radius: 4px;
+  --border-radius: 2px;
 
   /* sizes */
   --size-small: 12px;
@@ -21,96 +21,9 @@
   --color-danger: #c9302c;
 
   /* icons*/
-  --icon-arrow-left: '\e900';
-  --icon-arrow-right: '\e901';
-  --icon-check-circle: '\e902';
-  --icon-check-solid-circle: '\e903';
-  --icon-check: '\e904';
-  --icon-coin-rmb: '\e905';
-  --icon-delete: '\e906';
-  --icon-download: '\e907';
-  --icon-editor: '\e908';
-  --icon-error-circle: '\e909';
-  --icon-error-solid-circle: '\e90a';
-  --icon-error: '\e90b';
-  --icon-information: '\e90c';
-  --icon-loading-snaker: '\e90d';
-  --icon-loading: '\e90e';
-  --icon-location: '\e90f';
-  --icon-lock: '\e910';
-  --icon-message: '\e911';
-  --icon-minus-square: '\e912';
-  --icon-minus: '\e913';
-  --icon-phone: '\e914';
-  --icon-plus-square: '\e915';
-  --icon-plus: '\e916';
-  --icon-print: '\e917';
-  --icon-search: '\e918';
-  --icon-star: '\e919';
-  --icon-time: '\e91a';
-  --icon-user: '\e91b';
-  --icon-warnning-solid-circle: '\e91c';
-  --icon-warnning: '\e91d';
-
   --icon-size-normal: var(--size-normal);
   --icon-size-small: var(--size-small);
   --icon-size-large: var(--size-large);
-
-  /* button */
-  --button-default-font-size: 16px;
-  --button-default-color: #343C5C;
-  --button-default-fill: #FFFFFF;
-  --button-default-border: 1px solid #343C5C;
-  --button-default-border-radius: 2px;
-  --button-default-height: 44px;
-  --button-default-line-height: 44px;
-  --button-default-padding: 0 49px;
-  --button-small-font-size: 12px;
-  --button-small-height: 28px;
-  --button-small-line-height: 28px;
-  --button-small-default-padding: 0 15px;
-  --button-small-noborder-padding: 0 14px;
-  --button-primary-color: #FFFFFF;
-  --button-primary-fill: #343C5C;
-  --button-primary-border: none;
-  --button-primary-padding: 0 50px;
-  --button-primary-status-active: #2E3552;
-  --button-primary-status-disabled: #D7D8DF;
-  --button-secondary-color: #343C5C;
-  --button-secondary-fill: none;
-  --button-secondary-status-active: rgba(52,60,92,0.03);
-  --button-secondary-status-disabled: #CCCCCC;
-  --button-float-color: #343C5C;
-  --button-float-fill: #FFFFFF;
-  --button-float-border: none;
-  --button-float-padding: 0 50px;
-  --button-float-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15);
-  --button-float-status-active: #FAFAFA;
-  --button-float-status-disabled-fill: #FAFAFA;
-  --button-float-status-disabled-color: #CCCCCC;
-  --button-success-color: var(--color-white);
-  --button-success-border: var(--color-success);
-  --button-success-fill: var(--color-success);
-  --button-info-color: var(--color-white);
-  --button-info-border: var(--color-info);
-  --button-info-fill: var(--color-info);
-  --button-warning-color: var(--color-white);
-  --button-warning-border: var(--color-warning);
-  --button-warning-fill: var(--color-warning);
-  --button-danger-color: var(--color-white);
-  --button-danger-border: var(--color-danger);
-  --button-danger-fill: var(--color-danger);
-  --button-size-normal: var(--size-normal);
-  --button-size-small: var(--size-small);
-  --button-size-large: var(--size-large);
-  --button-disabled: var(--opacity);
-  --button-radius: var(--border-radius);
-  --button-line-height-small: 1.5;
-  --button-line-height-large: 1.333;
-  --button-padding-small: 2px 6px;
-  --button-padding-large: 2px 10px;
-  --button-icon-spacing: 6px;
-  --button-icon-font-size: 18px;
 
   /* toast */
   --radius-xs: 2px;

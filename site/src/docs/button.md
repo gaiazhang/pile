@@ -128,7 +128,7 @@ render () {
 render () {
   return (
     <div>
-      <Button.ButtonGroup line className='doc-mt10'>
+      <Button.ButtonGroup className='doc-mt10'>
         <Button>Secondary</Button>
         <Button type='primary'>Primary</Button>
       </Button.ButtonGroup>

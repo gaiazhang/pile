@@ -1,62 +1,5 @@
 :root {
-  /* base */
-  --opacity: 0.65;
-  --border-radius: 4px;
-
-  /* sizes */
-  --size-small: 12px;
-  --size-normal: 16px;
-  --size-large: 24px;
-
-  /* colors */
-  --color-white: #fff;
-  --color-black: #333;
-  --color-dashed: #d9d9d9;
-  --color-transparent: rgba(0,0,0,0);
-
-  --color-primary: #337ab7;
-  --color-success: #218838;
-  --color-info: #31b0d5;
-  --color-warning: #ec971f;
-  --color-danger: #c9302c;
-
-  /* icons*/
-  --icon-arrow-left: '\e900';
-  --icon-arrow-right: '\e901';
-  --icon-check-circle: '\e902';
-  --icon-check-solid-circle: '\e903';
-  --icon-check: '\e904';
-  --icon-coin-rmb: '\e905';
-  --icon-delete: '\e906';
-  --icon-download: '\e907';
-  --icon-editor: '\e908';
-  --icon-error-circle: '\e909';
-  --icon-error-solid-circle: '\e90a';
-  --icon-error: '\e90b';
-  --icon-information: '\e90c';
-  --icon-loading-snaker: '\e90d';
-  --icon-loading: '\e90e';
-  --icon-location: '\e90f';
-  --icon-lock: '\e910';
-  --icon-message: '\e911';
-  --icon-minus-square: '\e912';
-  --icon-minus: '\e913';
-  --icon-phone: '\e914';
-  --icon-plus-square: '\e915';
-  --icon-plus: '\e916';
-  --icon-print: '\e917';
-  --icon-search: '\e918';
-  --icon-star: '\e919';
-  --icon-time: '\e91a';
-  --icon-user: '\e91b';
-  --icon-warnning-solid-circle: '\e91c';
-  --icon-warnning: '\e91d';
-
-  --icon-size-normal: var(--size-normal);
-  --icon-size-small: var(--size-small);
-  --icon-size-large: var(--size-large);
-
-  /* button */
+  /* button 2 */
   --button-default-font-size: 16px;
   --button-default-color: #343C5C;
   --button-default-fill: #FFFFFF;
@@ -88,34 +31,10 @@
   --button-float-status-active: #FAFAFA;
   --button-float-status-disabled-fill: #FAFAFA;
   --button-float-status-disabled-color: #CCCCCC;
-  --button-success-color: var(--color-white);
-  --button-success-border: var(--color-success);
-  --button-success-fill: var(--color-success);
-  --button-info-color: var(--color-white);
-  --button-info-border: var(--color-info);
-  --button-info-fill: var(--color-info);
-  --button-warning-color: var(--color-white);
-  --button-warning-border: var(--color-warning);
-  --button-warning-fill: var(--color-warning);
-  --button-danger-color: var(--color-white);
-  --button-danger-border: var(--color-danger);
-  --button-danger-fill: var(--color-danger);
-  --button-size-normal: var(--size-normal);
-  --button-size-small: var(--size-small);
-  --button-size-large: var(--size-large);
-  --button-disabled: var(--opacity);
-  --button-radius: var(--border-radius);
-  --button-line-height-small: 1.5;
-  --button-line-height-large: 1.333;
-  --button-padding-small: 2px 6px;
-  --button-padding-large: 2px 10px;
   --button-icon-spacing: 6px;
   --button-icon-font-size: 18px;
-
-  /* toast */
-  --radius-xs: 2px;
-  --icon-size-big: 32px;
-  --font-size-base: 14px;
+  --button-icon-small-font-size: 14px;
+  --button-icon-small-margin-right: 4px;
 }
 
 .pile-button {
@@ -133,6 +52,7 @@
     border-radius: var(--button-default-border-radius);
     height: 44px;
     height: var(--button-default-height);
+    /*  conflict between line-height and children's vertical-align: middle  */
     line-height: 44px;
     line-height: var(--button-default-line-height);
     padding: 0 49px;
@@ -158,21 +78,13 @@
 .pile-button.is-circle.is-small {
         width: 30px;
         height: 30px;
-        font-size: 18px
+        font-size: 18px;
+        padding: 0
       }
 
 .pile-button.is-circle.is-small .pile-button-icon {
           font-size: 18px;
-        }
-
-.pile-button.is-circle.is-large {
-        width: 70px;
-        height: 70px;
-        font-size: 32px
-      }
-
-.pile-button.is-circle.is-large .pile-button-icon {
-          font-size: 32px;
+          margin-right: 0;
         }
 
 .pile-button.is-circle .pile-button-icon {
@@ -181,7 +93,6 @@
       }
 
 .pile-button.is-radius {
-      border-radius: 4px;
       border-radius: var(--button-radius);
 }
 
@@ -196,18 +107,21 @@
 
 .pile-button.is-small {
       font-size: 12px;
-      font-size: var(--button-size-small);
-      padding: 2px 6px;
-      padding: var(--button-padding-small);
+      font-size: var(--button-small-font-size);
+      padding: 0 15px;
+      padding: var(--button-small-default-padding);
       height: 28px;
       height: var(--button-small-height);
-      line-height: 1.5;
-      line-height: var(--button-line-height-small);
+      /*  conflict between line-height and children's vertical-align: middle  */
+      line-height: 28px;
+      line-height: var(--button-small-line-height);
 }
 
 .pile-button.is-small .pile-button-icon {
         font-size: 14px;
+        font-size: var(--button-icon-small-font-size);
         margin-right: 4px;
+        margin-right: var(--button-icon-small-margin-right);
       }
 
 .pile-button--default {
@@ -329,12 +243,16 @@
       margin-right: var(--button-icon-spacing);
       vertical-align: middle;
       display: inline-block;
+      /* 修复居中偏移 */
+      margin-top: -3px;
 }
 
 .pile-button-label {
       vertical-align: middle;
       display: inline-block;
       line-height: 1;
+      /* 修复居中偏移 */
+      margin-top: -3px;
 }
 
 .pile-btn-group > .pile-button:first-child {
@@ -343,7 +261,6 @@
       }
 
 .pile-btn-group > .pile-button.is-block:first-child {
-        border-top-right-radius: 4px;
         border-top-right-radius: var(--button-radius);
         border-bottom-left-radius: 0;
       }
@@ -356,7 +273,6 @@
 
 .pile-btn-group > .pile-button.is-block:last-child {
         border-top-right-radius: 0;
-        border-bottom-left-radius: 4px;
         border-bottom-left-radius: var(--button-radius);
       }
 
