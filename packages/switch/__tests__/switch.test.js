@@ -21,13 +21,6 @@ describe('Switch suite', () => {
     cExpect(onChange).to.have.property('callCount', 1);
   });
 
-  it('click Swtich, checked attribute becomes true, by onChange callback', () => {
-    const onChange = sinon.spy();
-    const wrapper = shallow(<Switch onChange={onChange} />);
-    wrapper.find('[role="switch"]').simulate('click');
-    cExpect(onChange).to.have.property('callCount', 1);
-  });
-
   it('switch has disabled state, in the disabled state, onChange event invalid clicks', () => {
     const onChange = sinon.spy();
     const wrapper = shallow(<Switch disabled onChange={onChange} />);
