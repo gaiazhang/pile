@@ -390,6 +390,51 @@ template {
   display: none;
 }
 
+/* reset css*/
+
+html, body {
+  height: 100%;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0;
+  margin: 0;
+  font-family: PingFang SC, STHeitiSC-Light, Helvetica-Light, arial, sans-serif;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+[class^="pile"],[class^="pile"] *, :after, :before {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+input, input:focus, button, button:focus {
+  outline: none;
+}
+
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, input, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: 400;
+  text-decoration: none;
+  vertical-align: baseline
+}
+
+article, aside, details, figcaption, figure, footer, header, menu, nav, section {
+  display: block
+}
+
+ul, li {
+  list-style: none;
+}
+
+a, a:hover, a:active, a:visited {
+  text-decoration: none;
+}
+
 :root {
   /* base */
   --opacity: 0.65;
@@ -449,12 +494,37 @@ template {
   --icon-size-large: var(--size-large);
 
   /* button */
-  --button-default-color: #656b79;
-  --button-default-border: #b8bbbf;
-  --button-default-fill: #f6f8fa;
-  --button-primary-color: var(--color-white);
-  --button-primary-border: rgb(41, 98, 146);
-  --button-primary-fill: var(--color-primary);
+  --button-default-font-size: 16px;
+  --button-default-color: #343C5C;
+  --button-default-fill: #FFFFFF;
+  --button-default-border: 1px solid #343C5C;
+  --button-default-border-radius: 2px;
+  --button-default-height: 44px;
+  --button-default-line-height: 44px;
+  --button-default-padding: 0 49px;
+  --button-small-font-size: 12px;
+  --button-small-height: 28px;
+  --button-small-line-height: 28px;
+  --button-small-default-padding: 0 15px;
+  --button-small-noborder-padding: 0 14px;
+  --button-primary-color: #FFFFFF;
+  --button-primary-fill: #343C5C;
+  --button-primary-border: none;
+  --button-primary-padding: 0 50px;
+  --button-primary-status-active: #2E3552;
+  --button-primary-status-disabled: #D7D8DF;
+  --button-secondary-color: #343C5C;
+  --button-secondary-fill: none;
+  --button-secondary-status-active: rgba(52,60,92,0.03);
+  --button-secondary-status-disabled: #CCCCCC;
+  --button-float-color: #343C5C;
+  --button-float-fill: #FFFFFF;
+  --button-float-border: none;
+  --button-float-padding: 0 50px;
+  --button-float-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15);
+  --button-float-status-active: #FAFAFA;
+  --button-float-status-disabled-fill: #FAFAFA;
+  --button-float-status-disabled-color: #CCCCCC;
   --button-success-color: var(--color-white);
   --button-success-border: var(--color-success);
   --button-success-fill: var(--color-success);
@@ -472,13 +542,12 @@ template {
   --button-size-large: var(--size-large);
   --button-disabled: var(--opacity);
   --button-radius: var(--border-radius);
-  --button-line-height-default: 1.5;
   --button-line-height-small: 1.5;
   --button-line-height-large: 1.333;
-  --button-padding-default: 2px 6px;
   --button-padding-small: 2px 6px;
   --button-padding-large: 2px 10px;
-  --button-icon-spacing: 8px;
+  --button-icon-spacing: 6px;
+  --button-icon-font-size: 18px;
 
   /* toast */
   --radius-xs: 2px;
@@ -714,21 +783,31 @@ template {
 
 .pile-button {
     font-size: 16px;
-    font-size: var(--button-size-normal);
-    padding: 2px 6px;
-    padding: var(--button-padding-default);
-    line-height: 1.5;
-    line-height: var(--button-line-height-default);
-    -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-    text-align: center;
+    font-size: var(--button-default-font-size);
     display: inline-block;
     position: relative;
-    border: 1px solid;
-    outline: 0;
+    color: #343C5C;
+    color: var(--button-default-color);
+    background: #FFFFFF;
+    background: var(--button-default-fill);
+    border: 1px solid #343C5C;
+    border: var(--button-default-border);
+    border-radius: 2px;
+    border-radius: var(--button-default-border-radius);
+    height: 44px;
+    height: var(--button-default-height);
+    line-height: 44px;
+    line-height: var(--button-default-line-height);
+    padding: 0 49px;
+    padding: var(--button-default-padding);
+    margin: 0;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    outline: none;
+    text-align: center;
+    vertical-align: middle;
     white-space: nowrap;
     word-break: break-word;
-    vertical-align: middle;
 }
 
 .pile-button.is-circle {
@@ -770,8 +849,7 @@ template {
 }
 
 .pile-button.is-disabled {
-      opacity: 0.65;
-      opacity: var(--button-disabled);
+      pointer-events: none;
 }
 
 .pile-button.is-block {
@@ -779,30 +857,28 @@ template {
       display: block;
 }
 
-.pile-button.is-large {
-      font-size: 24px;
-      font-size: var(--button-size-large);
-      padding: 2px 10px;
-      padding: var(--button-padding-large);
-      line-height: 1.333;
-      line-height: var(--button-line-height-large);
-}
-
 .pile-button.is-small {
       font-size: 12px;
       font-size: var(--button-size-small);
       padding: 2px 6px;
       padding: var(--button-padding-small);
+      height: 28px;
+      height: var(--button-small-height);
       line-height: 1.5;
       line-height: var(--button-line-height-small);
 }
 
+.pile-button.is-small .pile-button-icon {
+        font-size: 14px;
+        margin-right: 4px;
+      }
+
 .pile-button--default {
-      color: #656b79;
+      color: #343C5C;
       color: var(--button-default-color);
-      background-color: #f6f8fa;
+      background-color: #FFFFFF;
       background-color: var(--button-default-fill);
-      border-color: #b8bbbf;
+      border-color: 1px solid #343C5C;
       border-color: var(--button-default-border);
 }
 
@@ -812,120 +888,107 @@ template {
 }
 
 .pile-button--primary {
-      color: #fff;
+      color: #FFFFFF;
       color: var(--button-primary-color);
-      background-color: #337ab7;
+      background-color: #343C5C;
       background-color: var(--button-primary-fill);
+      border: none;
+      border: var(--button-primary-border);
+      padding: 0 50px;
+      padding: var(--button-primary-padding);
 }
 
-.pile-button--primary.is-text {
-        color: #337ab7;
-        color: var(--button-primary-fill);
-        background-color: transparent;
-        border: 0;
+.pile-button--primary:active {
+        background: #2E3552;
+        background: var(--button-primary-status-active);
+      }
+
+.pile-button--primary:disabled {
+        background: #D7D8DF;
+        background: var(--button-primary-status-disabled);
+      }
+
+.pile-button--primary.is-disabled {
+        background: #D7D8DF;
+        background: var(--button-primary-status-disabled);
 }
 
-.pile-button--primary.is-line {
-        color: #337ab7;
-        color: var(--button-primary-fill);
-        background-color: #fff;
-        background-color: var(--button-primary-color);
-        border-color: rgb(41, 98, 146);
-        border-color: var(--button-primary-border);
+.pile-button--primary.is-active {
+        background: #2E3552;
+        background: var(--button-primary-status-active);
 }
 
-.pile-button--success {
-      color: #fff;
-      color: var(--button-success-color);
-      background-color: #218838;
-      background-color: var(--button-success-fill);
+.pile-button--secondary {
+      color: #343C5C;
+      color: var(--button-secondary-color);
+      background-color: none;
+      background-color: var(--button-secondary-fill);
 }
 
-.pile-button--success.is-text {
-        color: #218838;
-        color: var(--button-success-fill);
-        background-color: transparent;
-        border: 0;
+.pile-button--secondary:active {
+        background: rgba(52,60,92,0.03);
+        background: var(--button-secondary-status-active);
+      }
+
+.pile-button--secondary:disabled {
+        border-color: #CCCCCC;
+        border-color: var(--button-secondary-status-disabled);
+        color: #CCCCCC;
+        color: var(--button-secondary-status-disabled);
+      }
+
+.pile-button--secondary.is-disabled {
+        border-color: #CCCCCC;
+        border-color: var(--button-secondary-status-disabled);
+        color: #CCCCCC;
+        color: var(--button-secondary-status-disabled);
 }
 
-.pile-button--success.is-line {
-        color: #218838;
-        color: var(--button-success-fill);
-        background-color: #fff;
-        background-color: var(--button-success-color);
-        border-color: #218838;
-        border-color: var(--button-success-fill);
+.pile-button--secondary.is-active {
+        background: rgba(52,60,92,0.03);
+        background: var(--button-secondary-status-active);
 }
 
-.pile-button--info {
-      color: #fff;
-      color: var(--button-info-color);
-      background-color: #31b0d5;
-      background-color: var(--button-info-fill);
+.pile-button--float {
+      color: #343C5C;
+      color: var(--button-float-color);
+      background-color: #FFFFFF;
+      background-color: var(--button-float-fill);
+      border: none;
+      border: var(--button-float-border);
+      padding: 0 50px;
+      padding: var(--button-float-padding);
+      -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15);
+              box-shadow: 0 1px 6px 0 rgba(0,0,0,0.15);
+      -webkit-box-shadow: var(--button-float-box-shadow);
+              box-shadow: var(--button-float-box-shadow);
 }
 
-.pile-button--info.is-text {
-        color: #31b0d5;
-        color: var(--button-info-fill);
-        background-color: transparent;
-        border: 0;
+.pile-button--float:active {
+        background: #FAFAFA;
+        background: var(--button-float-status-active);
+      }
+
+.pile-button--float:disabled {
+        background-color: #FAFAFA;
+        background-color: var(--button-float-status-disabled-fill);
+        color: #CCCCCC;
+        color: var(--button-float-status-disabled-color);
+      }
+
+.pile-button--float.is-disabled {
+        background-color: var(--button-float-status-disabled);
 }
 
-.pile-button--info.is-line {
-        color: #31b0d5;
-        color: var(--button-info-fill);
-        background-color: #fff;
-        background-color: var(--button-info-color);
-        border-color: #31b0d5;
-        border-color: var(--button-info-fill);
-}
-
-.pile-button--warning {
-      color: #fff;
-      color: var(--button-warning-color);
-      background-color: #ec971f;
-      background-color: var(--button-warning-fill);
-}
-
-.pile-button--warning.is-text {
-        color: #ec971f;
-        color: var(--button-warning-fill);
-        background-color: transparent;
-        border: 0;
-}
-
-.pile-button--warning.is-line {
-        color: #ec971f;
-        color: var(--button-warning-fill);
-        background-color: #fff;
-        background-color: var(--button-warning-color);
-        border-color: #ec971f;
-        border-color: var(--button-warning-fill);
-}
-
-.pile-button--danger {
-      color: #fff;
-      color: var(--button-danger-color);
-      background-color: #c9302c;
-      background-color: var(--button-danger-fill);
-}
-
-.pile-button--danger.is-text {
-        color: #c9302c;
-        color: var(--button-danger-fill);
-        background-color: transparent;
-        border: 0;
-}
-
-.pile-button--danger.is-line {
-        color: #c9302c;
-        color: var(--button-danger-fill);
-        background-color: #c9302c;
-        background-color: var(--button-danger-fill);
+.pile-button--float.is-active {
+        background: #FAFAFA;
+        background: var(--button-float-status-active);
 }
 
 .pile-button-icon {
-      margin-right: 8px;
+      font-size: 18px;
+      font-size: var(--button-icon-font-size);
+      margin-right: 6px;
       margin-right: var(--button-icon-spacing);
       vertical-align: middle;
       display: inline-block;
@@ -934,6 +997,7 @@ template {
 .pile-button-label {
       vertical-align: middle;
       display: inline-block;
+      line-height: 1;
 }
 
 .pile-btn-group > .pile-button:first-child {
