@@ -2,17 +2,17 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 componentWillMount () {
   this.setState({content : "hi,jasmine"})
- setTimeout(() => {
-        this.setState({content : "hei,potato",iconType : "success"})
-      }, 0.3 * 1000);
+  setTimeout(() => {
+        this.setState({content : "hei,potato",iconType : "warn"})
+  }, 0.3 * 1000);
 }
 render () {
   return (
     <div>
-      <Toast content={this.state.content} iconType={this.state.iconType}/>
+      <Toast content={this.state.content} iconType={this.state.iconType} visible={true}/>
     </div>
   )
 }

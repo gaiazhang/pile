@@ -16,7 +16,7 @@ const enhance = compose(
   trace('canvas'),
   withHandlers({
     renderCode: props => (renderCode) => {
-      import('../../../src').then((Pile) => { // ../../../src
+      import('../../../bundle').then((Pile) => { // ../../../src
         const args = ['React', 'render'];
         const argv = [React, render];
 
@@ -38,6 +38,7 @@ const enhance = compose(
         render(<Demo />, document.getElementById('${props.canvasId}'))
       `, {
           presets: ['es2015', 'react'],
+          plugins: ['proposal-class-properties'],
         });
 
         args.push(code);

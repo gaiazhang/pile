@@ -10,8 +10,8 @@ import {
 import { IfComponent } from '@pile/condition';
 
 const Button = ({
-  children, className, prefixCls, size, type, line,
-  icon, loading, nativeType, block, text, href, radius, circle, ...props
+  children, className, prefixCls, size, type,
+  icon, loading, nativeType, block, href, circle, ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-button`]: true,
@@ -22,9 +22,6 @@ const Button = ({
     /* eslint-disable react/destructuring-assignment */
     'is-disabled': props.disabled,
     /* eslint-enable react/destructuring-assignment */
-    'is-line': line,
-    'is-text': text,
-    'is-radius': !circle && radius,
     'is-circle': circle,
   });
 
@@ -59,38 +56,32 @@ Button.propTypes = {
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  type: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
+  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
   block: PropTypes.bool,
   disabled: PropTypes.bool,
-  line: PropTypes.bool,
   icon: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.node,
   ]),
   loading: PropTypes.bool,
-  text: PropTypes.bool,
   href: PropTypes.string,
-  radius: PropTypes.bool,
   circle: PropTypes.bool,
 };
 
 Button.defaultProps = {
-  type: 'default',
+  type: 'secondary',
   nativeType: 'button',
   block: false,
   disabled: false,
-  line: false,
   icon: null,
   loading: false,
-  text: false,
   href: null,
-  radius: true,
   circle: false,
 };
 
 const enhance = compose(
-  sizeProperty([sizes.SMALL, sizes.LARGE]),
+  sizeProperty([sizes.SMALL]),
   prefixClsProperty,
 );
 

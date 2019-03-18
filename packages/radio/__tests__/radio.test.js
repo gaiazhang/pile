@@ -1,7 +1,10 @@
-'use strict';
+import React from 'react';
+import { shallow } from 'enzyme';
+import Radio from '../src';
 
-const radio = require('..');
-
-describe('@pile/radio', () => {
-    it('needs tests');
+describe('Radio suite', () => {
+  it('render a radio', () => {
+    const wrapper = shallow(<Radio />);
+    expect(wrapper).toMatchSnapshot();
+  });
 });

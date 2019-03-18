@@ -6,7 +6,7 @@ import {
 } from '@pile/shared';
 
 const ButtonGroup = ({
-  prefixCls, className, children, block, line, divide, borderColor, ...props
+  prefixCls, className, children, block, divide, borderColor, ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-btn-group`]: true,
@@ -17,7 +17,6 @@ const ButtonGroup = ({
     <div className={cls} {...props}>
       {React.Children.map(children, child => React.cloneElement(child, {
         block,
-        line,
         style: {
           ...child.props.style,
           borderColor,
@@ -34,18 +33,14 @@ ButtonGroup.propTypes = {
   ]).isRequired,
   className: PropTypes.string,
   block: PropTypes.bool,
-  line: PropTypes.bool,
   divide: PropTypes.bool,
-  vertical: PropTypes.bool,
   borderColor: PropTypes.string,
 };
 
 ButtonGroup.defaultProps = {
   className: null,
   block: null,
-  line: null,
   divide: false,
-  vertical: false,
   borderColor: null,
 };
 

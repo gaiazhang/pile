@@ -2,7 +2,7 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 render () {
 	var onChange = (v) => console.log('onChange===>', v)
   return (
@@ -13,9 +13,10 @@ render () {
 }
 ```
 
-## 基本用法
 
-```js
+## 基本用法2
+
+```jsx harmony
 render () {
 	var onChange = (v) => console.log('onChange===>', v)
   return (
@@ -34,7 +35,7 @@ render () {
 
 ## 配置options用法
 
-```js
+```jsx harmony
 render () {
 	var options = [
 	{value: 1, label: '选项1'}, 
@@ -60,3 +61,4 @@ render () {
 | value  |  string，number  |  -      | 默认选中的radio值 |
 | disabled     | boolean |  false    | 是否禁用 |
 | onChange     | function |  -    | 选中回调函数 |
+
