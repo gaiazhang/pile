@@ -2,14 +2,17 @@
 
 ## 基本用法
 alert
-包含无按钮, 确认框, 多按钮情况
+包含无按钮, 确认框
 
 ```jsx harmony
 onClick = () => {
-  Modal.alert('删除', '确定删除么???', [
-    { text: '取消', onPress: () => console.log('cancel') },
-    { text: '确定', onPress: () => console.log('ok'), style: { fontWeight: 'bold' } },
-  ]);
+      Alert.open({
+      alertTip: '这是一个测试弹框',
+      alertCon: '内容内容123',
+      callBack: function() {
+        console.log('关闭了...');
+      }
+    });
 }
 
 render () {
@@ -25,6 +28,7 @@ render () {
 
 |   参数    |   类型   |   默认  |   说明     |
 |-----------|----------|------------|-------------------|
-| title      |  String 或 React.Element  |      无     | 标题 |
-| message   |  String 或 React.Element  |  无    | 提示信息	|
-| actions    | Array | 无 |   按钮组, [{text, onpress}]     |
+| alertTip      |  String 或 React.Element  |      无     | 标题 |
+| alertCon   |  String 或 React.Element  |  无    | 提示信息	|
+| alertStatus   |  bool  |  false    | icon是否显示	|
+| closeAlert    | function | 无 |   按钮回调函数    |
