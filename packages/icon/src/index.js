@@ -1,22 +1,16 @@
 import * as React from 'react';
 import * as PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  compose, prefixClsProperty, sizeProperty, sizes,
-} from '@pile/shared';
+import { compose, prefixClsProperty, sizeProperty, sizes } from '@pile/shared';
 
-const Icon = ({
-  prefixCls, type, size, className, ...props
-}) => {
+const Icon = ({ prefixCls, type, size, className, ...props }) => {
   const cls = classNames({
     [`${prefixCls}-icon-${type}`]: true,
     [className]: className,
     [size]: size,
   });
 
-  return (
-    <i className={cls} {...props} />
-  );
+  return <i className={cls} {...props} />;
 };
 
 Icon.propTypes = {
@@ -25,7 +19,7 @@ Icon.propTypes = {
 
 const enhance = compose(
   sizeProperty([sizes.SMALL, sizes.LARGE]),
-  prefixClsProperty,
+  prefixClsProperty
 );
 
 export default enhance(Icon);
