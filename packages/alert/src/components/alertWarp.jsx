@@ -11,6 +11,7 @@ const defaultState = {
   callBack() {},
 };
 
+
 class AlertWarp extends Component {
     state = {
       ...defaultState,

@@ -22,6 +22,7 @@ class Alert extends Component {
   }
 
 
+
   componentWillReceiveProps(nextProps) {
     const { show } = this.state;
     if (nextProps.show !== show) {
