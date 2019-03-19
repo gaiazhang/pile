@@ -1,9 +1,3 @@
-import alert from './components/alert';
-import Modal from './components/Modal';
-// import prompt from './prompt';
+import Alert from './components/alertWarp';
 
-Modal.alert = alert;
-Modal.prompt = alert;
-
-
-export default Modal;
+export default Alert;

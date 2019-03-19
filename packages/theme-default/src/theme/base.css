@@ -12,7 +12,7 @@
   --color-white: #fff;
   --color-black: #333;
   --color-dashed: #d9d9d9;
-  --color-transparent: rgba(0,0,0,0);
+  --color-transparent: #0000;
 
   --color-primary: #337ab7;
   --color-success: #218838;
@@ -31,16 +31,3 @@
   --font-size-base: 14px;
 }
 
-.pile-radio {
-        color: blue;
-        font-size: 23px;
-}
-
-.pile-radio-content {
-            color: #fff;
-            color: var(--color-white);
-            font-size: 14px;
-            font-size: var(--font-size-base);
-            line-height: 20px;
-            display: inline-block;
-}

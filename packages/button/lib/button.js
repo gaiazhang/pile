@@ -102,18 +102,15 @@ var Button = function Button(_ref) {
       prefixCls = _ref.prefixCls,
       size = _ref.size,
       type = _ref.type,
-      line = _ref.line,
       icon = _ref.icon,
       loading = _ref.loading,
       nativeType = _ref.nativeType,
       block = _ref.block,
-      text = _ref.text,
       href = _ref.href,
-      radius = _ref.radius,
       circle = _ref.circle,
-      props = objectWithoutProperties(_ref, ["children", "className", "prefixCls", "size", "type", "line", "icon", "loading", "nativeType", "block", "text", "href", "radius", "circle"]);
+      props = objectWithoutProperties(_ref, ["children", "className", "prefixCls", "size", "type", "icon", "loading", "nativeType", "block", "href", "circle"]);
 
-  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-button"), true), defineProperty(_classNames, "".concat(prefixCls, "-button--").concat(type), true), defineProperty(_classNames, className, className), defineProperty(_classNames, "is-".concat(size), size), defineProperty(_classNames, 'is-block', block), defineProperty(_classNames, 'is-disabled', props.disabled), defineProperty(_classNames, 'is-line', line), defineProperty(_classNames, 'is-text', text), defineProperty(_classNames, 'is-radius', !circle && radius), defineProperty(_classNames, 'is-circle', circle), _classNames));
+  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-button"), true), defineProperty(_classNames, "".concat(prefixCls, "-button--").concat(type), true), defineProperty(_classNames, className, className), defineProperty(_classNames, "is-".concat(size), size), defineProperty(_classNames, 'is-block', block), defineProperty(_classNames, 'is-disabled', props.disabled), defineProperty(_classNames, 'is-circle', circle), _classNames));
   var Component = href ? 'a' : 'button';
   var componentType = href ? {
     href: href
@@ -147,32 +144,26 @@ var Button = function Button(_ref) {
 
 Button.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
-  type: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
+  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
   block: PropTypes.bool,
   disabled: PropTypes.bool,
-  line: PropTypes.bool,
   icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   loading: PropTypes.bool,
-  text: PropTypes.bool,
   href: PropTypes.string,
-  radius: PropTypes.bool,
   circle: PropTypes.bool
 };
 Button.defaultProps = {
-  type: 'default',
+  type: 'secondary',
   nativeType: 'button',
   block: false,
   disabled: false,
-  line: false,
   icon: null,
   loading: false,
-  text: false,
   href: null,
-  radius: true,
   circle: false
 };
-var enhance = shared.compose(shared.sizeProperty([shared.sizes.SMALL, shared.sizes.LARGE]), shared.prefixClsProperty);
+var enhance = shared.compose(shared.sizeProperty([shared.sizes.SMALL]), shared.prefixClsProperty);
 var Button$1 = enhance(Button);
 
 function _objectSpread(target) {
@@ -203,10 +194,9 @@ var ButtonGroup = function ButtonGroup(_ref) {
       className = _ref.className,
       children = _ref.children,
       block = _ref.block,
-      line = _ref.line,
       divide = _ref.divide,
       borderColor = _ref.borderColor,
-      props = objectWithoutProperties(_ref, ["prefixCls", "className", "children", "block", "line", "divide", "borderColor"]);
+      props = objectWithoutProperties(_ref, ["prefixCls", "className", "children", "block", "divide", "borderColor"]);
 
   var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-btn-group"), true), defineProperty(_classNames, 'is-divide', divide), defineProperty(_classNames, className, className), _classNames));
   return React.createElement("div", _extends_1({
@@ -214,7 +204,6 @@ var ButtonGroup = function ButtonGroup(_ref) {
   }, props), React.Children.map(children, function (child) {
     return React.cloneElement(child, {
       block: block,
-      line: line,
       style: objectSpread({}, child.props.style, {
         borderColor: borderColor
       })
@@ -226,17 +215,13 @@ ButtonGroup.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
   className: PropTypes.string,
   block: PropTypes.bool,
-  line: PropTypes.bool,
   divide: PropTypes.bool,
-  vertical: PropTypes.bool,
   borderColor: PropTypes.string
 };
 ButtonGroup.defaultProps = {
   className: null,
   block: null,
-  line: null,
   divide: false,
-  vertical: false,
   borderColor: null
 };
 var enhance$1 = shared.compose(shared.sizeProperty([shared.sizes.SMALL, shared.sizes.LARGE]), shared.prefixClsProperty);

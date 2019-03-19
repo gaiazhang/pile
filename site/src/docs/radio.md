@@ -2,7 +2,7 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 render () {
   return (
     <div>

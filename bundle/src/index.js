@@ -4,3 +4,4 @@ export { Mask, Toast } from '@pile/toast';
 export { default as Switch } from '@pile/switch';
 export { default as Input } from '@pile/input';
 export { default as Radio } from '@pile/radio';
+export { default as Alert } from '@pile/alert';

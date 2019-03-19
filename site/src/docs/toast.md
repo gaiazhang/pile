@@ -2,7 +2,7 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 componentWillMount () {
   //this.setState({content : "hi,jasmine"})
   Toast.show({content : "hi,jasmine",iconType : "success",duration: 0})

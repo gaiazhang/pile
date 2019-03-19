@@ -3,7 +3,7 @@
 ## 基本用法
 普通情况
 
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -14,7 +14,7 @@ render () {
 ```
 
 checked
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -25,7 +25,7 @@ render () {
 ```
 
 disabled and checked
-```js
+```jsx harmony
 render () {
   return (
     <div>
@@ -36,7 +36,7 @@ render () {
 ```
 
 width、height、onChange
-```js
+```jsx harmony
 render () {
   return (
     <div>

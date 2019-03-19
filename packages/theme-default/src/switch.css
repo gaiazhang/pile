@@ -1,4 +1,4 @@
-@import 'theme';
+@import 'theme/base';
 
 @ns pile {
   @c switch {
