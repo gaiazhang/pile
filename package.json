@@ -8,7 +8,8 @@
     "watch:css": "gulp watch-css --cwd ./packages/theme-default",
     "build": "rollup -c",
     "watch": "rollup -cw",
-    "lerna": "lerna"
+    "lerna": "lerna",
+    "lint": "eslint packages/**/src/*.js"
   },
   "husky": {
     "hooks": {
@@ -18,6 +19,7 @@
   "lint-staged": {
     "packages/**/src/*.js": [
       "prettier --write",
+      "eslint",
       "git add"
     ]
   },
