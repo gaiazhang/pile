@@ -1,7 +1,7 @@
 # mobile端switch组件
 
 ## 基本用法
-普通情况
+普通情况2
 
 ```jsx harmony
 render () {
