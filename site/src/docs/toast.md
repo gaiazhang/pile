@@ -21,9 +21,10 @@ render () {
 ```
 ## API
 
-### props
+### parameter
 
 |   参数    |   类型   |   默认  |   说明     |
 |-----------|----------|------------|-------------------|
-| type  |  string  |  -      | one of [arrow-left, arrow-right, ... , icon-warnning]  |
-| size  |  string  |  -      | small/large，small: 12px，large: 24px; |
+| content  |  string  |   ''  | toast显示的文字  |
+| iconType  |  string  |   ''   | one of ['success', 'fail', 'load', 'warn', '' |
+| duration  |  number  |    3s  |  默认展示3s后关闭，也可以自己传入数值，传入0时，toast不再自己关闭|
