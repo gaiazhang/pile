@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom';
 import AlertBox from './alert';
 
 const defaultState = {
-  alertStatus: false,
-  alertTip: '提示',
-  alertCon: '内容内容',
-  alertShow: false,
+  showIcon: false,
+  title: '提示',
+  content: '内容',
+  show: false,
+  btnText: '确定',
   callBack() {},
 };
 
@@ -16,8 +17,12 @@ class AlertWarp extends Component {
     };
 
     open =(options) => {
+      /* eslint-disable */
       options = options || {};
-      options.alertShow = true;
+      options.show = true;
+      options.children = options.content;
+      delete options.content;
+        /* eslint-enable */
       this.setState({
         ...defaultState,
         ...options,
@@ -25,28 +30,31 @@ class AlertWarp extends Component {
     }
 
     callBack = () => {
-      if (this.state.callBack) {
-        this.state.callBack();
+      const { callBack } = this.state;
+      if (callBack) {
+        callBack();
       }
     }
 
     close = () => {
       this.setState({
-        alertShow: false,
+        ...defaultState,
+        show: false,
       });
     }
 
     render() {
       return (
-        <AlertBox {...this.state} callBackClose={this.callBack} close={this.close} />
+        <AlertBox {...this.state} callBack={this.callBack} />
       );
     }
 }
 const div = document.createElement('div');
 document.body.appendChild(div);
-
+/* eslint-disable */
 const alertBox = ReactDOM.render(
   <AlertWarp />,
   div,
 );
+/* eslint-enable */
 export default alertBox;

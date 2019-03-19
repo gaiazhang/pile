@@ -7,8 +7,11 @@ alert
 ```jsx harmony
 onClick = () => {
       Alert.open({
-      alertTip: '这是一个测试弹框',
-      alertCon: '内容内容123',
+      title: '这是一个测试弹框',
+      // content: '内容内容123',
+      btnText:'你好了',
+      showIcon:true,
+      type:'warnning',// success, warnning
       callBack: function() {
         console.log('关闭了...');
       }
@@ -28,7 +31,9 @@ render () {
 
 |   参数    |   类型   |   默认  |   说明     |
 |-----------|----------|------------|-------------------|
-| alertTip      |  String 或 React.Element  |      无     | 标题 |
-| alertCon   |  String 或 React.Element  |  无    | 提示信息	|
-| alertStatus   |  bool  |  false    | icon是否显示	|
-| closeAlert    | function | 无 |   按钮回调函数    |
+| title      |  String 或 React.Element  |      无     | 标题 |
+| content   |  String 或 React.Element  |  无    | 提示信息	|
+| btnText   |  String  |  无    | 按钮文案	|
+| type   |  String  |  无    | 按钮类型	|
+| showIcon   |  bool  |  false    | icon是否显示	|
+| callBack    | function | 无 |   按钮回调函数    |
