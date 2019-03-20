@@ -11,44 +11,41 @@ const defaultState = {
   callBack() {},
 };
 
-
 class AlertWarp extends Component {
-    state = {
-      ...defaultState,
-    };
+  state = {
+    ...defaultState,
+  };
 
-    open =(options) => {
-      /* eslint-disable */
+  open = options => {
+    /* eslint-disable */
       options = options || {};
       options.show = true;
       options.children = options.content;
       delete options.content;
         /* eslint-enable */
-      this.setState({
-        ...defaultState,
-        ...options,
-      });
-    }
+    this.setState({
+      ...defaultState,
+      ...options,
+    });
+  };
 
-    callBack = () => {
-      const { callBack } = this.state;
-      if (callBack) {
-        callBack();
-      }
+  callBack = () => {
+    const { callBack } = this.state;
+    if (callBack) {
+      callBack();
     }
+  };
 
-    close = () => {
-      this.setState({
-        ...defaultState,
-        show: false,
-      });
-    }
+  close = () => {
+    this.setState({
+      ...defaultState,
+      show: false,
+    });
+  };
 
-    render() {
-      return (
-        <AlertBox {...this.state} callBack={this.callBack} />
-      );
-    }
+  render() {
+    return <AlertBox {...this.state} callBack={this.callBack} />;
+  }
 }
 const div = document.createElement('div');
 document.body.appendChild(div);

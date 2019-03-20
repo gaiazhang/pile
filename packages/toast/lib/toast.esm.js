@@ -214,6 +214,7 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      /* eslint-disable */
       var _this$props2 = this.props,
           content = _this$props2.content,
           iconType = _this$props2.iconType;
@@ -267,7 +268,8 @@ ToastContent.propTypes = {
 ToastContent.defaultProps = {
   content: '',
   iconType: '',
-  duration: 3
+  duration: 3,
+  onAnimateLeave: null
 };
 
 var messageInstance;
