@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group'; // ES6
-// import './alert.css';
+import classNames from 'classnames';
+import {
+  prefixClsProperty,
+} from '@pile/shared';
 
 /* let defaultState = {
   alertStatus: false,
@@ -10,7 +13,7 @@ import { CSSTransition } from 'react-transition-group'; // ES6
   closeAlert: function() {}
 }; */
 
-export default class Alert extends Component {
+class Alert extends Component {
   constructor(props) {
     super(props);
     const obj = {};
@@ -18,38 +21,60 @@ export default class Alert extends Component {
     this.state = objs;
   }
 
-  callBackClose = () => {
-    if (this.props.callBackClose) {
-      this.props.callBackClose();
-    }
-  }
 
-  close = () => {
-    console.log('88888889x');
-    this.props.close();
-  }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.alertShow !== this.props.alertShow) {
+    const { show } = this.state;
+    if (nextProps.show !== show) {
       this.setState(nextProps);
     }
   }
+
 
   componentWillUnmount() {
     document.body.style.overflow = '';
   }
 
+
+  callBackClose = () => {
+    const { callBack } = this.props;
+    if (callBack) {
+      callBack();
+    }
+  }
+
+  onClose = () => {
+    this.setState({
+      show: false,
+    });
+  }
+
+  onKeyPress = (e) => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.onClose(e);
+    }
+  }
+
   render() {
+    let typeIcon = 'success';
     const {
-      alertShow, alertStatus, alertTip, alertCon,
+      show, showIcon, title, children, btnText, type,
     } = this.state;
+    const { prefixCls } = this.props;
+    const iconCls = classNames({ [`${prefixCls}-alert-icon`]: true });
+    if (type === 'success') {
+      typeIcon = 'check';
+    } else {
+      typeIcon = type;
+    }
     return (
 
       <CSSTransition
           /* component={this.FirstChild} */
-        in={alertShow}
+        in={show}
         timeout={200}// 动画时长
-        classNames="pile-animate"
+        classNames="pile-alert-animate"
         unmountOnExit
         onEnter={() => {
           document.body.style.overflow = 'hidden';
@@ -61,23 +86,28 @@ export default class Alert extends Component {
           this.callBackClose();
         }}
       >
-        <div className="pile-dialog">
-          <div className="pile_mask" />
-          <div className="pile_dialog">
-            <p
-              className="pile_icon icon-popup_right"
-              style={alertStatus ? { display: 'block' } : { display: 'none' }}
-            />
-            <div className="dialog-alerttitle">{alertTip}</div>
-            <div className="dialog-alert-content">
-              {alertCon}
+        <div className="pile-alert">
+          <div className="pile-alert-mask" />
+          <div className="pile-alert-box">
+            <i className={`${prefixCls}-icon-${typeIcon} ${iconCls}`} style={showIcon ? { display: 'block' } : { display: 'none' }} />
+
+            <div className="pile-alert-title">{title}</div>
+            {
+              children ? (
+                <div className="pile-alert-content">
+                  {children}
+                </div>
+              ) : null
+            }
+            {/* eslint-disable */}
+            <div className="d-btns pile-btn-alert" onClick={this.onClose} onKeyPress={this.onKeyPress}>
+              <span className="btn-orange">{btnText}</span>
             </div>
-            <div className="d_btns pile_btn_alert" onClick={this.close}>
-              <span className="btn_orange">好的</span>
-            </div>
+            { /* eslint-enable */}
           </div>
         </div>
       </CSSTransition>
     );
   }
 }
+export default prefixClsProperty(Alert);
