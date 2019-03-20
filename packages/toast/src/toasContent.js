@@ -9,8 +9,11 @@ class ToastContent extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { duration, content, iconType } = this.props;
-    if (duration !== prevProps.duration
-      || content !== prevProps.content || iconType !== prevProps.iconType) {
+    if (
+      duration !== prevProps.duration ||
+      content !== prevProps.content ||
+      iconType !== prevProps.iconType
+    ) {
       this.restartCloseTimer();
     }
   }
@@ -72,8 +75,13 @@ class ToastContent extends React.Component {
 
     return (
       <div className="pile-toast">
-        {iconType && type ? (<Icon type={type} size="large" />) : null }
-        <div className="pile-toast-content" ref={(t) => { this.toastContent = t; }}>
+        {iconType && type ? <Icon type={type} size="large" /> : null}
+        <div
+          className="pile-toast-content"
+          ref={t => {
+            this.toastContent = t;
+          }}
+        >
           {content}
         </div>
       </div>

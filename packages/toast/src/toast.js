@@ -13,7 +13,10 @@ const getMessageInstance = function createMessage(properties) {
     div.parentNode.removeChild(div);
   }
 
-  ReactDOM.render(<ToastContent {...properties} onAnimateLeave={destroy} />, div);
+  ReactDOM.render(
+    <ToastContent {...properties} onAnimateLeave={destroy} />,
+    div
+  );
 
   return { destroy };
 };
