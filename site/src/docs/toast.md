@@ -5,7 +5,7 @@
 ```jsx harmony
 componentWillMount () {
   //this.setState({content : "hi,jasmine"})
-  Toast.show({content : "hi,jasmine",iconType : "success",duration: 0})
+  Toast.show({content : "hi,xixi",iconType : "success",duration: 0})
   setTimeout(() => {
         //this.setState({content : "hei,potato",iconType : "warn"})
         Toast.hide();
