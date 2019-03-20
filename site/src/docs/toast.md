@@ -2,11 +2,11 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 componentWillMount () {
   this.setState({content : "hi,jasmine"})
   setTimeout(() => {
-        this.setState({content : "hei,potato",iconType : "success"})
+        this.setState({content : "hei,potato",iconType : "warn"})
   }, 0.3 * 1000);
 }
 render () {

@@ -18,7 +18,7 @@ import 'codemirror/addon/fold/foldgutter.css';
 export default class Editor extends Component {
   constructor() {
     super();
-    this.state = { show: true };
+    this.state = { show: false };
   }
 
   componentDidMount() {

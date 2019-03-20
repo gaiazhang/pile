@@ -5,7 +5,7 @@
  */
 import classnames from 'classnames';
 import React from 'react';
-import { compose, prefixClsProperty } from '@pile/shared';
+import { prefixClsProperty } from '@pile/shared';
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -1292,65 +1292,53 @@ function (_React$Component) {
     classCallCheck(this, Switch);
 
     _this = possibleConstructorReturn(this, getPrototypeOf(Switch).call(this, props));
-    _this.onClick = _this.onClick.bind(assertThisInitialized(_this));
-    _this.getMinusedSize = _this.getMinusedSize.bind(assertThisInitialized(_this));
     var checked = props.checked,
         disabled = props.disabled;
+    _this.onClick = _this.onClick.bind(assertThisInitialized(_this));
+    _this.onKeyPress = _this.onKeyPress.bind(assertThisInitialized(_this));
     _this.state = {
       checked: !!checked,
       disabled: !!disabled
     };
     return _this;
   }
+  /**
+   * 将 CSS 长度单位减去相应数值并转换
+   * 如 getMinusedSize(1) => 1px
+   * 如 getMinusedSize(3, 1) => 2px
+   * @param {*} size
+   * @param {*} minusNum
+   */
+
 
   createClass(Switch, [{
     key: "onClick",
     value: function onClick(e) {
+      /* eslint-disable prefer-const */
       var _this$state = this.state,
           checked = _this$state.checked,
           disabled = _this$state.disabled;
+      var onChange = this.props.onChange;
 
       if (disabled) {
         return;
       }
 
       checked = !checked;
-      this.props.onChange(checked);
+      if (onChange) onChange(checked, e);
+      /* eslint-enable prefer-const */
+
       this.setState({
         checked: checked
       });
     }
-    /**
-     * 将 CSS 长度单位减去相应数值并转换
-     * 如 getMinusedSize(1) => 1px
-     * 如 getMinusedSize(3, 1) => 2px
-     * @param {*} size
-     * @param {*} minusNum
-     */
-
   }, {
-    key: "getMinusedSize",
-    value: function getMinusedSize(size) {
-      var minusNum = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-      if (typeof size === 'number') {
-        return size - minusNum + 'px';
+    key: "onKeyPress",
+    value: function onKeyPress(e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        this.onClick(e);
       }
-
-      if (typeof size !== "string") {
-        return JSON.stringify(size);
-      }
-
-      var reg = /\d+/;
-      var transedSize = size.replace(reg, function (matchNum) {
-        return Number(matchNum) - minusNum;
-      }); // 如果输入了非数字字符串，则直接 return
-
-      if (!/^\d+$/.test(size)) {
-        return transedSize;
-      }
-
-      return transedSize + 'px';
     }
   }, {
     key: "render",
@@ -1367,9 +1355,9 @@ function (_React$Component) {
       var _this$state2 = this.state,
           checked = _this$state2.checked,
           disabled = _this$state2.disabled;
-      var transedWidth = this.getMinusedSize(width);
-      var transedHeight = this.getMinusedSize(height);
-      var minusedHeight = this.getMinusedSize(height, 2);
+      var transedWidth = Switch.getMinusedSize(width);
+      var transedHeight = Switch.getMinusedSize(height);
+      var minusedHeight = Switch.getMinusedSize(height, 2);
       var borderRadius = transedHeight;
       var divWrapCSS = classnames((_classnames = {}, defineProperty(_classnames, "".concat(prefixCls, "-switch--wrap"), true), defineProperty(_classnames, "isDisabled", disabled), _classnames));
       var divWrapStyle = {
@@ -1384,18 +1372,47 @@ function (_React$Component) {
         borderRadius: minusedHeight,
         border: checked ? "1px solid ".concat(checkedColor) : "1px solid ".concat(color),
         left: !checked ? '1px' : '100%',
-        marginLeft: !checked ? 0 : '-' + this.getMinusedSize(height, 1)
+        marginLeft: !checked ? 0 : "-".concat(Switch.getMinusedSize(height, 1))
       };
       return React.createElement("div", {
         className: divWrapCSS,
         style: divWrapStyle,
-        onClick: this.onClick
+        role: "switch",
+        "aria-checked": checked,
+        tabIndex: "0",
+        onClick: this.onClick,
+        onKeyPress: this.onKeyPress
       }, React.createElement("input", {
         type: "checkbox",
-        name: name
+        name: name,
+        value: checked
       }), React.createElement("div", {
         style: divInnerStyle
       }));
+    }
+  }], [{
+    key: "getMinusedSize",
+    value: function getMinusedSize(size) {
+      var minusNum = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (typeof size === 'number') {
+        return "".concat(size - minusNum, "px");
+      }
+
+      if (typeof size !== 'string') {
+        return JSON.stringify(size);
+      }
+
+      var reg = /\d+/;
+      var transedSize = size.replace(reg, function (matchNum) {
+        return Number(matchNum) - minusNum;
+      }); // 如果输入了非数字字符串，则直接 return
+
+      if (!/^\d+$/.test(size)) {
+        return transedSize;
+      }
+
+      return "".concat(transedSize, "px");
     }
   }]);
 
@@ -1417,12 +1434,12 @@ Switch.propTypes = {
   disabled: propTypes.bool,
   name: propTypes.string,
   color: propTypes.string,
+  checkedColor: propTypes.string,
   width: propTypes.oneOfType([propTypes.string, propTypes.number]),
   height: propTypes.oneOfType([propTypes.string, propTypes.number]),
   onChange: propTypes.func
 };
-var enhance = compose(prefixClsProperty);
-var index = enhance(Switch);
+var index = prefixClsProperty(Switch);
 
 export default index;
 //# sourceMappingURL=switch.esm.js.map

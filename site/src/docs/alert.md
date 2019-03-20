@@ -4,17 +4,21 @@
 alert
 包含无按钮, 确认框, 多按钮情况
 
-```js
-import { Modal, Button } from 'pile';
-const alert = Modal.alert;
-const App = () => (
-    <Button onClick={() => alert('删除', '确定删除么???', [
-      { text: '取消', onPress: () => console.log('cancel') },
-      { text: '确定', onPress: () => console.log('ok'), style: { fontWeight: 'bold' } },
-    ])}
-    >确认对话框</Button>
-);
-ReactDOM.render(<App />, mountNode);
+```jsx harmony
+onClick = () => {
+  Modal.alert('删除', '确定删除么???', [
+    { text: '取消', onPress: () => console.log('cancel') },
+    { text: '确定', onPress: () => console.log('ok'), style: { fontWeight: 'bold' } },
+  ]);
+}
+
+render () {
+  return (
+    <div>
+      <Button type='primary' onClick={this.onClick}>alert click</Button>{' '}
+    </div>
+  )
+}
 ```
 
 ## API

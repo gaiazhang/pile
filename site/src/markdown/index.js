@@ -38,7 +38,7 @@ marked.setOptions({
 const enhance = compose(
   withProps(({ input }) => {
     const snippets = {};
-    const newinput = marked(input.replace(/```js\s?([^]+?)```/g, (match, p1, offset) => {
+    const newinput = marked(input.replace(/```jsx harmony\s?([^]+?)```/g, (match, p1, offset) => {
       const id = offset.toString(36);
       snippets[id] = React.createElement(Canvas, { code: p1 });
 

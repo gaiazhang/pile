@@ -1,7 +1,7 @@
 # mobile端input组件
 
 ## 基本用法
-```js
+```jsx harmony
 render () {
   return (
     <div>

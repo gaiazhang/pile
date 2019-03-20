@@ -45,13 +45,13 @@ npm run build
 Build single package by running the following:
 
 ```bash
-npm run build:prod -- --scope "@pile/button"
+npm run build -- --scope "@pile/button"
 ```
 
 Build multiple packages where scope is a glob expression:
 
 ```bash
-npm run build:prod -- --scope "{@pile/button,@pile/icon}"
+npm run build -- --scope "{@pile/button,@pile/icon}"
 ```
 
 Watch all filters (auto-rebuild upon src changes):
