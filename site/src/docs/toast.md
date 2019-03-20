@@ -2,26 +2,29 @@
 
 ## 基本用法
 
-```js
+```jsx harmony
 componentWillMount () {
-  this.setState({content : "hi,jasmine"})
+  //this.setState({content : "hi,jasmine"})
+  Toast.show({content : "hi,jasmine",iconType : "success",duration: 0})
   setTimeout(() => {
-        this.setState({content : "hei,potato",iconType : "success"})
-  }, 0.3 * 1000);
+        //this.setState({content : "hei,potato",iconType : "warn"})
+        Toast.hide();
+  }, 1 * 1000);
 }
 render () {
   return (
     <div>
-      <Toast content={this.state.content} iconType={this.state.iconType} visible={true}/>
+      111
     </div>
   )
 }
 ```
 ## API
 
-### props
+### parameter
 
 |   参数    |   类型   |   默认  |   说明     |
 |-----------|----------|------------|-------------------|
-| type  |  string  |  -      | one of [arrow-left, arrow-right, ... , icon-warnning]  |
-| size  |  string  |  -      | small/large，small: 12px，large: 24px; |
+| content  |  string  |   ''  | toast显示的文字  |
+| iconType  |  string  |   ''   | one of ['success', 'fail', 'load', 'warn', '' |
+| duration  |  number  |    3s  |  默认展示3s后关闭，也可以自己传入数值，传入0时，toast不再自己关闭|

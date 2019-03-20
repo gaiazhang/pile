@@ -1,9 +1,4 @@
-@import 'theme';
-
-
-@listPrefixCls: pile;
-@inputPrefixCls: am-input;
-
+@import 'theme/base';
 
 @ns pile {
   @c input-item {

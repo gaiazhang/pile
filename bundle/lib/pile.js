@@ -15,6 +15,7 @@ var toast = require('@pile/toast');
 var _switch = _interopDefault(require('@pile/switch'));
 var input = _interopDefault(require('@pile/input'));
 var radio = _interopDefault(require('@pile/radio'));
+var alert = _interopDefault(require('@pile/alert'));
 
 
 
@@ -25,4 +26,5 @@ exports.Toast = toast.Toast;
 exports.Switch = _switch;
 exports.Input = input;
 exports.Radio = radio;
+exports.Alert = alert;
 //# sourceMappingURL=pile.js.map

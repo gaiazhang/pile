@@ -38,6 +38,7 @@ const enhance = compose(
         render(<Demo />, document.getElementById('${props.canvasId}'))
       `, {
           presets: ['es2015', 'react'],
+          plugins: ['proposal-class-properties'],
         });
 
         args.push(code);

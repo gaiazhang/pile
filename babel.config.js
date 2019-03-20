@@ -18,6 +18,7 @@ module.exports = function config(api) {
         plugins: [
           '@babel/plugin-syntax-dynamic-import',
           '@babel/plugin-transform-runtime',
+          '@babel/proposal-class-properties',
         ],
       },
       production: {

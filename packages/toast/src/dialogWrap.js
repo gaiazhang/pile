@@ -1,14 +1,9 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
-import PropTypes from 'prop-types';
 
 const IS_REACT_16 = !!ReactDOM.createPortal;
 
 class DialogWrap extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     if (this.props.visible) {
       this.componentDidUpdate();
