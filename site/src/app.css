@@ -34,12 +34,12 @@
 
 .app-note .note-header .note-nav ul {
   list-style: none;
+  display: inline;
 }
 
 .app-note .note-header .note-nav ul li {
   float: left;
   list-style: none;
-  padding: 0 30px;
   font-size: 20px;
 }
 
@@ -47,12 +47,63 @@
   display: block;
   height: 100px;
   color: #333;
+  padding: 0 30px;
+  box-sizing: border-box;
+  cursor: pointer;
 }
 
-.app-note .note-header .note-nav ul li.actived a, .app-note .note-header .note-nav ul li a:hover {
+.app-note .note-header .note-nav ul li.actived a span, .app-note .note-header .note-nav ul li a:hover span {
   border-bottom: 3px solid #1C80F9;
   color: #1E96FA;
+  display: block;
+}
+
+.note-nav-items, .note-nav .change-version {
+  float: left;
+}
+
+.note-nav .change-version {
+  height: 100px;
+  margin-right: 30px;
+  font-size: 20px;
+}
+
+.change-version .note-old-v a, .change-version .note-v {
+  padding: 0 30px;
   cursor: pointer;
+}
+
+.change-version .note-old-v {
+  display: none;
+}
+
+.change-version:hover .note-old-v {
+  display: block;
+  /* border: 1px solid #eee; */
+  background: #fff;
+  line-height: 50px;
+  position: relative;
+  background: #1e96fa;
+  color: #fff;
+  border-radius: 2px;
+}
+
+.change-version:hover .note-old-v a {
+  color: #fff;
+  line-height: 50px;
+}
+
+.change-version:hover .note-old-v::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border-right: 10px solid transparent;
+  border-left: 10px solid transparent;
+  border-bottom: 10px solid #1e96fa;
+  top: -10px;
+  left: 50%;
+  margin-left: -8px;
 }
 
 /* sidebar*/
@@ -76,6 +127,15 @@
 .note-content>div {
   padding: 0 40px;
   border-left: 1px solid #e5e5e5;
+}
+
+.note-header .nav-links-github {
+  font-size: 20px;
+  color: #333;
+}
+
+.note-header .nav-links-github:hover {
+  color: #1C80F9;
 }
 
 /* 侧边栏 */
@@ -269,3 +329,71 @@
   padding: 30px 0 30px 150px;
   line-height: 20px;
 }
+
+/* markdown */
+
+/* home */
+
+.pile-home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.pile-home-footer {
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
+  width: 100%;
+  left: 0;
+  font-size: 14px;
+  color: #999;
+}
+
+.pile-home-main {
+  position: relative;
+  top: -10%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  color: #666;
+}
+
+.pile-home-main h1 {
+  color: #333;
+  font-size: 45px;
+}
+
+.pile-home-main h2 {
+  color: #666;
+  font-size: 18px;
+  margin-top: 25px;
+  ;
+}
+
+.pile-home-main .version-links {
+  margin-top: 40px;
+  color: #ccc;
+}
+
+.pile-home-main .version-links a {
+  padding: 0 10px;
+  margin: 0 15px;
+  font-size: 18px;
+  color: #1E96FA;
+}
+
+/* 移动端兼容 */

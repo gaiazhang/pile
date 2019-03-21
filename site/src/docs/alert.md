@@ -5,8 +5,12 @@ alert
 包含无按钮, 确认框
 
 ```jsx harmony
+constructor(props) {
+  super(props);
+  this.state = {}
+}
 onClick = () => {
-      Alert.open({
+      Alert.show({
       title: '这是一个测试弹框',
       // content: '内容内容123',
       btnText:'你好了',
@@ -18,10 +22,17 @@ onClick = () => {
     });
 }
 
+onClick2 = () => {
+  this.setState(()=> ({show: true}))
+}
+
 render () {
+  const {show} = this.state;
   return (
     <div>
-      <Button type='primary' onClick={this.onClick}>alert click</Button>{' '}
+      <Button type='primary' onClick={this.onClick}>alert全局式</Button>{' '}
+      <Button type='primary' onClick={this.onClick2}>alert组件式</Button>{' '}
+      <Alert show={show} btnText='确定' callBack={()=>{}} >内容</Alert>
     </div>
   )
 }
