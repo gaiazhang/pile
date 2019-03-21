@@ -1,5 +1,5 @@
 /*!
- * pile.js v2.0.0
+ * pile-ui.js v2.0.0
  * (c) 2018-2019 renmaomin <renmaomin@126.com> (https://github.com/renmm)
  * Released under the MIT License.
  */
@@ -21,7 +21,6 @@ var alert = _interopDefault(require('@pile/alert'));
 
 exports.Icon = icon;
 exports.Button = button;
-exports.Mask = toast.Mask;
 exports.Toast = toast.Toast;
 exports.Switch = _switch;
 exports.Input = input;

@@ -4,6 +4,8 @@ import Routes from './roots/routes';
 
 import '../../packages/theme-default/lib/index.css';
 import './app.css';
+import './prism.css';
+import './prism.js'
 
 const navList = [
   /*   { label: '主题', nodeName: 'h2', link: 'components/theme' },

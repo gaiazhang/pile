@@ -1,7 +1,7 @@
-import { render } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Toast } from '../src';
+import ToastContent from '../src/toasContent';
 
 describe('test toast component', () => {
   beforeAll(() => {
@@ -11,8 +11,11 @@ describe('test toast component', () => {
   afterEach(() => {
     ReactDOM.createPortal.mockClear();
   });
-  it('snapshot ui', () => {
-    const wrapper = render(<Toast content="hi,you" iconType="success" visible />);
+  it('snapshot toast ui', () => {
+    const wrapper = shallow(<ToastContent content="hi,you" iconType="success" />);
     expect(wrapper).toMatchSnapshot();
+  });
+  it('', () => {
+
   });
 });
