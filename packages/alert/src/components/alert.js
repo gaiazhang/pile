@@ -1,16 +1,18 @@
-import React, { Component } from 'react';
+import * as React from 'react';
+import * as PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group'; // ES6
 import classNames from 'classnames';
 import { prefixClsProperty } from '@pile/shared';
 
-class Alert extends Component {
+class Alert extends React.Component {
   constructor(props) {
     super(props);
     this.state = { show: false };
   }
 
   componentDidMount() {
-    if (this.props.show) {
+    const { show } = this.props;
+    if (show) {
       setTimeout(() => {
         this.setState({ show: true });
       }, 0);
@@ -30,10 +32,10 @@ class Alert extends Component {
     document.body.style.overflow = '';
   }
 
-  callBackClose = () => {
-    const { callBack } = this.props;
-    if (callBack) {
-      callBack();
+  callBackClose = e => {
+    const { onClick } = this.props;
+    if (onClick) {
+      onClick(e);
     }
   };
 
@@ -87,41 +89,41 @@ class Alert extends Component {
             {children ? (
               <div className="pile-alert-content">{children}</div>
             ) : null}
-
+            {/* eslint-disable */}
             <div
+              role="button"
               className="d-btns pile-btn-alert"
               onClick={this.onClose}
               onKeyPress={this.onKeyPress}
             >
               <span className="btn-orange">{btnText}</span>
             </div>
+            {/* eslint-enable */}
           </div>
         </div>
       </CSSTransition>
     );
   }
 }
-/* Button.propTypes = {
+Alert.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]).isRequired,
-  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
-  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-  block: PropTypes.bool,
-  disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  loading: PropTypes.bool,
-  href: PropTypes.string,
-  circle: PropTypes.bool,
-}; */
+  show: PropTypes.bool,
+  showIcon: PropTypes.bool,
+  title: PropTypes.node,
+  btnText: PropTypes.string,
+  onClick: PropTypes.func,
+  type: PropTypes.oneOf(['success', 'warnning']),
+};
 
 Alert.defaultProps = {
   showIcon: false,
   title: '提示',
-  content: '内容',
   show: false,
   btnText: '确定',
-  callBack() {},
+  type: 'success',
+  onClick() {},
 };
 export default prefixClsProperty(Alert);
