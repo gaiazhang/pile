@@ -1,6 +1,6 @@
 import * as React from 'react';
-import docMd from '../docs/alert.md';
-import Markdown from '../markdown';
+import docMd from '../../docs/alert.md';
+import Markdown from '../../markdown';
 
 const Alert = () => (
   <div>
