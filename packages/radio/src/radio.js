@@ -7,77 +7,81 @@ import {
   sizeProperty,
   sizes,
 } from '@pile/shared';
-import { IfComponent } from '@pile/condition';
-import { compose as composed, withState, withHandlers } from 'recompose'
+import { compose as composed, withHandlers } from 'recompose'
 
 const enhanced = composed(
-  withState('value', 'updateValue', ''),
-  withState('id', 'updateId', ''),
   withHandlers({
-    onChange: props => event => {
-      props.updateValue(event.target.value)
+    onItemClick: props => (value) => event => {
+      if (props.onClick) return props.onClick()
+      if (props.disabled) return null
+      props.onChange(value)
     }
   })
 )
 
-
-const Radio = enhanced(({
-  prefixCls, className, size, value, onChange,
+const Radio = ({
+  prefixCls, className, onItemClick, checked, disabled, value, children, clsicon, name, vertical,
   ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-radio`]: true,
+    [`${prefixCls}-radio-vertical`]: vertical,
     [className]: className,
-    [`is-${size}`]: size,
   });
+  
+  if (!clsicon) {
+    if (checked) {
+      clsicon = classNames({
+        [`${prefixCls}-radio-icon`]: true,
+        [`${prefixCls}-radio-checked`]: true,
+        [`${prefixCls}-radio-vertical-icon`]: vertical,
+        [`${prefixCls}-radio-disabled`]: disabled,
+      });
+    } else {
+      clsicon = classNames({
+        [`${prefixCls}-radio-icon`]: true,
+        [`${prefixCls}-radio-no`]: true,
+        [`${prefixCls}-radio-vertical-icon`]: vertical,
+        [`${prefixCls}-radio-disabled-no`]: disabled,
+      });
+    }
+  }
 
   return (
-    <div className={cls} onClick={onChange}>
-      <label className="label" htmlFor={props.id}>
-        <span id={props.id} className={classNames('icon', props.radioType)} />
-        {props.label + '12344'}
+    <div className={cls} >
+      <label className={`${prefixCls}-radio-label`} htmlFor={`${prefixCls}-radio-${value}`} onClick={onItemClick(value)}>
+        <input className={`${prefixCls}-radio-label-input`} value={value} defaultChecked={checked} type='radio' name={name} />
+        <span id={`${prefixCls}-radio-${value}`} className={clsicon}></span>
+        <span className={`${prefixCls}-radio-text`}>{children}</span>
       </label>
     </div>)
-})
+}
 
-// Button.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.arrayOf(PropTypes.node),
-//     PropTypes.node,
-//   ]).isRequired,
-//   type: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
-//   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-//   block: PropTypes.bool,
-//   disabled: PropTypes.bool,
-//   line: PropTypes.bool,
-//   icon: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.node,
-//   ]),
-//   loading: PropTypes.bool,
-//   text: PropTypes.bool,
-//   href: PropTypes.string,
-//   radius: PropTypes.bool,
-//   circle: PropTypes.bool,
-// };
+Radio.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  checked: PropTypes.bool,
+  vertical: PropTypes.bool
+};
 
-// Button.defaultProps = {
-//   type: 'default',
-//   nativeType: 'button',
-//   block: false,
-//   disabled: false,
-//   line: false,
-//   icon: null,
-//   loading: false,
-//   text: false,
-//   href: null,
-//   radius: true,
-//   circle: false,
-// };
+Radio.defaultProps = {
+  disabled: false,
+  checked: false,
+  onChange: function(){}
+};
 
 const enhance = compose(
   sizeProperty([sizes.SMALL, sizes.LARGE]),
   prefixClsProperty,
 );
 
-export default enhance(Radio);
+export default enhanced(enhance(Radio));
