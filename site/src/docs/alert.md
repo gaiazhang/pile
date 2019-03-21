@@ -28,16 +28,6 @@ onClick2 = () => {
 
 render () {
   const {show} = this.state;
-  const obj = {
-      title: '这是一个测试弹框',
-      // content: '内容内容123',
-      btnText:'你好了',
-      showIcon:true,
-      type:'warnning',// success, warnning
-      callBack: function() {
-        console.log('关闭了...');
-      }
-    }
   return (
     <div>
       <Button type='primary' onClick={this.onClick}>alert全局式</Button>{' '}
