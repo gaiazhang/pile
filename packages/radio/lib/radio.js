@@ -8,10 +8,9 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = require('react');
-require('prop-types');
+var PropTypes = _interopDefault(require('prop-types'));
 var classNames = _interopDefault(require('classnames'));
 var shared = require('@pile/shared');
-require('@pile/condition');
 var recompose = require('recompose');
 
 function _defineProperty(obj, key, value) {
@@ -69,43 +68,44 @@ function _objectWithoutProperties(source, excluded) {
 
 var objectWithoutProperties = _objectWithoutProperties;
 
-var enhanced = recompose.compose(recompose.withState('checked', 'updateValue', function (props) {
-  return props.checked;
-}), recompose.withHandlers({
-  onClick: function onClick(props) {
+var enhanced = recompose.compose(recompose.withHandlers({
+  onItemClick: function onItemClick(props) {
     return function (value) {
       return function (event) {
+        if (props.onClick) return props.onClick();
         if (props.disabled) return null;
-        props.updateValue(true);
         props.onChange(value);
       };
     };
   }
 }));
-var Radio = enhanced(function (_ref) {
+
+var Radio = function Radio(_ref) {
   var _classNames;
 
   var prefixCls = _ref.prefixCls,
       className = _ref.className,
-      onClick = _ref.onClick,
+      onItemClick = _ref.onItemClick,
       checked = _ref.checked,
       disabled = _ref.disabled,
       value = _ref.value,
       children = _ref.children,
       clsicon = _ref.clsicon,
-      props = objectWithoutProperties(_ref, ["prefixCls", "className", "onClick", "checked", "disabled", "value", "children", "clsicon"]);
+      name = _ref.name,
+      vertical = _ref.vertical,
+      props = objectWithoutProperties(_ref, ["prefixCls", "className", "onItemClick", "checked", "disabled", "value", "children", "clsicon", "name", "vertical"]);
 
-  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-radio"), true), defineProperty(_classNames, className, className), _classNames));
+  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-radio"), true), defineProperty(_classNames, "".concat(prefixCls, "-radio-vertical"), vertical), defineProperty(_classNames, className, className), _classNames));
 
   if (!clsicon) {
     if (checked) {
       var _classNames2;
 
-      clsicon = classNames((_classNames2 = {}, defineProperty(_classNames2, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-checked"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-disabled"), disabled), _classNames2));
+      clsicon = classNames((_classNames2 = {}, defineProperty(_classNames2, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-checked"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-vertical-icon"), vertical), defineProperty(_classNames2, "".concat(prefixCls, "-radio-disabled"), disabled), _classNames2));
     } else {
       var _classNames3;
 
-      clsicon = classNames((_classNames3 = {}, defineProperty(_classNames3, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-no"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-disabled-no"), disabled), _classNames3));
+      clsicon = classNames((_classNames3 = {}, defineProperty(_classNames3, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-no"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-vertical-icon"), vertical), defineProperty(_classNames3, "".concat(prefixCls, "-radio-disabled-no"), disabled), _classNames3));
     }
   }
 
@@ -114,52 +114,87 @@ var Radio = enhanced(function (_ref) {
   }, React.createElement("label", {
     className: "".concat(prefixCls, "-radio-label"),
     htmlFor: "".concat(prefixCls, "-radio-").concat(value),
-    onClick: onClick(value)
-  }, React.createElement("span", {
+    onClick: onItemClick(value)
+  }, React.createElement("input", {
+    className: "".concat(prefixCls, "-radio-label-input"),
+    value: value,
+    defaultChecked: checked,
+    type: "radio",
+    name: name
+  }), React.createElement("span", {
     id: "".concat(prefixCls, "-radio-").concat(value),
     className: clsicon
   }), React.createElement("span", {
     className: "".concat(prefixCls, "-radio-text")
   }, children)));
-}); // Button.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.arrayOf(PropTypes.node),
-//     PropTypes.node,
-//   ]).isRequired,
-//   type: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
-//   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-//   block: PropTypes.bool,
-//   disabled: PropTypes.bool,
-//   line: PropTypes.bool,
-//   icon: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.node,
-//   ]),
-//   loading: PropTypes.bool,
-//   text: PropTypes.bool,
-//   href: PropTypes.string,
-//   radius: PropTypes.bool,
-//   circle: PropTypes.bool,
-// };
-// Button.defaultProps = {
-//   type: 'default',
-//   nativeType: 'button',
-//   block: false,
-//   disabled: false,
-//   line: false,
-//   icon: null,
-//   loading: false,
-//   text: false,
-//   href: null,
-//   radius: true,
-//   circle: false,
-// };
+};
 
+Radio.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  checked: PropTypes.bool,
+  vertical: PropTypes.bool
+};
+Radio.defaultProps = {
+  disabled: false,
+  checked: false,
+  onChange: function onChange() {}
+};
 var enhance = shared.compose(shared.sizeProperty([shared.sizes.SMALL, shared.sizes.LARGE]), shared.prefixClsProperty);
-var Radio$1 = enhance(Radio);
+var Radio$1 = enhanced(enhance(Radio));
+
+function _objectSpread(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+    var ownKeys = Object.keys(source);
+
+    if (typeof Object.getOwnPropertySymbols === 'function') {
+      ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+      }));
+    }
+
+    ownKeys.forEach(function (key) {
+      defineProperty(target, key, source[key]);
+    });
+  }
+
+  return target;
+}
+
+var objectSpread = _objectSpread;
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var _extends_1 = createCommonjsModule(function (module) {
+function _extends() {
+  module.exports = _extends = Object.assign || function (target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i];
+
+      for (var key in source) {
+        if (Object.prototype.hasOwnProperty.call(source, key)) {
+          target[key] = source[key];
+        }
+      }
+    }
+
+    return target;
+  };
+
+  return _extends.apply(this, arguments);
+}
+
+module.exports = _extends;
+});
 
 var enhanced$1 = recompose.compose(recompose.withState('selectedValue', 'updateValue', function (props) {
-  return props.value;
+  return props.defaultValue;
 }), recompose.withHandlers({
   onClick: function onClick(props) {
     return function (item) {
@@ -171,7 +206,7 @@ var enhanced$1 = recompose.compose(recompose.withState('selectedValue', 'updateV
     };
   }
 }));
-var Radio$2 = enhanced$1(function (_ref) {
+var RadioGroup = enhanced$1(function (_ref) {
   var _classNames;
 
   var prefixCls = _ref.prefixCls,
@@ -181,87 +216,60 @@ var Radio$2 = enhanced$1(function (_ref) {
       selectedValue = _ref.selectedValue,
       disabled = _ref.disabled,
       children = _ref.children,
-      props = objectWithoutProperties(_ref, ["prefixCls", "className", "onClick", "options", "selectedValue", "disabled", "children"]);
+      onChange = _ref.onChange,
+      name = _ref.name,
+      vertical = _ref.vertical,
+      props = objectWithoutProperties(_ref, ["prefixCls", "className", "onClick", "options", "selectedValue", "disabled", "children", "onChange", "name", "vertical"]);
 
-  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-radio"), true), defineProperty(_classNames, className, className), _classNames));
-
-  if (!options) {
-    var opt = [];
-    React.Children.map(children, function (child) {
-      opt.push({
-        value: child.props.value,
-        label: child.props.children,
-        disabled: child.props.disabled
-      });
-    });
-    console.log('opt', opt);
-    options = opt;
-  }
-
+  var cls = classNames((_classNames = {}, defineProperty(_classNames, "".concat(prefixCls, "-radio-group"), true), defineProperty(_classNames, className, className), _classNames));
   options && options.forEach(function (item, index) {
     if (item.value == selectedValue) {
       var _classNames2;
 
-      item.clsicon = classNames((_classNames2 = {}, defineProperty(_classNames2, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-checked"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-disabled"), disabled || item.disabled), _classNames2));
+      item.clsicon = classNames((_classNames2 = {}, defineProperty(_classNames2, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-checked"), true), defineProperty(_classNames2, "".concat(prefixCls, "-radio-vertical-icon"), vertical), defineProperty(_classNames2, "".concat(prefixCls, "-radio-disabled"), disabled || item.disabled), _classNames2));
     } else {
       var _classNames3;
 
-      item.clsicon = classNames((_classNames3 = {}, defineProperty(_classNames3, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-no"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-disabled-no"), disabled || item.disabled), _classNames3));
+      item.clsicon = classNames((_classNames3 = {}, defineProperty(_classNames3, "".concat(prefixCls, "-radio-icon"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-no"), true), defineProperty(_classNames3, "".concat(prefixCls, "-radio-vertical-icon"), vertical), defineProperty(_classNames3, "".concat(prefixCls, "-radio-disabled-no"), disabled || item.disabled), _classNames3));
     }
   });
   return React.createElement("div", {
     className: cls
   }, options && options.map(function (item, index) {
-    return React.createElement("label", {
-      className: "".concat(prefixCls, "-radio-label"),
+    return React.createElement(Radio$1, _extends_1({}, item, {
       key: item.value + '' + index,
-      htmlFor: item.value + index,
-      onClick: onClick(item)
-    }, React.createElement("span", {
-      id: item.value + index,
-      className: item.clsicon
-    }), React.createElement("span", {
-      className: "".concat(prefixCls, "-radio-text")
-    }, item.label));
+      onClick: onClick(item),
+      onChange: onChange,
+      name: name,
+      vertical: vertical,
+      checked: item.value == selectedValue
+    }), item.label);
+  }), !options && React.Children.map(children, function (child) {
+    return React.cloneElement(child, objectSpread({}, child.props, {
+      onClick: onClick(child.props),
+      onChange: onChange,
+      name: name,
+      checked: child.props.value == selectedValue
+    }));
   }));
-}); // Button.propTypes = {
-//   children: PropTypes.oneOfType([
-//     PropTypes.arrayOf(PropTypes.node),
-//     PropTypes.node,
-//   ]).isRequired,
-//   type: PropTypes.oneOf(['default', 'primary', 'success', 'info', 'warning', 'danger']),
-//   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-//   block: PropTypes.bool,
-//   disabled: PropTypes.bool,
-//   line: PropTypes.bool,
-//   icon: PropTypes.oneOfType([
-//     PropTypes.string,
-//     PropTypes.node,
-//   ]),
-//   loading: PropTypes.bool,
-//   text: PropTypes.bool,
-//   href: PropTypes.string,
-//   radius: PropTypes.bool,
-//   circle: PropTypes.bool,
-// };
-// Button.defaultProps = {
-//   type: 'default',
-//   nativeType: 'button',
-//   block: false,
-//   disabled: false,
-//   line: false,
-//   icon: null,
-//   loading: false,
-//   text: false,
-//   href: null,
-//   radius: true,
-//   circle: false,
-// };
-
+});
+RadioGroup.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  disabled: PropTypes.bool,
+  vertical: PropTypes.bool,
+  options: PropTypes.array
+};
+RadioGroup.defaultProps = {
+  disabled: false,
+  onChange: function onChange() {}
+};
 var enhance$1 = shared.compose(shared.sizeProperty([shared.sizes.SMALL, shared.sizes.LARGE]), shared.prefixClsProperty);
-var RadioGroup = enhance$1(Radio$2);
+var RadioGroup$1 = enhance$1(RadioGroup);
 
-Radio$1.RadioGroup = RadioGroup;
+Radio$1.RadioGroup = RadioGroup$1;
  // export { default as Radio } from './radio';
 
 module.exports = Radio$1;
