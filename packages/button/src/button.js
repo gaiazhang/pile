@@ -1,17 +1,22 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  compose,
-  prefixClsProperty,
-  sizeProperty,
-  sizes,
-} from '@pile/shared';
+import { compose, prefixClsProperty, sizeProperty, sizes } from '@pile/shared';
 import { IfComponent } from '@pile/condition';
 
 const Button = ({
-  children, className, prefixCls, size, type,
-  icon, loading, nativeType, block, href, circle, ...props
+  children,
+  className,
+  prefixCls,
+  size,
+  type,
+  icon,
+  loading,
+  nativeType,
+  block,
+  href,
+  circle,
+  ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-button`]: true,
@@ -38,13 +43,14 @@ const Button = ({
         {() => <i className={`${prefixCls}-icon-${iconType} ${iconCls}`} />}
       </IfComponent>
       <IfComponent when={!isIconType && icon !== null}>
-        {() => React.cloneElement(icon,
-          {
+        {() =>
+          React.cloneElement(icon, {
             className: classNames({
               [iconSelfCls]: iconSelfCls,
               [iconCls]: iconCls,
             }),
-          })}
+          })
+        }
       </IfComponent>
       <span className={`${prefixCls}-button-label`}>{children}</span>
     </Component>
@@ -60,10 +66,7 @@ Button.propTypes = {
   nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
   block: PropTypes.bool,
   disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.node,
-  ]),
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
   loading: PropTypes.bool,
   href: PropTypes.string,
   circle: PropTypes.bool,
@@ -82,7 +85,7 @@ Button.defaultProps = {
 
 const enhance = compose(
   sizeProperty([sizes.SMALL]),
-  prefixClsProperty,
+  prefixClsProperty
 );
 
 export default enhance(Button);

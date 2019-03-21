@@ -1,12 +1,16 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  compose, prefixClsProperty, sizeProperty, sizes,
-} from '@pile/shared';
+import { compose, prefixClsProperty, sizeProperty, sizes } from '@pile/shared';
 
 const ButtonGroup = ({
-  prefixCls, className, children, block, divide, borderColor, ...props
+  prefixCls,
+  className,
+  children,
+  block,
+  divide,
+  borderColor,
+  ...props
 }) => {
   const cls = classNames({
     [`${prefixCls}-btn-group`]: true,
@@ -15,13 +19,15 @@ const ButtonGroup = ({
   });
   return (
     <div className={cls} {...props}>
-      {React.Children.map(children, child => React.cloneElement(child, {
-        block,
-        style: {
-          ...child.props.style,
-          borderColor,
-        },
-      }))}
+      {React.Children.map(children, child =>
+        React.cloneElement(child, {
+          block,
+          style: {
+            ...child.props.style,
+            borderColor,
+          },
+        })
+      )}
     </div>
   );
 };
@@ -46,7 +52,7 @@ ButtonGroup.defaultProps = {
 
 const enhance = compose(
   sizeProperty([sizes.SMALL, sizes.LARGE]),
-  prefixClsProperty,
+  prefixClsProperty
 );
 
 export default enhance(ButtonGroup);

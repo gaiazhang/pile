@@ -26,5 +26,5 @@ exports.Toast = toast.Toast;
 exports.Switch = _switch;
 exports.Input = input;
 exports.Radio = radio;
-exports.Modal = alert;
+exports.Alert = alert;
 //# sourceMappingURL=pile.js.map

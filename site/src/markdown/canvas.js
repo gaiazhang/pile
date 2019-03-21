@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { render } from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import {
   withProps, withHandlers, lifecycle, compose,
 } from 'recompose';
@@ -17,8 +17,8 @@ const enhance = compose(
   withHandlers({
     renderCode: props => (renderCode) => {
       import('../../../bundle').then((Pile) => { // ../../../src
-        const args = ['React', 'render'];
-        const argv = [React, render];
+        const args = ['React', 'ReactDOM'];
+        const argv = [React, ReactDOM];
 
         Object.keys(Pile).forEach((key) => {
           args.push(key);
@@ -30,12 +30,21 @@ const enhance = compose(
           argv,
         };
       }).then(({ args, argv }) => {
-        const { code } = transform(`
-        class Demo extends React.Component {
+        const isMulitInstance = renderCode.includes('ReactDom.render(');
+        let codeTempl = `class Demo extends React.Component {
           ${renderCode}
         }
 
-        render(<Demo />, document.getElementById('${props.canvasId}'))
+        ReactDOM.render(<Demo />, mountNode)
+        `
+
+        if (isMulitInstance) {
+           codeTempl = `${renderCode}`
+        }
+        const { code } = transform(`
+        const mountNode = document.getElementById('${props.canvasId}');
+
+        ${codeTempl}
       `, {
           presets: ['es2015', 'react'],
           plugins: ['proposal-class-properties'],

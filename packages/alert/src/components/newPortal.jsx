@@ -13,6 +13,7 @@ class NewPortal extends React.Component {
     }
   }
 
+
   getContainer = () => {
     if (!this.container) {
       const container = document.createElement('div');

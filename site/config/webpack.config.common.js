@@ -25,7 +25,7 @@ module.exports = {
         loader: 'babel-loader',
         include: [
           path.resolve(__dirname, '../src'),
-          path.resolve(__dirname, '../../src'),
+          path.resolve(__dirname, '../../bundle'),
           path.resolve(__dirname, '../../packages'),
         ],
         exclude: /node_modules/,
