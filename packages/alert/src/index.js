@@ -1,9 +1,7 @@
-import alert from './components/alert';
-import Modal from './components/Modal';
-// import prompt from './prompt';
+import Alert from './components/alert';
+import alertBox from './components/alertWarp';
 
-Modal.alert = alert;
-Modal.prompt = alert;
-
-
-export default Modal;
+const { show, hide } = alertBox;
+Alert.show = show;
+Alert.hide = hide;
+export default Alert;

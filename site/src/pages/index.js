@@ -1,11 +1,12 @@
-import Button from './button';
-import Icon from './icon';
-import Toast from './toast';
-import Alert from './alert';
-import Switch from './switch';
-import Input from './input';
-import Radio from './radio';
-import Introduce from './introduce';
+import Button from './dev/button'
+import Icon from './dev/icon'
+import Toast from './dev/toast'
+import Alert from './dev/alert'
+import Switch from './dev/switch'
+import Input from './dev/input'
+import Radio from './dev/radio'
+import Introduce from './dev/introduce'
+import Index from './home'
 
 export default {
   Button,
@@ -16,4 +17,5 @@ export default {
   Input,
   Radio,
   Introduce,
-};
+  Index
+}

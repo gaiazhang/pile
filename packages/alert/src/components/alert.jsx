@@ -1,87 +1,142 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Modal from './Modal';
+import React, { Component } from 'react';
+// import ReactDOM from 'react-dom';
+import { CSSTransition } from 'react-transition-group'; // ES6
+import classNames from 'classnames';
+import { prefixClsProperty } from '@pile/shared';
 
-export default function alert(title, message, actions = [{ text: '确定' }]) {
-  let closed = false;
+/* let defaultState = {
+  alertStatus: false,
+  alertTip: '提示',
+  show:true,
+  closeAlert: function() {}
+}; */
 
-  if (!title && !message) {
-    // 有信息 -- 不执行关闭函数
-    return {
-      close: () => {},
-    };
+class Alert extends Component {
+  constructor(props) {
+    super(props);
+    const obj = {};
+    // const objs = Object.assign({}, obj, props);
+    this.state = { show: false };
   }
-  const div = document.createElement('div');
-  document.body.appendChild(div);
 
-  function close() {
-    ReactDOM.unmountComponentAtNode(div); // 销毁指定容器内的所有React节点
-    if (div && div.parentNode) {
-      div.parentNode.removeChild(div);
+  componentDidMount() {
+    console.log('componentDidMount');
+    if (this.props.show) {
+      setTimeout(() => {
+        this.setState({ show: true });
+      }, 0);
     }
   }
 
-  const footer = actions.map((button) => {
-    // 按钮组执行函数
-    const orginPress = button.onPress || function () {};
+  componentWillReceiveProps(nextProps) {
+    const { show } = this.state;
+    console.log('componentDidUpdate:', nextProps.show !== show);
+    if (nextProps.show !== show) {
+      console.log('go');
+      setTimeout(() => {
+        this.setState({ show: true });
+      }, 0);
+    }
+  }
 
-    button.onPress = () => {
-      if (closed) {
-        return;
-      }
-      const res = orginPress();
-      if (res && res.then) {
-        res
-          .then(() => {
-            closed = true;
-            close();
-          })
-          .catch(() => {});
-      } else {
-        closed = true;
-        close();
-      }
-    };
-    return button;
-  });
+  componentWillUnmount() {
+    document.body.style.overflow = '';
+  }
 
-  const prefixCls = 'pile-modal';
-  ReactDOM.render(
-    <Modal
-      visible
-      title={title}
-      transitionName="pile-fade"
-      closable={false}
-      maskClosable={false}
-      footer={footer}
-      maskTransitionName="pile-fade"
-    >
-      <div className={`${prefixCls}-alert-content`}>{message}</div>
-    </Modal>,
-    div,
-  );
-
-  return {
-    close,
+  callBackClose = () => {
+    const { callBack } = this.props;
+    if (callBack) {
+      callBack();
+    }
   };
+
+  onClose = () => {
+    this.setState({
+      show: false,
+    });
+  };
+
+  onKeyPress = e => {
+    if (e.keyCode === 13) {
+      e.preventDefault();
+      this.onClose(e);
+    }
+  };
+
+  render() {
+    let typeIcon = 'success';
+    const { showIcon, title, children, btnText, type } = this.props;
+    const { show } = this.state;
+    const { prefixCls } = this.props;
+    const iconCls = classNames({ [`${prefixCls}-alert-icon`]: true });
+    if (type === 'success') {
+      typeIcon = 'check';
+    } else {
+      typeIcon = type;
+    }
+    return (
+      <CSSTransition
+        in={show}
+        timeout={200} // 动画时长
+        classNames="pile-alert-animate"
+        unmountOnExit
+        onEnter={() => {
+          document.body.style.overflow = 'hidden';
+          console.log('动画进入完成1');
+        }}
+        onExited={() => {
+          document.body.style.overflow = '';
+          console.log('动画退出完成2');
+          this.callBackClose();
+        }}
+      >
+        <div className="pile-alert">
+          <div className="pile-alert-mask" />
+          <div className="pile-alert-box">
+            <i
+              className={`${prefixCls}-icon-${typeIcon} ${iconCls}`}
+              style={showIcon ? { display: 'block' } : { display: 'none' }}
+            />
+
+            <div className="pile-alert-title">{title}</div>
+            {children ? (
+              <div className="pile-alert-content">{children}</div>
+            ) : null}
+
+            <div
+              className="d-btns pile-btn-alert"
+              onClick={this.onClose}
+              onKeyPress={this.onKeyPress}
+            >
+              <span className="btn-orange">{btnText}</span>
+            </div>
+          </div>
+        </div>
+      </CSSTransition>
+    );
+  }
 }
+/* Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
+  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
+  block: PropTypes.bool,
+  disabled: PropTypes.bool,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  loading: PropTypes.bool,
+  href: PropTypes.string,
+  circle: PropTypes.bool,
+}; */
 
-/* ----API
-visible  对话框是否可见	Boolean	false
-onClose  点击 x 或 mask 回调	(): void	无
-title (only transparent)	标题	React.Element	无
-closable	是否显示关闭按钮	Boolean	true
-maskClosable (only transparent)	点击蒙层是否允许关闭	Boolean	true
-footer (only not transparent)	底部内容	Array [{text, onpress}]	[]
-transparent	是否弹窗模式	Boolean	false
-wrapClassName 新增弹窗样式 String
-
-==========================================================
-
-Modal.alert(title, message, actions?) ( 适用平台：WEB、React-Native )#
-参数	说明	类型	默认值
-title	标题	String 或 React.Element	无
-message	提示信息	String 或 React.Element	无
-actions	按钮组, [{text, onpress, style}]	Array	无
-
-*/
+Alert.defaultProps = {
+  showIcon: false,
+  title: '提示',
+  content: '内容',
+  show: false,
+  btnText: '确定',
+  callBack() {},
+};
+export default prefixClsProperty(Alert);

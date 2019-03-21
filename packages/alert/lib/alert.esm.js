@@ -4,91 +4,10 @@
  * Released under the MIT License.
  */
 import React, { Component } from 'react';
+import { CSSTransition } from 'react-transition-group';
+import classNames from 'classnames';
+import { prefixClsProperty } from '@pile/shared';
 import ReactDOM from 'react-dom';
-import classnames from 'classnames';
-import PropTypes from 'prop-types';
-import Animate from 'rc-animate';
-
-function createCommonjsModule(fn, module) {
-	return module = { exports: {} }, fn(module, module.exports), module.exports;
-}
-
-var _extends_1 = createCommonjsModule(function (module) {
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends;
-});
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-var defineProperty = _defineProperty;
-
-function _objectWithoutPropertiesLoose(source, excluded) {
-  if (source == null) return {};
-  var target = {};
-  var sourceKeys = Object.keys(source);
-  var key, i;
-
-  for (i = 0; i < sourceKeys.length; i++) {
-    key = sourceKeys[i];
-    if (excluded.indexOf(key) >= 0) continue;
-    target[key] = source[key];
-  }
-
-  return target;
-}
-
-var objectWithoutPropertiesLoose = _objectWithoutPropertiesLoose;
-
-function _objectWithoutProperties(source, excluded) {
-  if (source == null) return {};
-  var target = objectWithoutPropertiesLoose(source, excluded);
-  var key, i;
-
-  if (Object.getOwnPropertySymbols) {
-    var sourceSymbolKeys = Object.getOwnPropertySymbols(source);
-
-    for (i = 0; i < sourceSymbolKeys.length; i++) {
-      key = sourceSymbolKeys[i];
-      if (excluded.indexOf(key) >= 0) continue;
-      if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue;
-      target[key] = source[key];
-    }
-  }
-
-  return target;
-}
-
-var objectWithoutProperties = _objectWithoutProperties;
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -115,6 +34,10 @@ function _createClass(Constructor, protoProps, staticProps) {
 }
 
 var createClass = _createClass;
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
 
 var _typeof_1 = createCommonjsModule(function (module) {
 function _typeof2(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof2 = function _typeof2(obj) { return typeof obj; }; } else { _typeof2 = function _typeof2(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof2(obj); }
@@ -197,6 +120,200 @@ function _inherits(subClass, superClass) {
 
 var inherits = _inherits;
 
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+var defineProperty = _defineProperty;
+
+/* let defaultState = {
+  alertStatus: false,
+  alertTip: '提示',
+  show:true,
+  closeAlert: function() {}
+}; */
+
+var Alert =
+/*#__PURE__*/
+function (_Component) {
+  inherits(Alert, _Component);
+
+  function Alert(props) {
+    var _this;
+
+    classCallCheck(this, Alert);
+
+    _this = possibleConstructorReturn(this, getPrototypeOf(Alert).call(this, props));
+
+    defineProperty(assertThisInitialized(_this), "callBackClose", function () {
+      var callBack = _this.props.callBack;
+
+      if (callBack) {
+        callBack();
+      }
+    });
+
+    defineProperty(assertThisInitialized(_this), "onClose", function () {
+      _this.setState({
+        show: false
+      });
+    });
+
+    defineProperty(assertThisInitialized(_this), "onKeyPress", function (e) {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+
+        _this.onClose(e);
+      }
+    });
+
+    _this.state = {
+      show: false
+    };
+    return _this;
+  }
+
+  createClass(Alert, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      console.log('componentDidMount');
+
+      if (this.props.show) {
+        setTimeout(function () {
+          _this2.setState({
+            show: true
+          });
+        }, 0);
+      }
+    }
+  }, {
+    key: "componentWillReceiveProps",
+    value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
+
+      var show = this.state.show;
+      console.log('componentDidUpdate:', nextProps.show !== show);
+
+      if (nextProps.show !== show) {
+        console.log('go');
+        setTimeout(function () {
+          _this3.setState({
+            show: true
+          });
+        }, 0);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      document.body.style.overflow = '';
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this4 = this;
+
+      var typeIcon = 'success';
+      var _this$props = this.props,
+          showIcon = _this$props.showIcon,
+          title = _this$props.title,
+          children = _this$props.children,
+          btnText = _this$props.btnText,
+          type = _this$props.type;
+      var show = this.state.show;
+      var prefixCls = this.props.prefixCls;
+      var iconCls = classNames(defineProperty({}, "".concat(prefixCls, "-alert-icon"), true));
+
+      if (type === 'success') {
+        typeIcon = 'check';
+      } else {
+        typeIcon = type;
+      }
+
+      return React.createElement(CSSTransition, {
+        in: show,
+        timeout: 200 // 动画时长
+        ,
+        classNames: "pile-alert-animate",
+        unmountOnExit: true,
+        onEnter: function onEnter() {
+          document.body.style.overflow = 'hidden';
+          console.log('动画进入完成1');
+        },
+        onExited: function onExited() {
+          document.body.style.overflow = '';
+          console.log('动画退出完成2');
+
+          _this4.callBackClose();
+        }
+      }, React.createElement("div", {
+        className: "pile-alert"
+      }, React.createElement("div", {
+        className: "pile-alert-mask"
+      }), React.createElement("div", {
+        className: "pile-alert-box"
+      }, React.createElement("i", {
+        className: "".concat(prefixCls, "-icon-").concat(typeIcon, " ").concat(iconCls),
+        style: showIcon ? {
+          display: 'block'
+        } : {
+          display: 'none'
+        }
+      }), React.createElement("div", {
+        className: "pile-alert-title"
+      }, title), children ? React.createElement("div", {
+        className: "pile-alert-content"
+      }, children) : null, React.createElement("div", {
+        className: "d-btns pile-btn-alert",
+        onClick: this.onClose,
+        onKeyPress: this.onKeyPress
+      }, React.createElement("span", {
+        className: "btn-orange"
+      }, btnText)))));
+    }
+  }]);
+
+  return Alert;
+}(Component);
+/* Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
+  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
+  block: PropTypes.bool,
+  disabled: PropTypes.bool,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  loading: PropTypes.bool,
+  href: PropTypes.string,
+  circle: PropTypes.bool,
+}; */
+
+
+Alert.defaultProps = {
+  showIcon: false,
+  title: '提示',
+  content: '内容',
+  show: false,
+  btnText: '确定',
+  callBack: function callBack() {}
+};
+var Alert$1 = prefixClsProperty(Alert);
+
 function _objectSpread(target) {
   for (var i = 1; i < arguments.length; i++) {
     var source = arguments[i] != null ? arguments[i] : {};
@@ -218,567 +335,102 @@ function _objectSpread(target) {
 
 var objectSpread = _objectSpread;
 
-var RenderBox =
-/*#__PURE__*/
-function (_Component) {
-  inherits(RenderBox, _Component);
-
-  function RenderBox() {
-    classCallCheck(this, RenderBox);
-
-    return possibleConstructorReturn(this, getPrototypeOf(RenderBox).apply(this, arguments));
-  }
-
-  createClass(RenderBox, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      if (this.props.end) {
-        this.props.end();
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var className = this.props.className;
-
-      var props = objectSpread({}, this.props);
-
-      delete props.hiddenClassName;
-      delete props.visible;
-      props.className = className;
-      return React.createElement("div", props, props.children);
-    }
-  }]);
-
-  return RenderBox;
-}(Component);
-
-defineProperty(RenderBox, "propTypes", {
-  children: PropTypes.any,
-  visible: PropTypes.bool
-});
-
-defineProperty(RenderBox, "defaultProps", {
-  visible: true
-});
-
-function noop() {}
-
-var Dialog =
-/*#__PURE__*/
-function (_Component) {
-  inherits(Dialog, _Component);
-
-  function Dialog(_props) {
-    var _this;
-
-    classCallCheck(this, Dialog);
-
-    _this = possibleConstructorReturn(this, getPrototypeOf(Dialog).call(this, _props));
-
-    defineProperty(assertThisInitialized(_this), "getDialogElement", function () {
-      var props = _this.props;
-      var closable = props.closable;
-      var prefixCls = props.prefixCls;
-      var footer;
-
-      if (props.footer) {
-        footer = React.createElement("div", {
-          className: "".concat(prefixCls, "-footer"),
-          ref: function ref(el) {
-            return _this.footerRef = el;
-          }
-        }, props.footer);
-      }
-
-      var header;
-
-      if (props.title) {
-        header = React.createElement("div", {
-          className: "".concat(prefixCls, "-header"),
-          ref: function ref(el) {
-            return _this.headerRef = el;
-          }
-        }, React.createElement("div", {
-          className: "".concat(prefixCls, "-title")
-        }, props.title));
-      }
-
-      var closer;
-
-      if (closable) {
-        closer = React.createElement("button", {
-          onClick: _this.close,
-          "aria-label": "Close",
-          className: "".concat(prefixCls, "-close")
-        }, React.createElement("span", {
-          className: "".concat(prefixCls, "-close-x")
-        }));
-      }
-
-      var transitionName = _this.getTransitionName();
-
-      var dialogElement = React.createElement(RenderBox, {
-        key: "dialog-element",
-        role: "document",
-        ref: function ref(el) {
-          return _this.dialogRef = el;
-        },
-        style: props.style || {},
-        className: "".concat(prefixCls, " ").concat(props.className || ''),
-        visible: props.visible
-      }, React.createElement("div", {
-        className: "".concat(prefixCls, "-content")
-      }, closer, header, React.createElement("div", {
-        className: "".concat(prefixCls, "-body"),
-        style: props.bodyStyle,
-        ref: function ref(el) {
-          return _this.bodyRef = el;
-        }
-      }, props.children), footer)); // https://github.com/react-component/animate 动画库
-
-      return React.createElement(Animate, {
-        key: "dialog",
-        showProp: "visible",
-        onAppear: _this.onAnimateAppear,
-        onLeave: _this.onAnimateLeave,
-        transitionName: transitionName,
-        component: "",
-        transitionAppear: true
-      }, dialogElement);
-    });
-
-    defineProperty(assertThisInitialized(_this), "onAnimateAppear", function () {
-      // console.log('动画过度开始')
-      document.body.style.overflow = 'hidden';
-    });
-
-    defineProperty(assertThisInitialized(_this), "onAnimateLeave", function () {
-      // console.log('动画结束的时候执行')
-      document.body.style.overflow = '';
-
-      if (_this.wrapRef) {
-        _this.wrapRef.style.display = 'none';
-      }
-
-      if (_this.props.onAnimateLeave) {
-        _this.props.onAnimateLeave();
-      }
-
-      if (_this.props.afterClose) {
-        _this.props.afterClose();
-      }
-    });
-
-    defineProperty(assertThisInitialized(_this), "close", function (e) {
-      if (_this.props.onClose) {
-        _this.props.onClose(e);
-      }
-    });
-
-    defineProperty(assertThisInitialized(_this), "onMaskClick", function (e) {
-      if (e.target === e.currentTarget) {
-        _this.close(e);
-      }
-    });
-
-    _this.getMaskTransitionName = _this.getMaskTransitionName.bind(assertThisInitialized(_this));
-    _this.getTransitionName = _this.getTransitionName.bind(assertThisInitialized(_this));
-    _this.getTransitionName = _this.getTransitionName.bind(assertThisInitialized(_this));
-    _this.getMaskElement = _this.getMaskElement.bind(assertThisInitialized(_this));
-    return _this;
-  }
-
-  createClass(Dialog, [{
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      document.body.style.overflow = '';
-
-      if (this.wrapRef) {
-        this.wrapRef.style.display = 'none';
-      }
-    }
-  }, {
-    key: "getMaskTransitionName",
-    value: function getMaskTransitionName() {
-      var props = this.props;
-      var transitionName = props.maskTransitionName;
-      var animation = props.maskAnimation;
-
-      if (!transitionName && animation) {
-        transitionName = "".concat(props.prefixCls, "-").concat(animation);
-      }
-
-      return transitionName;
-    }
-  }, {
-    key: "getTransitionName",
-    value: function getTransitionName() {
-      var props = this.props;
-      var transitionName = props.transitionName;
-      console.log(transitionName, 'transitionName');
-      var animation = props.animation;
-
-      if (!transitionName && animation) {
-        transitionName = "".concat(props.prefixCls, "-").concat(animation);
-      }
-
-      return transitionName;
-    }
-  }, {
-    key: "getMaskElement",
-    value: function getMaskElement() {
-      var props = this.props;
-      var maskElement;
-
-      if (props.mask) {
-        var maskTransition = this.getMaskTransitionName();
-        maskElement = React.createElement(RenderBox, _extends_1({
-          key: "mask-element",
-          className: "".concat(props.prefixCls, "-mask"),
-          hiddenClassName: "".concat(props.prefixCls, "-mask-hidden"),
-          visible: props.visible
-        }, props.maskProps));
-
-        if (maskTransition) {
-          maskElement = React.createElement(Animate, {
-            key: "mask",
-            showProp: "visible",
-            transitionAppear: true,
-            component: "",
-            transitionName: maskTransition
-          }, maskElement);
-        }
-      }
-
-      return maskElement;
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var props = this.props;
-      var prefixCls = props.prefixCls,
-          maskClosable = props.maskClosable;
-      return React.createElement("div", null, this.getMaskElement(), React.createElement("div", _extends_1({
-        className: "".concat(prefixCls, "-wrap ").concat(props.wrapClassName || ''),
-        ref: function ref(el) {
-          return _this2.wrapRef = el;
-        },
-        onClick: maskClosable ? this.onMaskClick : undefined,
-        role: "dialog",
-        "aria-labelledby": props.title
-      }, props.wrapProps), this.getDialogElement()));
-    }
-  }]);
-
-  return Dialog;
-}(Component);
-Dialog.defaultProps = {
-  afterClose: noop,
-  className: '',
-  mask: true,
-  visible: false,
-  closable: true,
-  maskClosable: true,
-  prefixCls: 'pile-dialog',
-  onClose: noop
+var defaultOpts = {
+  showIcon: false,
+  title: '提示',
+  content: '内容',
+  show: false,
+  btnText: '确定',
+  callBack: function callBack() {}
 };
-Dialog.propTypes = {
-  afterClose: PropTypes.func,
-  className: PropTypes.string,
-  mask: PropTypes.bool,
-  visible: PropTypes.bool,
-  closable: PropTypes.bool,
-  maskClosable: PropTypes.bool,
-  prefixCls: PropTypes.string,
-  onClose: PropTypes.func
-};
+/* class AlertWarp extends Component {
+  state = {
+    ...defaultOpts,
+  };
 
-var CAN_USE_DOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+  show = options => {
+    options = options || {};
+    options.show = true;
+    options.children = options.content;
+    delete options.content;
 
-var DialogWrap =
-/*#__PURE__*/
-function (_Component) {
-  inherits(DialogWrap, _Component);
-
-  function DialogWrap(_props) {
-    var _this;
-
-    classCallCheck(this, DialogWrap);
-
-    _this = possibleConstructorReturn(this, getPrototypeOf(DialogWrap).call(this, _props));
-
-    defineProperty(assertThisInitialized(_this), "saveRef", function (node) {
-      _this._component = node;
+    this.setState({
+      ...defaultOpts,
+      ...options,
     });
+  };
 
-    defineProperty(assertThisInitialized(_this), "getComponent", function (visible) {
-      var props = objectSpread({}, _this.props);
+  callBack = () => {
+    const { callBack } = this.state;
+    if (callBack) {
+      callBack();
+    }
+  };
 
-      return React.createElement(Dialog, _extends_1({}, props, {
-        visible: visible,
-        onAnimateLeave: _this.removeContainer,
-        ref: _this.saveRef
-      }));
+  hide = () => {
+    this.setState({
+      ...defaultOpts,
+      show: false,
     });
+  };
 
-    defineProperty(assertThisInitialized(_this), "removeContainer", function () {
-      if (_this.container) {
-        _this.container.parentNode.removeChild(_this.container);
-
-        _this.container = null;
-      }
-    });
-
-    defineProperty(assertThisInitialized(_this), "getContainer", function () {
-      if (!_this.container) {
-        var container = document.createElement('div');
-        var containerId = "".concat(_this.props.prefixCls, "-container-").concat(new Date().getTime());
-        container.setAttribute('id', containerId);
-        document.body.appendChild(container);
-        _this.container = container;
-      }
-
-      return _this.container;
-    });
-
-    return _this;
+  render() {
+    return <Alert {...this.state} callBack={this.callBack} />;
   }
+}
+const div = document.createElement('div');
+document.body.appendChild(div);
 
-  createClass(DialogWrap, [{
-    key: "shouldComponentUpdate",
-    value: function shouldComponentUpdate(_ref) {
-      var visible = _ref.visible;
-      return !!(this.props.visible || visible);
-    }
-  }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {
-      this.removeContainer();
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      if (!CAN_USE_DOM) {
-        return null;
-      }
+const alertBox = ReactDOM.render(<AlertWarp />, div);
 
-      var visible = this.props.visible;
+export default alertBox; */
 
-      if (visible || this._component) {
-        return ReactDOM.createPortal(this.getComponent(visible), this.getContainer());
-      }
+var messageInstance;
 
-      return null;
-    }
-  }]);
-
-  return DialogWrap;
-}(Component);
-DialogWrap.defaultProps = {
-  visible: false,
-  prefixCls: 'pile-modal',
-  onClose: function onClose() {}
-};
-DialogWrap.propTypes = {
-  visible: PropTypes.bool,
-  prefixCls: PropTypes.string,
-  onClose: PropTypes.func
-};
-
-var Modal =
-/*#__PURE__*/
-function (_Component) {
-  inherits(Modal, _Component);
-
-  function Modal(props) {
-    var _this;
-
-    classCallCheck(this, Modal);
-
-    _this = possibleConstructorReturn(this, getPrototypeOf(Modal).call(this, props));
-    _this.renderFooterButton = _this.renderFooterButton.bind(assertThisInitialized(_this));
-    return _this;
-  }
-
-  createClass(Modal, [{
-    key: "renderFooterButton",
-    value: function renderFooterButton(button, prefixCls, i) {
-      var buttonStyle = {};
-
-      if (button.style) {
-        buttonStyle = button.style;
-
-        if (typeof buttonStyle === 'string') {
-          var styleMap = {
-            cancel: {},
-            default: {},
-            destructive: {
-              color: 'red'
-            }
-          };
-          buttonStyle = styleMap[buttonStyle] || {};
-        }
-      }
-
-      var onClickFn = function onClickFn(e) {
-        e.preventDefault();
-
-        if (button.onPress) {
-          button.onPress();
-        }
-      };
-
-      return React.createElement("div", {
-        className: "".concat(prefixCls, "-button"),
-        key: i
-      }, React.createElement("a", {
-        className: "".concat(prefixCls, "-button"),
-        role: "button",
-        style: buttonStyle,
-        onClick: onClickFn
-      }, button.text || 'Button'));
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      var _this$props = this.props,
-          prefixCls = _this$props.prefixCls,
-          className = _this$props.className,
-          wrapClassName = _this$props.wrapClassName,
-          style = _this$props.style,
-          _this$props$footer = _this$props.footer,
-          footer = _this$props$footer === void 0 ? [] : _this$props$footer,
-          popup = _this$props.popup,
-          restProps = objectWithoutProperties(_this$props, ["prefixCls", "className", "wrapClassName", "style", "footer", "popup"]);
-
-      var btnGroupClass = classnames( //
-      "".concat(prefixCls, "-button-group-").concat(footer.length === 2 ? 'h' : 'v'), "".concat(prefixCls, "-button-group-normal"));
-      var footerDom = footer.length ? React.createElement("div", {
-        className: btnGroupClass
-      }, footer.map(function (button, i) {
-        return _this2.renderFooterButton(button, prefixCls, i);
-      })) : null;
-      var wrapCls = classnames(wrapClassName, defineProperty({}, "".concat(prefixCls, "-wrap-popup"), popup));
-      return React.createElement(DialogWrap, _extends_1({}, restProps, {
-        prefixCls: prefixCls,
-        className: "pile-modal-transparent",
-        wrapClassName: wrapCls,
-        transitionName: "pile-fade",
-        maskTransitionName: "pile-fade",
-        style: style,
-        footer: footerDom
-      }));
-    }
-  }]);
-
-  return Modal;
-}(Component);
-Modal.defaultProps = {
-  prefixCls: 'pile-modal',
-  style: {},
-  onShow: function onShow() {},
-  footer: [],
-  closable: false
-};
-Modal.propTypes = {
-  prefixCls: PropTypes.string,
-  className: PropTypes.string,
-  wrapClassName: PropTypes.string,
-  onShow: PropTypes.func,
-  footer: PropTypes.array
-}; // export default WithPortal(Modal);
-
-function alert(title, message) {
-  var actions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [{
-    text: '确定'
-  }];
-  var closed = false;
-
-  if (!title && !message) {
-    // 有信息 -- 不执行关闭函数
-    return {
-      close: function close() {}
-    };
-  }
-
+var getMessageInstance = function createMessage(opts) {
   var div = document.createElement('div');
   document.body.appendChild(div);
 
-  function close() {
-    ReactDOM.unmountComponentAtNode(div); // 销毁指定容器内的所有React节点
-
-    if (div && div.parentNode) {
-      div.parentNode.removeChild(div);
-    }
+  function destroy() {
+    ReactDOM.unmountComponentAtNode(div);
+    div.parentNode.removeChild(div);
   }
 
-  var footer = actions.map(function (button) {
-    // 按钮组执行函数
-    var orginPress = button.onPress || function () {};
+  opts.children = opts.content;
+  delete opts.content;
 
-    button.onPress = function () {
-      if (closed) {
-        return;
-      }
+  var props = objectSpread({}, defaultOpts, opts);
 
-      var res = orginPress();
-
-      if (res && res.then) {
-        res.then(function () {
-          closed = true;
-          close();
-        }).catch(function () {});
-      } else {
-        closed = true;
-        close();
-      }
-    };
-
-    return button;
-  });
-  var prefixCls = 'pile-modal';
-  ReactDOM.render(React.createElement(Modal, {
-    visible: true,
-    title: title,
-    transitionName: "pile-fade",
-    closable: false,
-    maskClosable: false,
-    footer: footer,
-    maskTransitionName: "pile-fade"
-  }, React.createElement("div", {
-    className: "".concat(prefixCls, "-alert-content")
-  }, message)), div);
+  console.log(props, 'opts');
+  ReactDOM.render(React.createElement(Alert$1, props), div);
   return {
-    close: close
+    destroy: destroy
   };
-}
-/* ----API
-visible  对话框是否可见	Boolean	false
-onClose  点击 x 或 mask 回调	(): void	无
-title (only transparent)	标题	React.Element	无
-closable	是否显示关闭按钮	Boolean	true
-maskClosable (only transparent)	点击蒙层是否允许关闭	Boolean	true
-footer (only not transparent)	底部内容	Array [{text, onpress}]	[]
-transparent	是否弹窗模式	Boolean	false
-wrapClassName 新增弹窗样式 String
+};
 
-==========================================================
+var alertBox = {
+  show: function show(opts) {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
 
-Modal.alert(title, message, actions?) ( 适用平台：WEB、React-Native )#
-参数	说明	类型	默认值
-title	标题	String 或 React.Element	无
-message	提示信息	String 或 React.Element	无
-actions	按钮组, [{text, onpress, style}]	Array	无
+    messageInstance = getMessageInstance(objectSpread({}, opts, {
+      show: true
+    }));
+  },
+  hide: function hide() {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
+  }
+};
 
-*/
+var show = alertBox.show,
+    hide = alertBox.hide;
+Alert$1.show = show;
+Alert$1.hide = hide;
 
-Modal.alert = alert;
-Modal.prompt = alert;
-
-export default Modal;
+export default Alert$1;
 //# sourceMappingURL=alert.esm.js.map
