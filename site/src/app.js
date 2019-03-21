@@ -25,9 +25,7 @@ const navList = [
         label: '交互',
         nodeName: 'dl',
         link: '',
-        list: [
-          { label: 'Toast', nodeName: 'dd', link: 'components/toast' },
-        ],
+        list: [{ label: 'Toast', nodeName: 'dd', link: 'components/toast' }],
       },
     ],
   },
@@ -41,12 +39,19 @@ function changeLink(e) {
 }
 // 侧边栏 分类展示
 const navH2 = (re, curnav) => (
-  <h2 className={`links ${re.link == curnav ? 'actived' : ''}`}><Link to={`/${re.link}`} onClick={() => { changeLink(re.link); }}>{re.label}</Link></h2>
+  <h2 className={`links ${re.link == curnav ? 'actived' : ''}`}>
+    <Link
+      to={`/${re.link}`}
+      onClick={() => {
+        changeLink(re.link);
+      }}
+    >
+      {re.label}
+    </Link>
+  </h2>
 );
 
-const navUnlinks = re => (
-  <h2 className="un-links">{re.label}</h2>
-);
+const navUnlinks = re => <h2 className="un-links">{re.label}</h2>;
 
 const navUl = (re, curnav) => (
   <ul className="arc-list">
@@ -54,7 +59,12 @@ const navUl = (re, curnav) => (
       if (item.nodeName === 'li') {
         return (
           <li className={`links ${item.link == curnav ? 'actived' : ''}`}>
-            <Link to={`/${item.link}`} onClick={() => { changeLink(item.link); }}>
+            <Link
+              to={`/${item.link}`}
+              onClick={() => {
+                changeLink(item.link);
+              }}
+            >
               {item.label}
             </Link>
           </li>
@@ -66,7 +76,16 @@ const navUl = (re, curnav) => (
             <dl>
               <dt>{item.label}</dt>
               {item.list.map(rem => (
-                <dd className={`links ${rem.link == curnav ? 'actived' : ''}`}><Link to={`/${rem.link}`} onClick={() => { changeLink(rem.link); }}>{rem.label}</Link></dd>
+                <dd className={`links ${rem.link == curnav ? 'actived' : ''}`}>
+                  <Link
+                    to={`/${rem.link}`}
+                    onClick={() => {
+                      changeLink(rem.link);
+                    }}
+                  >
+                    {rem.label}
+                  </Link>
+                </dd>
               ))}
             </dl>
           </li>
