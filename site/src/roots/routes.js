@@ -15,7 +15,7 @@ export default () => (
       <Route path="/components/toast" component={pages.Toast} />
       <Route path="/components/alert" component={pages.Alert} />
       <Route path="/components/switch" component={pages.Switch} />
-      <Route path="/components/input" component={pages.Input} />
+      <Route path="/components/inputFiled" component={pages.InputFiled} />
       <Route path="/components/radio" component={pages.Radio} />
       <Route path="/components/introduce" component={pages.Introduce} />
       <Route path="/index" component={pages.Index} />
