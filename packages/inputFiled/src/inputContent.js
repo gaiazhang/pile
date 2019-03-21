@@ -1,5 +1,5 @@
 import * as React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { IfComponent } from '@pile/condition';
 import Icon from '@pile/icon';
 import { prefixClsProperty } from '@pile/shared';
@@ -138,5 +138,26 @@ class InputContent extends React.Component {
     );
   }
 }
+InputContent.propTypes = {
+  autoFocus: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onChange: PropTypes.func,
+  clearable: PropTypes.bool,
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  value: PropTypes.string,
+};
+
+InputContent.defaultProps = {
+  type: 'text',
+  clearable: false,
+  autoFocus: false,
+  disabled: false,
+  onFocus() {},
+  onBlur() {},
+  onChange() {},
+  value: '',
+};
 
 export default prefixClsProperty(InputContent);
