@@ -178,19 +178,42 @@ function (_Component) {
       }
     });
 
-    var obj = {};
-    var objs = Object.assign({}, obj, props);
-    _this.state = objs;
+    _this.state = {
+      show: false
+    };
     return _this;
   }
 
   createClass(Alert, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      console.log('componentDidMount');
+
+      if (this.props.show) {
+        setTimeout(function () {
+          _this2.setState({
+            show: true
+          });
+        }, 0);
+      }
+    }
+  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
+      var _this3 = this;
+
       var show = this.state.show;
+      console.log('componentDidUpdate:', nextProps.show !== show);
 
       if (nextProps.show !== show) {
-        this.setState(nextProps);
+        console.log('go');
+        setTimeout(function () {
+          _this3.setState({
+            show: true
+          });
+        }, 0);
       }
     }
   }, {
@@ -201,16 +224,16 @@ function (_Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this2 = this;
+      var _this4 = this;
 
       var typeIcon = 'success';
-      var _this$state = this.state,
-          show = _this$state.show,
-          showIcon = _this$state.showIcon,
-          title = _this$state.title,
-          children = _this$state.children,
-          btnText = _this$state.btnText,
-          type = _this$state.type;
+      var _this$props = this.props,
+          showIcon = _this$props.showIcon,
+          title = _this$props.title,
+          children = _this$props.children,
+          btnText = _this$props.btnText,
+          type = _this$props.type;
+      var show = this.state.show;
       var prefixCls = this.props.prefixCls;
       var iconCls = classNames(defineProperty({}, "".concat(prefixCls, "-alert-icon"), true));
 
@@ -220,9 +243,7 @@ function (_Component) {
         typeIcon = type;
       }
 
-      return React.createElement(CSSTransition
-      /* component={this.FirstChild} */
-      , {
+      return React.createElement(CSSTransition, {
         in: show,
         timeout: 200 // 动画时长
         ,
@@ -230,13 +251,13 @@ function (_Component) {
         unmountOnExit: true,
         onEnter: function onEnter() {
           document.body.style.overflow = 'hidden';
-          console.log('动画进入完成');
+          console.log('动画进入完成1');
         },
         onExited: function onExited() {
           document.body.style.overflow = '';
-          console.log('动画退出完成');
+          console.log('动画退出完成2');
 
-          _this2.callBackClose();
+          _this4.callBackClose();
         }
       }, React.createElement("div", {
         className: "pile-alert"
@@ -267,30 +288,31 @@ function (_Component) {
 
   return Alert;
 }(Component);
+/* Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node,
+  ]).isRequired,
+  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
+  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
+  block: PropTypes.bool,
+  disabled: PropTypes.bool,
+  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  loading: PropTypes.bool,
+  href: PropTypes.string,
+  circle: PropTypes.bool,
+}; */
 
-var AlertBox = prefixClsProperty(Alert);
 
-var _extends_1 = createCommonjsModule(function (module) {
-function _extends() {
-  module.exports = _extends = Object.assign || function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
-    }
-
-    return target;
-  };
-
-  return _extends.apply(this, arguments);
-}
-
-module.exports = _extends;
-});
+Alert.defaultProps = {
+  showIcon: false,
+  title: '提示',
+  content: '内容',
+  show: false,
+  btnText: '确定',
+  callBack: function callBack() {}
+};
+var Alert$1 = prefixClsProperty(Alert);
 
 function _objectSpread(target) {
   for (var i = 1; i < arguments.length; i++) {
@@ -313,7 +335,7 @@ function _objectSpread(target) {
 
 var objectSpread = _objectSpread;
 
-var defaultState = {
+var defaultOpts = {
   showIcon: false,
   title: '提示',
   content: '内容',
@@ -321,77 +343,94 @@ var defaultState = {
   btnText: '确定',
   callBack: function callBack() {}
 };
+/* class AlertWarp extends Component {
+  state = {
+    ...defaultOpts,
+  };
 
-var AlertWarp =
-/*#__PURE__*/
-function (_Component) {
-  inherits(AlertWarp, _Component);
+  show = options => {
+    options = options || {};
+    options.show = true;
+    options.children = options.content;
+    delete options.content;
 
-  function AlertWarp() {
-    var _getPrototypeOf2;
+    this.setState({
+      ...defaultOpts,
+      ...options,
+    });
+  };
 
-    var _this;
-
-    classCallCheck(this, AlertWarp);
-
-    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
+  callBack = () => {
+    const { callBack } = this.state;
+    if (callBack) {
+      callBack();
     }
+  };
 
-    _this = possibleConstructorReturn(this, (_getPrototypeOf2 = getPrototypeOf(AlertWarp)).call.apply(_getPrototypeOf2, [this].concat(args)));
-
-    defineProperty(assertThisInitialized(_this), "state", objectSpread({}, defaultState));
-
-    defineProperty(assertThisInitialized(_this), "open", function (options) {
-      /* eslint-disable */
-      options = options || {};
-      options.show = true;
-      options.children = options.content;
-      delete options.content;
-      /* eslint-enable */
-
-      _this.setState(objectSpread({}, defaultState, options));
+  hide = () => {
+    this.setState({
+      ...defaultOpts,
+      show: false,
     });
+  };
 
-    defineProperty(assertThisInitialized(_this), "callBack", function () {
-      var callBack = _this.state.callBack;
+  render() {
+    return <Alert {...this.state} callBack={this.callBack} />;
+  }
+}
+const div = document.createElement('div');
+document.body.appendChild(div);
 
-      if (callBack) {
-        callBack();
-      }
-    });
+const alertBox = ReactDOM.render(<AlertWarp />, div);
 
-    defineProperty(assertThisInitialized(_this), "close", function () {
-      _this.setState(objectSpread({}, defaultState, {
-        show: false
-      }));
-    });
+export default alertBox; */
 
-    return _this;
+var messageInstance;
+
+var getMessageInstance = function createMessage(opts) {
+  var div = document.createElement('div');
+  document.body.appendChild(div);
+
+  function destroy() {
+    ReactDOM.unmountComponentAtNode(div);
+    div.parentNode.removeChild(div);
   }
 
-  createClass(AlertWarp, [{
-    key: "render",
-    value: function render() {
-      return React.createElement(AlertBox, _extends_1({}, this.state, {
-        callBack: this.callBack
-      }));
+  opts.children = opts.content;
+  delete opts.content;
+
+  var props = objectSpread({}, defaultOpts, opts);
+
+  console.log(props, 'opts');
+  ReactDOM.render(React.createElement(Alert$1, props), div);
+  return {
+    destroy: destroy
+  };
+};
+
+var alertBox = {
+  show: function show(opts) {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
     }
-  }]);
 
-  return AlertWarp;
-}(Component);
+    messageInstance = getMessageInstance(objectSpread({}, opts, {
+      show: true
+    }));
+  },
+  hide: function hide() {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
+  }
+};
 
-var div = document.createElement('div');
-document.body.appendChild(div);
-/* eslint-disable */
+var show = alertBox.show,
+    hide = alertBox.hide;
+Alert$1.show = show;
+Alert$1.hide = hide;
 
-var alertBox = ReactDOM.render(React.createElement(AlertWarp, null), div);
-
-var open = alertBox.open,
-    close = alertBox.close;
-AlertBox.open = open;
-AlertBox.close = close;
-
-export default AlertBox;
+export default Alert$1;
 //# sourceMappingURL=alert.esm.js.map
