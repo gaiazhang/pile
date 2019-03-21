@@ -304,8 +304,8 @@ Value.propTypes = {
   onChange: PropTypes.func
 };
 Value.defaultProps = {
-  defaultValue: "",
-  inputType: "",
+  defaultValue: '',
+  inputType: '',
   children: function children() {},
   onChange: function onChange() {}
 };
