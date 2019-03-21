@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import AlertBox from './alert';
+import Alert from './alert';
 
-const defaultState = {
+const defaultOpts = {
   showIcon: false,
   title: '提示',
   content: '内容',
@@ -11,20 +11,19 @@ const defaultState = {
   callBack() {},
 };
 
-class AlertWarp extends Component {
+/* class AlertWarp extends Component {
   state = {
-    ...defaultState,
+    ...defaultOpts,
   };
 
-  open = options => {
-    /* eslint-disable */
-      options = options || {};
-      options.show = true;
-      options.children = options.content;
-      delete options.content;
-        /* eslint-enable */
+  show = options => {
+    options = options || {};
+    options.show = true;
+    options.children = options.content;
+    delete options.content;
+
     this.setState({
-      ...defaultState,
+      ...defaultOpts,
       ...options,
     });
   };
@@ -36,23 +35,55 @@ class AlertWarp extends Component {
     }
   };
 
-  close = () => {
+  hide = () => {
     this.setState({
-      ...defaultState,
+      ...defaultOpts,
       show: false,
     });
   };
 
   render() {
-    return <AlertBox {...this.state} callBack={this.callBack} />;
+    return <Alert {...this.state} callBack={this.callBack} />;
   }
 }
 const div = document.createElement('div');
 document.body.appendChild(div);
-/* eslint-disable */
-const alertBox = ReactDOM.render(
-  <AlertWarp />,
-  div,
-);
-/* eslint-enable */
-export default alertBox;
+
+const alertBox = ReactDOM.render(<AlertWarp />, div);
+
+export default alertBox; */
+
+let messageInstance;
+
+const getMessageInstance = function createMessage(opts) {
+  const div = document.createElement('div');
+  document.body.appendChild(div);
+  function destroy() {
+    ReactDOM.unmountComponentAtNode(div);
+    div.parentNode.removeChild(div);
+  }
+  opts.children = opts.content;
+  delete opts.content;
+  const props = { ...defaultOpts, ...opts };
+  console.log(props, 'opts');
+  ReactDOM.render(<Alert {...props} />, div);
+
+  return { destroy };
+};
+
+export default {
+  show(opts) {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
+
+    messageInstance = getMessageInstance({ ...opts, show: true });
+  },
+  hide() {
+    if (messageInstance) {
+      messageInstance.destroy();
+      messageInstance = null;
+    }
+  },
+};

@@ -1,7 +1,7 @@
 import Alert from './components/alert';
 import alertBox from './components/alertWarp';
 
-const { open, close } = alertBox;
-Alert.open = open;
-Alert.close = close;
+const { show, hide } = alertBox;
+Alert.show = show;
+Alert.hide = hide;
 export default Alert;
