@@ -50,6 +50,25 @@ import single css
 import '@pile/theme-default/lib/button.min.css'
 ```
 
+## 按需加载
+
+使用 babel-plugin-import
+
+```js
+//babel.config.js
+      ['import', {
+        libraryName: 'pile-ui',
+        camel2UnderlineComponentName: false,
+        camel2DashComponentName: false,
+        customName(name) {
+          if (name) {
+            return `pile-ui/node_modules/@pile/${name}`;
+          }
+        },
+      }],
+```
+
+>>>>>>> 883180893216e6214afaca275a3db0f4b04063e7
 ## Example
 
 We have several examples on the documentation. Here is the first one to get you started:

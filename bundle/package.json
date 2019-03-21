@@ -27,7 +27,7 @@
     "@pile/alert": "^2.0.0",
     "@pile/button": "^2.0.0",
     "@pile/icon": "^2.0.0",
-    "@pile/input": "^2.0.0",
+    "@pile/inputFiled": "^2.0.0",
     "@pile/radio": "^2.0.0",
     "@pile/switch": "^2.0.0",
     "@pile/toast": "^2.0.0"

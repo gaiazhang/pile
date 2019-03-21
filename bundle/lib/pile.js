@@ -13,7 +13,7 @@ var icon = _interopDefault(require('@pile/icon'));
 var button = _interopDefault(require('@pile/button'));
 var toast = require('@pile/toast');
 var _switch = _interopDefault(require('@pile/switch'));
-var input = _interopDefault(require('@pile/input'));
+var inputFiled = _interopDefault(require('@pile/inputFiled'));
 var radio = _interopDefault(require('@pile/radio'));
 var alert = _interopDefault(require('@pile/alert'));
 
@@ -23,7 +23,7 @@ exports.Icon = icon;
 exports.Button = button;
 exports.Toast = toast.Toast;
 exports.Switch = _switch;
-exports.Input = input;
+exports.InputFiled = inputFiled;
 exports.Radio = radio;
 exports.Alert = alert;
 //# sourceMappingURL=pile.js.map
