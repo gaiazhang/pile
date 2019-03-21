@@ -9,6 +9,7 @@ function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'defau
 
 var React = require('react');
 var React__default = _interopDefault(React);
+var PropTypes = require('prop-types');
 var reactTransitionGroup = require('react-transition-group');
 var classNames = _interopDefault(require('classnames'));
 var shared = require('@pile/shared');
@@ -144,8 +145,8 @@ var defineProperty = _defineProperty;
 
 var Alert =
 /*#__PURE__*/
-function (_Component) {
-  inherits(Alert, _Component);
+function (_React$Component) {
+  inherits(Alert, _React$Component);
 
   function Alert(props) {
     var _this;
@@ -154,11 +155,11 @@ function (_Component) {
 
     _this = possibleConstructorReturn(this, getPrototypeOf(Alert).call(this, props));
 
-    defineProperty(assertThisInitialized(_this), "callBackClose", function () {
-      var callBack = _this.props.callBack;
+    defineProperty(assertThisInitialized(_this), "callBackClose", function (e) {
+      var onClick = _this.props.onClick;
 
-      if (callBack) {
-        callBack();
+      if (onClick) {
+        onClick(e);
       }
     });
 
@@ -187,7 +188,9 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (this.props.show) {
+      var show = this.props.show;
+
+      if (show) {
         setTimeout(function () {
           _this2.setState({
             show: true
@@ -237,7 +240,7 @@ function (_Component) {
         typeIcon = type;
       }
 
-      return React__default.createElement(reactTransitionGroup.CSSTransition, {
+      return React.createElement(reactTransitionGroup.CSSTransition, {
         in: show,
         timeout: 200 // 动画时长
         ,
@@ -251,28 +254,29 @@ function (_Component) {
 
           _this4.callBackClose();
         }
-      }, React__default.createElement("div", {
+      }, React.createElement("div", {
         className: "pile-alert"
-      }, React__default.createElement("div", {
+      }, React.createElement("div", {
         className: "pile-alert-mask"
-      }), React__default.createElement("div", {
+      }), React.createElement("div", {
         className: "pile-alert-box"
-      }, React__default.createElement("i", {
+      }, React.createElement("i", {
         className: "".concat(prefixCls, "-icon-").concat(typeIcon, " ").concat(iconCls),
         style: showIcon ? {
           display: 'block'
         } : {
           display: 'none'
         }
-      }), React__default.createElement("div", {
+      }), React.createElement("div", {
         className: "pile-alert-title"
-      }, title), children ? React__default.createElement("div", {
+      }, title), children ? React.createElement("div", {
         className: "pile-alert-content"
-      }, children) : null, React__default.createElement("div", {
+      }, children) : null, React.createElement("div", {
+        role: "button",
         className: "d-btns pile-btn-alert",
         onClick: this.onClose,
         onKeyPress: this.onKeyPress
-      }, React__default.createElement("span", {
+      }, React.createElement("span", {
         className: "btn-orange"
       }, btnText)))));
     }
@@ -280,29 +284,23 @@ function (_Component) {
 
   return Alert;
 }(React.Component);
-/* Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
-  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-  block: PropTypes.bool,
-  disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  loading: PropTypes.bool,
-  href: PropTypes.string,
-  circle: PropTypes.bool,
-}; */
 
-
+Alert.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]).isRequired,
+  show: PropTypes.bool,
+  showIcon: PropTypes.bool,
+  title: PropTypes.node,
+  btnText: PropTypes.string,
+  onClick: PropTypes.func,
+  type: PropTypes.oneOf(['success', 'warnning'])
+};
 Alert.defaultProps = {
   showIcon: false,
   title: '提示',
-  content: '内容',
   show: false,
   btnText: '确定',
-  callBack: function callBack() {}
+  type: 'success',
+  onClick: function onClick() {}
 };
 var Alert$1 = shared.prefixClsProperty(Alert);
 

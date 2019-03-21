@@ -54,7 +54,6 @@ export default class Editor extends Component {
   }
 
   onToggle(show) {
-    console.log('show:', show);
     this.setState({ show: !show });
   }
 

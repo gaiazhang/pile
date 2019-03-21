@@ -7,6 +7,8 @@
     "test": "jest --verbose=true --no-cache",
     "watch:css": "gulp watch-css --cwd ./packages/theme-default",
     "build": "rollup -c",
+    "build:doc": "npm run build && webpack --config ./site/config/webpack.config.prod.js",
+    "doc": "http-server ./_site -p 3333",
     "watch": "rollup -cw",
     "lerna": "lerna",
     "lint": "eslint packages/**/src/*.js"

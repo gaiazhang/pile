@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Routes from './roots/routes';
 
 import '../../packages/theme-default/lib/index.css';
 import './app.css';
 import './prism.css';
-import './prism.js'
+import './prism.js';
 
 const navList = [
   /*   { label: '主题', nodeName: 'h2', link: 'components/theme' },
@@ -34,7 +34,7 @@ const navList = [
 ];
 
 // 当前页卡展示
-let curnav = window.location.href.split('9999')[1].substring(1);
+let curnav = 'index';
 
 function changeLink(e) {
   curnav = e;
@@ -97,8 +97,9 @@ const navUl = (re, curnav) => (
   </ul>
 );
 
-const App = () => {
-  if (curnav == 'index' || curnav == '') {
+const App = (props) => {
+  curnav = props.location.pathname
+  if (curnav === 'index' || curnav === '/' || curnav === '/index') {
     return (
       <div className="pile-note-index">
         <Routes />
@@ -112,39 +113,64 @@ const App = () => {
           <h1 className="trademark fl">Pile docs</h1>
           <nav className="note-nav fr clearfix">
             <ul className="clearfix note-nav-items">
-              <li><a href={`//${window.location.host}/index`}><span>首页</span></a></li>
-              <li className={curnav.includes('design') ? 'actived' : ''}><a><span>设计</span></a></li>
-              <li className={curnav.includes('components') ? 'actived' : ''}><Link to="introduce" onClick={() => { changeLink('components/introduce'); }}><span>组件</span></Link></li>
+              <li>
+                <Link
+                  to="/index"
+                >
+                  <span>首页</span>
+                </Link>
+              </li>
+              <li className={curnav.includes('design') ? 'actived' : ''}>
+                <a>
+                  <span>设计</span>
+                </a>
+              </li>
+              <li className={curnav.includes('components') ? 'actived' : ''}>
+                <Link
+                  to="introduce"
+                  onClick={() => {
+                    changeLink('components/introduce');
+                  }}
+                >
+                  <span>组件</span>
+                </Link>
+              </li>
               <li />
             </ul>
             <div className="change-version">
               <div className="note-v">2.x</div>
               <div className="note-old-v">
-                <a href="//didi.github.io/pile.js/docs/" target="_blank">1.x</a>
+                <a href="//didi.github.io/pile.js/1.x/docs/" target="_blank">
+                  1.x
+                </a>
               </div>
             </div>
 
-            <a href="//github.com/didi/pile.js" target="_blank" className="nav-links-github"><span>github</span></a>
+            <a
+              href="//github.com/didi/pile.js"
+              target="_blank"
+              className="nav-links-github"
+            >
+              <span>github</span>
+            </a>
           </nav>
         </div>
         <div className="note-main">
-          {curnav.includes('components')
-            && (
-              <div className="note-sidebar">
-                {navList.map((re, index) => {
-                  if (re.nodeName === 'h2') {
-                    return navH2(re, curnav);
-                  }
-                  if (re.nodeName === 'un-links') {
-                    return navUnlinks(re);
-                  }
-                  if (re.nodeName === 'ul') {
-                    return navUl(re, curnav);
-                  }
-                })}
-              </div>
-            )
-          }
+          {curnav.includes('components') && (
+            <div className="note-sidebar">
+              {navList.map((re, index) => {
+                if (re.nodeName === 'h2') {
+                  return navH2(re, curnav);
+                }
+                if (re.nodeName === 'un-links') {
+                  return navUnlinks(re);
+                }
+                if (re.nodeName === 'ul') {
+                  return navUl(re, curnav);
+                }
+              })}
+            </div>
+          )}
           <div className="note-content">
             <Routes />
           </div>
@@ -153,16 +179,30 @@ const App = () => {
           <div className="footer-links">
             <dl className="f-links-item">
               <dt>相关资源</dt>
-              <dd><a href="//github.com/didi/pile.js" target="_blank">GitHub</a></dd>
-              <dd><a href="javascript:;">更新日志</a></dd>
-              <dd><a href="javascript:;">常见问题</a></dd>
-              <dd><a href="javascript:;">调色板</a></dd>
+              <dd>
+                <a href="//github.com/didi/pile.js" target="_blank">
+                  GitHub
+                </a>
+              </dd>
+              <dd>
+                <a href="javascript:;">更新日志</a>
+              </dd>
+              <dd>
+                <a href="javascript:;">常见问题</a>
+              </dd>
+              <dd>
+                <a href="javascript:;">调色板</a>
+              </dd>
             </dl>
 
             <dl className="f-links-item">
               <dt>社区</dt>
-              <dd><a href="javascript:;">问题反馈</a></dd>
-              <dd><a href="javascript:;">文字列表</a></dd>
+              <dd>
+                <a href="javascript:;">问题反馈</a>
+              </dd>
+              <dd>
+                <a href="javascript:;">文字列表</a>
+              </dd>
             </dl>
 
             <dl className="f-links-item">
@@ -172,26 +212,25 @@ const App = () => {
                   Cube UI
                   <span>- Vue.js组件库</span>
                 </a>
-
               </dd>
               <dd>
                 <a href="//github.com/didi/DoraemonKit" target="_blank">
                   DoraemonKit
                   <span>- iOS开发助手</span>
                 </a>
-
               </dd>
               <dd>
                 <a href="//github.com/didi/VirtualAPK" target="_blank">
                   VirtualAPK
                   <span>- Android插件化框架</span>
                 </a>
-
               </dd>
             </dl>
           </div>
           <div className="version-msg">
-            <div className="version-bd">版权所有© 2012-2019滴滴出行。版权所有</div>
+            <div className="version-bd">
+              版权所有© 2012-2019滴滴出行。版权所有
+            </div>
           </div>
         </div>
       </div>
@@ -199,4 +238,4 @@ const App = () => {
   }
 };
 
-export default App;
+export default withRouter(App);

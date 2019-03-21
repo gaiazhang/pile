@@ -233,7 +233,7 @@ var RadioGroup = enhanced$1(function (_ref) {
     className: cls
   }, options && options.map(function (item, index) {
     return createElement(Radio$1, _extends_1({}, item, {
-      key: item.value + '' + index,
+      key: "".concat(item.value).concat(index),
       onClick: onClick(item),
       onChange: onChange,
       name: name,

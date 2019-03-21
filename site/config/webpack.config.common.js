@@ -9,7 +9,7 @@ module.exports = {
   output: {
     filename: 'js/[name].[hash].js',
     chunkFilename: 'js/[name].[hash].js',
-    path: path.resolve(__dirname, '../dist'),
+    path: path.resolve(__dirname, '../../_site'),
     publicPath: '/',
   },
   plugins: [

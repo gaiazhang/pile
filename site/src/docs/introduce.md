@@ -1,62 +1,64 @@
 # Pile [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![license Apache 2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](https://www.npmjs.com/package/pile)
 
-[Pile](https://www.npmjs.com/package/pile-ui) Components build with [React](http://facebook.github.io/react/).
-
-
-## Installation
-
-With [npm](http://npmjs.com/):
-
-If React is not installed
-
-```
-npm install --save react react-dom
-```
-
-With React Installed
-
-```
-npm install pile-ui --save
-```
+A lightweight mobile components library build with [React](http://facebook.github.io/react/).
 
 [![pile](https://nodei.co/npm/pile-ui.png)](https://www.npmjs.com/package/pile-ui)
 
+## Docs
 
-import css
+[View the docs here](https://didi.github.io/pile.js/docs/)
 
-```js
-import 'pile/dist/styles/pile.min.css'
+[1.x docs](https://didi.github.io/pile.js/1.x/docs/)
+
+
+## Dependences
+
+* react@16.x
+* react-dom@16.x
+
+## Installation
+
+
+```
+npm i pile-ui@latest --save
+
+// import css
+npm i @pile/theme-default
 ```
 
-import Pile
+import component
 
 ```js
-// 引用方式一
-import Pile from 'pile'
-const {Button} = Pile
 
-// 引用方式二
-import {Button} from 'pile'
+// style1
+import {Button} from 'pile-ui'
 
-// 单个组件引用方式 （推荐使用，节省无用组件调用）
-import Button from 'pile/dist/components/button'
+// single component
+import Button from '@pile/button'
 ```
 
 
+import all css
 
+```js
+import '@pile/theme-default/lib/index.min.css'
+```
+
+import single css
+
+```js
+import '@pile/theme-default/lib/button.min.css'
+```
 
 ## Example
 
 We have several examples on the documentation. Here is the first one to get you started:
 
 ```jsx
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
-//import pile
-import Pile from 'pile'
-import 'pile/dist/styles/pile.min.css'
-const {Button} = Pile
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { Button } from 'pile-ui'
+import '@pile/theme-default/lib/index.min.css'
 
 class App extends Component {
     render() {
@@ -82,17 +84,40 @@ npm install
 npm start
 ```
 
+css build
+
+```
+cd packages/theme-default
+npm run build
+```
+
+```bash
+npm run build
+```
+
+Build single package by running the following:
+
+```bash
+npm run build -- --scope "@pile/button"
+```
+
+Build multiple packages where scope is a glob expression:
+
+```bash
+npm run build -- --scope "{@pile/button,@pile/icon}"
+```
+
+Watch all filters (auto-rebuild upon src changes):
+
+```bash
+npm run watch
+```
 
 ## Contributing
 
-Welcome to contribute by creating issues or sending pull requests. See [Contributing Guide](.github/CONTRIBUTING.md) for guidelines.
-
-
+Welcome to contribute by creating issues or sending pull requests. See [Contributing Guide](https://github.com/didi/pile.js/tree/master/.github/CONTRIBUTING.md) for guidelines.
 
 
 ## License
 
-pile is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file.
-
-
-
+pile is licensed under the Apache License 2.0. See the [LICENSE](https://github.com/didi/pile.js/tree/master/LICENSE) file.

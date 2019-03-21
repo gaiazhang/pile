@@ -3,7 +3,8 @@
  * (c) 2018-2019 zhangzhipeng <zhangzhipeng@didichuxing.com>
  * Released under the MIT License.
  */
-import React, { Component } from 'react';
+import React__default, { createElement, Component } from 'react';
+import { oneOfType, arrayOf, node, bool, string, func, oneOf } from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import { prefixClsProperty } from '@pile/shared';
@@ -139,8 +140,8 @@ var defineProperty = _defineProperty;
 
 var Alert =
 /*#__PURE__*/
-function (_Component) {
-  inherits(Alert, _Component);
+function (_React$Component) {
+  inherits(Alert, _React$Component);
 
   function Alert(props) {
     var _this;
@@ -149,11 +150,11 @@ function (_Component) {
 
     _this = possibleConstructorReturn(this, getPrototypeOf(Alert).call(this, props));
 
-    defineProperty(assertThisInitialized(_this), "callBackClose", function () {
-      var callBack = _this.props.callBack;
+    defineProperty(assertThisInitialized(_this), "callBackClose", function (e) {
+      var onClick = _this.props.onClick;
 
-      if (callBack) {
-        callBack();
+      if (onClick) {
+        onClick(e);
       }
     });
 
@@ -182,7 +183,9 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      if (this.props.show) {
+      var show = this.props.show;
+
+      if (show) {
         setTimeout(function () {
           _this2.setState({
             show: true
@@ -232,7 +235,7 @@ function (_Component) {
         typeIcon = type;
       }
 
-      return React.createElement(CSSTransition, {
+      return createElement(CSSTransition, {
         in: show,
         timeout: 200 // 动画时长
         ,
@@ -246,28 +249,29 @@ function (_Component) {
 
           _this4.callBackClose();
         }
-      }, React.createElement("div", {
+      }, createElement("div", {
         className: "pile-alert"
-      }, React.createElement("div", {
+      }, createElement("div", {
         className: "pile-alert-mask"
-      }), React.createElement("div", {
+      }), createElement("div", {
         className: "pile-alert-box"
-      }, React.createElement("i", {
+      }, createElement("i", {
         className: "".concat(prefixCls, "-icon-").concat(typeIcon, " ").concat(iconCls),
         style: showIcon ? {
           display: 'block'
         } : {
           display: 'none'
         }
-      }), React.createElement("div", {
+      }), createElement("div", {
         className: "pile-alert-title"
-      }, title), children ? React.createElement("div", {
+      }, title), children ? createElement("div", {
         className: "pile-alert-content"
-      }, children) : null, React.createElement("div", {
+      }, children) : null, createElement("div", {
+        role: "button",
         className: "d-btns pile-btn-alert",
         onClick: this.onClose,
         onKeyPress: this.onKeyPress
-      }, React.createElement("span", {
+      }, createElement("span", {
         className: "btn-orange"
       }, btnText)))));
     }
@@ -275,29 +279,23 @@ function (_Component) {
 
   return Alert;
 }(Component);
-/* Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]).isRequired,
-  type: PropTypes.oneOf(['primary', 'secondary', 'float']),
-  nativeType: PropTypes.oneOf(['button', 'submit', 'reset']),
-  block: PropTypes.bool,
-  disabled: PropTypes.bool,
-  icon: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-  loading: PropTypes.bool,
-  href: PropTypes.string,
-  circle: PropTypes.bool,
-}; */
 
-
+Alert.propTypes = {
+  children: oneOfType([arrayOf(node), node]).isRequired,
+  show: bool,
+  showIcon: bool,
+  title: node,
+  btnText: string,
+  onClick: func,
+  type: oneOf(['success', 'warnning'])
+};
 Alert.defaultProps = {
   showIcon: false,
   title: '提示',
-  content: '内容',
   show: false,
   btnText: '确定',
-  callBack: function callBack() {}
+  type: 'success',
+  onClick: function onClick() {}
 };
 var Alert$1 = prefixClsProperty(Alert);
 
@@ -389,7 +387,7 @@ var getMessageInstance = function createMessage(opts) {
   var props = objectSpread({}, defaultOpts, opts);
 
   console.log(props, 'opts');
-  ReactDOM.render(React.createElement(Alert$1, props), div);
+  ReactDOM.render(React__default.createElement(Alert$1, props), div);
   return {
     destroy: destroy
   };

@@ -57,7 +57,7 @@ module.exports = merge(common, {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify('production'),
-        PUBLIC_URL: JSON.stringify('https://didi.github.io/pile.js/'),
+        PUBLIC_URL: JSON.stringify('/pile.js'),
       },
     }),
     new BundleAnalyzerPlugin({
