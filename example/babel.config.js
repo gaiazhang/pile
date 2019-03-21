@@ -36,16 +36,19 @@ module.exports = function config(api) {
         '@babel/proposal-object-rest-spread',
         { useBuiltIns: true, loose: true },
       ],
-      ['import', {
-        libraryName: '../../../bundle',
-        camel2UnderlineComponentName: false,
-        camel2DashComponentName: false,
-        customName(name) {
-          if (name === 'Button') {
-            return '../../../bundle/node_modules/@pile/button';
-          }
+      [
+        'import',
+        {
+          libraryName: '../../../bundle',
+          camel2UnderlineComponentName: false,
+          camel2DashComponentName: false,
+          customName(name) {
+            if (name) {
+              return `../../../bundle/node_modules/@pile/${name}`;
+            }
+          },
         },
-      }],
+      ],
     ].filter(Boolean),
   };
   return config;

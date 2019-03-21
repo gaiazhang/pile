@@ -53,8 +53,21 @@ import {Button} from 'pile'
 import Button from 'pile/dist/components/button'
 ```
 
-
-
+按需加载
+使用 babel-plugin-import
+```js
+//babel.config.js
+      ['import', {
+        libraryName: 'pile',
+        camel2UnderlineComponentName: false,
+        camel2DashComponentName: false,
+        customName(name) {
+          if (name) {
+            return `pile/node_modules/@pile/${name}`;
+          }
+        },
+      }],
+```
 
 ## Example
 

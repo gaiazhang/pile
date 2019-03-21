@@ -1,14 +1,18 @@
 /*!
- * @pile/input.js v2.0.0
+ * @pile/inputFiled.js v2.0.0
  * (c) 2018-2019 huangping <huangping@didichuxing.com>
  * Released under the MIT License.
  */
-import { createElement, Component, createRef, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { prefixClsProperty, refProperty } from '@pile/shared';
-import { IfComponent } from '@pile/condition';
-import Icon from '@pile/icon';
+'use strict';
+
+function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
+
+var React = require('react');
+var PropTypes = _interopDefault(require('prop-types'));
+var classNames = _interopDefault(require('classnames'));
+var shared = require('@pile/shared');
+var condition = require('@pile/condition');
+var Icon = _interopDefault(require('@pile/icon'));
 
 function _defineProperty(obj, key, value) {
   if (key in obj) {
@@ -69,7 +73,7 @@ var InputLabel = function InputLabel(_ref) {
   var prefixCls = _ref.prefixCls,
       labeltext = _ref.labeltext;
   var labelCls = classNames(defineProperty({}, "".concat(prefixCls, "-input-label"), true));
-  return createElement("div", {
+  return React.createElement("div", {
     className: labelCls
   }, labeltext);
 };
@@ -80,7 +84,7 @@ InputLabel.propTypes = {
 InputLabel.defaultProps = {
   labeltext: ''
 };
-var InputLabel$1 = prefixClsProperty(InputLabel);
+var InputLabel$1 = shared.prefixClsProperty(InputLabel);
 
 function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
@@ -215,88 +219,100 @@ function _inherits(subClass, superClass) {
 
 var inherits = _inherits;
 
-// import {
-//   prefixClsProperty,
-// } from '@pile/shared';
-// import classNames from 'classnames';
-
 var Value =
 /*#__PURE__*/
 function (_React$Component) {
   inherits(Value, _React$Component);
 
-  function Value(_props) {
+  function Value(props) {
     var _this;
 
     classCallCheck(this, Value);
 
-    _this = possibleConstructorReturn(this, getPrototypeOf(Value).call(this, _props)); // this._set = this._set.bind(this);
-    //  this.handleClear = this.handleClear.bind(this);
+    _this = possibleConstructorReturn(this, getPrototypeOf(Value).call(this, props));
 
-    defineProperty(assertThisInitialized(_this), "_set", function (e) {
+    defineProperty(assertThisInitialized(_this), "set", function (e) {
       var ctrlValue = e.target.value;
+      var inputType = _this.props.inputType;
+      var preValue = _this.state.value;
+      var tempValue = ctrlValue;
+
+      switch (inputType) {
+        case 'phone':
+          tempValue = preValue.length === 11 && ctrlValue.length > 11 ? preValue : ctrlValue.replace(/\D/g, '').substring(0, 11);
+          break;
+
+        case 'number':
+          tempValue = ctrlValue.replace(/\D/g, '');
+          break;
+
+        case 'text':
+        case 'password':
+        default:
+          break;
+      }
 
       _this.setState({
-        value: ctrlValue
+        value: tempValue
       });
 
       var onChange = _this.props.onChange;
 
       if (onChange) {
-        onChange(ctrlValue);
+        onChange(tempValue);
       }
     });
 
-    defineProperty(assertThisInitialized(_this), "_reset", function () {
+    defineProperty(assertThisInitialized(_this), "reset", function () {
+      var defaultValue = _this.props.defaultValue;
+
       _this.setState({
-        value: props.defaultValue
+        value: defaultValue
       });
     });
 
-    defineProperty(assertThisInitialized(_this), "_clear", function () {
+    defineProperty(assertThisInitialized(_this), "clear", function () {
       _this.setState({
         value: ''
       });
     });
 
     _this.state = {
-      value: _props.defaultValue || ''
+      value: props.defaultValue || ''
     };
     return _this;
-  } // static getDerivedStateFromProps(nextProps, prevState) {
-  //   console.log(nextProps.defaultValue);
-  //   console.log(prevState.value);
-  //   if (nextProps.defaultValue != prevState.value) {
-  //     return { value: nextProps.defaultValue };
-  //   }
-  //   return null;
-  // }
-
+  }
 
   createClass(Value, [{
     key: "render",
     value: function render() {
-      // const { prefixCls } = this.props;
+      var value = this.state.value;
       var newProps = {
-        value: this.state.value,
-        set: this._set,
-        clear: this._clear,
-        reset: this._reset
+        set: this.set,
+        clear: this.clear,
+        reset: this.reset,
+        value: value
       };
-      return this.props.children(newProps) // <React.Fragment>
-      //   <div className={`${prefixCls}-input-input`}>
-      //     {this.props.render(newProps)}
-      //   </div>
-      //   <div className={`${prefixCls}-input-clear`} onClick={this.handleClear}>
-      //     <Icon type="error-circle" />
-      //   </div>
-      // </React.Fragment>
-      ;
+      var children = this.props.children;
+      return children(newProps);
     }
   }]);
 
   return Value;
-}(Component); // export default prefixClsProperty(InputChange);
+}(React.Component);
+
+Value.propTypes = {
+  defaultValue: PropTypes.string,
+  inputType: PropTypes.string,
+  children: PropTypes.func,
+  onChange: PropTypes.func
+};
+Value.defaultProps = {
+  defaultValue: "",
+  inputType: "",
+  children: function children() {},
+  onChange: function onChange() {}
+};
 
 var Inputbody =
 /*#__PURE__*/
@@ -314,40 +330,55 @@ function (_React$Component) {
       _this.textInput.current.focus();
     });
 
-    defineProperty(assertThisInitialized(_this), "_onblur", function (e) {
+    defineProperty(assertThisInitialized(_this), "onblur", function (e) {
       var value = e.target.value;
+      var onBlur = _this.props.onBlur;
 
-      _this.props.onBlur(value);
+      if (onBlur) {
+        onBlur(value);
+      }
     });
 
-    defineProperty(assertThisInitialized(_this), "_onfocus", function (e) {
+    defineProperty(assertThisInitialized(_this), "onfocus", function (e) {
       var value = e.target.value;
+      var onFocus = _this.props.onFocus;
 
-      _this.props.onFocus(value);
+      if (onFocus) {
+        onFocus(value);
+      }
     });
 
-    _this.textInput = createRef();
+    _this.textInput = React.createRef();
     return _this;
-  } // componentDidMount() {
-  //   this.props.autofocus && this.focus();
-  // }
-
+  }
 
   createClass(Inputbody, [{
     key: "render",
     value: function render() {
-      return createElement("input", _extends_1({}, this.props, {
+      return React.createElement("input", _extends_1({}, this.props, {
         ref: this.textInput,
-        onBlur: this._onblur,
-        onFocus: this._onfocus
+        onBlur: this.onblur,
+        onFocus: this.onfocus
       }));
     }
   }]);
 
   return Inputbody;
-}(Component);
+}(React.Component);
 
-var Inputbody$1 = refProperty(Inputbody);
+Inputbody.propTypes = {
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func
+};
+Inputbody.defaultProps = {
+  onFocus: function onFocus() {},
+  onBlur: function onBlur() {},
+  onChange: function onChange() {}
+};
+var Inputbody$1 = shared.refProperty(Inputbody);
+
+/* eslint-disable no-shadow */
 
 var InputContent =
 /*#__PURE__*/
@@ -374,6 +405,11 @@ function (_React$Component) {
             });
           }
         }, 200);
+        var onBlur = _this.props.onBlur;
+
+        if (onBlur) {
+          onBlur(value);
+        }
       }
     });
 
@@ -386,12 +422,18 @@ function (_React$Component) {
       _this.setState({
         focus: true
       });
+
+      var onFocus = _this.props.onFocus;
+
+      if (onFocus) {
+        onFocus(value);
+      }
     });
 
     _this.state = {
       focus: props.autoFocus
     };
-    _this.textInput = createRef();
+    _this.textInput = React.createRef();
     _this.debounceTimeout = null;
     return _this;
   }
@@ -413,19 +455,23 @@ function (_React$Component) {
       var _this$props = this.props,
           value = _this$props.value,
           onChange = _this$props.onChange,
+          onFocus = _this$props.onFocus,
+          onBlur = _this$props.onBlur,
           clearable = _this$props.clearable,
           prefixCls = _this$props.prefixCls,
-          props = objectWithoutProperties(_this$props, ["value", "onChange", "clearable", "prefixCls"]);
+          disabled = _this$props.disabled,
+          props = objectWithoutProperties(_this$props, ["value", "onChange", "onFocus", "onBlur", "clearable", "prefixCls", "disabled"]);
 
-      var disabled = this.props.disabled;
+      var type = this.props.type;
       var focus = this.state.focus;
       var defaultProps = {
         defaultValue: value,
+        inputType: type,
         onChange: onChange
       };
       var inputCls = classNames(defineProperty({}, "".concat(prefixCls, "-input-input"), true));
       var clearCls = classNames((_classNames2 = {}, defineProperty(_classNames2, "".concat(prefixCls, "-input-clear"), true), defineProperty(_classNames2, "".concat(prefixCls, "-input-fucos"), focus), _classNames2));
-      return createElement(Value, defaultProps, function (_ref) {
+      return React.createElement(Value, defaultProps, function (_ref) {
         var value = _ref.value,
             set = _ref.set,
             clear = _ref.clear;
@@ -438,67 +484,83 @@ function (_React$Component) {
           _this2.focus();
 
           clear();
-        }; // alert(clearable && value);
+        };
 
+        var onKeyPress = function onKeyPress(e) {
+          if (e.keyCode === 13) {
+            e.preventDefault();
+            getClear(e);
+          }
+        };
 
-        return createElement(Fragment, null, createElement("div", {
+        return React.createElement(React.Fragment, null, React.createElement("div", {
           className: inputCls
-        }, createElement(Inputbody$1, _extends_1({
+        }, React.createElement(Inputbody$1, _extends_1({
           onBlur: _this2.onBlur,
           onFocus: _this2.onFocus
         }, props, valueChange, {
           ref: _this2.textInput
-        }))), createElement(IfComponent, {
+        }))), React.createElement(condition.IfComponent, {
           when: clearable && !disabled && "".concat(value).length > 0
         }, function () {
-          return createElement("div", {
-            className: clearCls,
-            onClick: getClear
-          }, createElement(Icon, {
-            type: "error-circle"
-          }));
+          return (
+            /* eslint-disable jsx-a11y/no-static-element-interactions */
+            React.createElement("div", {
+              className: clearCls,
+              onClick: getClear,
+              onKeyPress: onKeyPress
+            }, React.createElement(Icon, {
+              type: "error-circle"
+            }))
+            /* eslint-enable jsx-a11y/no-static-element-interactions */
+
+          );
         }));
       });
     }
   }]);
 
   return InputContent;
-}(Component);
+}(React.Component);
 
-var InputContent$1 = prefixClsProperty(InputContent);
+var InputContent$1 = shared.prefixClsProperty(InputContent);
 
-var Input = function Input(_ref) {
+var InputFiled = function InputFiled(_ref) {
   var prefixCls = _ref.prefixCls,
       children = _ref.children,
       props = objectWithoutProperties(_ref, ["prefixCls", "children"]);
 
   var wrapCls = classNames(defineProperty({}, "".concat(prefixCls, "-input-item"), true));
-  return createElement("div", {
+  return React.createElement("div", {
     className: wrapCls
-  }, createElement(InputLabel$1, {
+  }, React.createElement(InputLabel$1, {
     labeltext: children
-  }), createElement(InputContent$1, props));
+  }), React.createElement(InputContent$1, props));
 };
 
-Input.propTypes = {
+InputFiled.propTypes = {
   type: PropTypes.string,
   children: PropTypes.string,
   placeholder: PropTypes.string,
   clearable: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  name: PropTypes.string,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func
 };
-Input.defaultProps = {
+InputFiled.defaultProps = {
   type: 'text',
   children: '',
   placeholder: '',
-  clearable: true,
-  name: '',
+  clearable: false,
   autoFocus: false,
-  disabled: false
+  disabled: false,
+  onFocus: function onFocus() {},
+  onBlur: function onBlur() {},
+  onChange: function onChange() {}
 };
-var index = prefixClsProperty(Input);
+var index = shared.prefixClsProperty(InputFiled);
 
-export default index;
-//# sourceMappingURL=input.esm.js.map
+module.exports = index;
+//# sourceMappingURL=input.js.map

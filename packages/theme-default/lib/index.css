@@ -1354,6 +1354,9 @@ a, a:hover, a:active, a:visited {
     color:#333;
     padding-right:10px;
     text-align:left;
+    max-width:82px;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .pile-input-input {

@@ -3,7 +3,7 @@ import Icon from './icon';
 import Toast from './toast';
 import Alert from './alert';
 import Switch from './switch';
-import Input from './input';
+import InputFiled from './inputfiled';
 import Radio from './radio';
 import Introduce from './introduce';
 
@@ -13,7 +13,7 @@ export default {
   Toast,
   Alert,
   Switch,
-  Input,
+  InputFiled,
   Radio,
   Introduce,
 };

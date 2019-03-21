@@ -1,17 +1,11 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import {
-  prefixClsProperty,
-} from '@pile/shared';
+import { prefixClsProperty } from '@pile/shared';
 import InputLabel from './inputlabel';
 import InputContent from './inputContent';
 
-const Input = ({
-  prefixCls,
-  children,
-  ...props
-}) => {
+const InputFiled = ({ prefixCls, children, ...props }) => {
   const wrapCls = classNames({
     [`${prefixCls}-input-item`]: true,
   });
@@ -24,25 +18,28 @@ const Input = ({
   );
 };
 
-Input.propTypes = {
+InputFiled.propTypes = {
   type: PropTypes.string,
   children: PropTypes.string,
   placeholder: PropTypes.string,
   clearable: PropTypes.bool,
   autoFocus: PropTypes.bool,
-  name: PropTypes.string,
   disabled: PropTypes.bool,
+  onFocus: PropTypes.func,
+  onBlur: PropTypes.func,
+  onChange: PropTypes.func,
 };
 
-
-Input.defaultProps = {
+InputFiled.defaultProps = {
   type: 'text',
   children: '',
   placeholder: '',
-  clearable: true,
-  name: '',
+  clearable: false,
   autoFocus: false,
   disabled: false,
+  onFocus() {},
+  onBlur() {},
+  onChange() {},
 };
 
-export default prefixClsProperty(Input);
+export default prefixClsProperty(InputFiled);

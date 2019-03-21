@@ -18,6 +18,9 @@
     color:#333;
     padding-right:10px;
     text-align:left;
+    max-width:82px;
+    overflow: hidden;
+    white-space: nowrap;
   }
   @c input-input{
     flex:1;
