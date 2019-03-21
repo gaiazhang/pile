@@ -3,30 +3,19 @@
 [Pile](https://www.npmjs.com/package/pile-ui) Components build with [React](http://facebook.github.io/react/).
 
 
-
-
-## Mobile Demo
-
-[Mobile Demo](https://didi.github.io/pile.js/docs/)
-
-![pile](http://es-static.xiaojukeji.com/static/web/activity/pile/pilejsqr05.png)
-
-
-
-
 ## Installation
 
 With [npm](http://npmjs.com/):
 
 If React is not installed
 
-```js
+```
 npm install --save react react-dom
 ```
 
 With React Installed
 
-```js
+```
 npm install pile-ui --save
 ```
 
@@ -60,7 +49,7 @@ import Button from 'pile/dist/components/button'
 
 We have several examples on the documentation. Here is the first one to get you started:
 
-```js
+```jsx
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 

@@ -1,5 +1,5 @@
 /*!
- * pile.js v2.0.0
+ * pile-ui.js v2.0.0
  * (c) 2018-2019 renmaomin <renmaomin@126.com> (https://github.com/renmm)
  * Released under the MIT License.
  */
