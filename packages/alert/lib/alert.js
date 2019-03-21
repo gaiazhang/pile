@@ -142,13 +142,6 @@ function _defineProperty(obj, key, value) {
 
 var defineProperty = _defineProperty;
 
-/* let defaultState = {
-  alertStatus: false,
-  alertTip: '提示',
-  show:true,
-  closeAlert: function() {}
-}; */
-
 var Alert =
 /*#__PURE__*/
 function (_Component) {
@@ -194,8 +187,6 @@ function (_Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      console.log('componentDidMount');
-
       if (this.props.show) {
         setTimeout(function () {
           _this2.setState({
@@ -210,10 +201,8 @@ function (_Component) {
       var _this3 = this;
 
       var show = this.state.show;
-      console.log('componentDidUpdate:', nextProps.show !== show);
 
       if (nextProps.show !== show) {
-        console.log('go');
         setTimeout(function () {
           _this3.setState({
             show: true
@@ -256,11 +245,9 @@ function (_Component) {
         unmountOnExit: true,
         onEnter: function onEnter() {
           document.body.style.overflow = 'hidden';
-          console.log('动画进入完成1');
         },
         onExited: function onExited() {
           document.body.style.overflow = '';
-          console.log('动画退出完成2');
 
           _this4.callBackClose();
         }

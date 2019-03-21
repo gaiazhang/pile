@@ -1,26 +1,15 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
 import { CSSTransition } from 'react-transition-group'; // ES6
 import classNames from 'classnames';
 import { prefixClsProperty } from '@pile/shared';
 
-/* let defaultState = {
-  alertStatus: false,
-  alertTip: '提示',
-  show:true,
-  closeAlert: function() {}
-}; */
-
 class Alert extends Component {
   constructor(props) {
     super(props);
-    const obj = {};
-    // const objs = Object.assign({}, obj, props);
     this.state = { show: false };
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
     if (this.props.show) {
       setTimeout(() => {
         this.setState({ show: true });
@@ -30,9 +19,7 @@ class Alert extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { show } = this.state;
-    console.log('componentDidUpdate:', nextProps.show !== show);
     if (nextProps.show !== show) {
-      console.log('go');
       setTimeout(() => {
         this.setState({ show: true });
       }, 0);
@@ -82,11 +69,9 @@ class Alert extends Component {
         unmountOnExit
         onEnter={() => {
           document.body.style.overflow = 'hidden';
-          console.log('动画进入完成1');
         }}
         onExited={() => {
           document.body.style.overflow = '';
-          console.log('动画退出完成2');
           this.callBackClose();
         }}
       >
