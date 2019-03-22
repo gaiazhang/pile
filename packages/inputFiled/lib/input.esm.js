@@ -519,6 +519,26 @@ function (_React$Component) {
   return InputContent;
 }(Component);
 
+InputContent.propTypes = {
+  autoFocus: PropTypes.bool,
+  onBlur: PropTypes.func,
+  onFocus: PropTypes.func,
+  onChange: PropTypes.func,
+  clearable: PropTypes.bool,
+  type: PropTypes.string,
+  disabled: PropTypes.bool,
+  value: PropTypes.string
+};
+InputContent.defaultProps = {
+  type: 'text',
+  clearable: false,
+  autoFocus: false,
+  disabled: false,
+  onFocus: function onFocus() {},
+  onBlur: function onBlur() {},
+  onChange: function onChange() {},
+  value: ''
+};
 var InputContent$1 = prefixClsProperty(InputContent);
 
 var InputFiled = function InputFiled(_ref) {

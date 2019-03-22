@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 import Alert from './alert';
 
 const defaultOpts = {
@@ -10,51 +10,7 @@ const defaultOpts = {
   btnText: '确定',
   callBack() {},
 };
-
-/* class AlertWarp extends Component {
-  state = {
-    ...defaultOpts,
-  };
-
-  show = options => {
-    options = options || {};
-    options.show = true;
-    options.children = options.content;
-    delete options.content;
-
-    this.setState({
-      ...defaultOpts,
-      ...options,
-    });
-  };
-
-  callBack = () => {
-    const { callBack } = this.state;
-    if (callBack) {
-      callBack();
-    }
-  };
-
-  hide = () => {
-    this.setState({
-      ...defaultOpts,
-      show: false,
-    });
-  };
-
-  render() {
-    return <Alert {...this.state} callBack={this.callBack} />;
-  }
-}
-const div = document.createElement('div');
-document.body.appendChild(div);
-
-const alertBox = ReactDOM.render(<AlertWarp />, div);
-
-export default alertBox; */
-
 let messageInstance;
-
 const getMessageInstance = function createMessage(opts) {
   const div = document.createElement('div');
   document.body.appendChild(div);
@@ -62,22 +18,17 @@ const getMessageInstance = function createMessage(opts) {
     ReactDOM.unmountComponentAtNode(div);
     div.parentNode.removeChild(div);
   }
-  opts.children = opts.content;
-  delete opts.content;
-  const props = { ...defaultOpts, ...opts };
-  console.log(props, 'opts');
+  const props = { ...defaultOpts, ...opts, children: opts.content };
+  delete props.content;
   ReactDOM.render(<Alert {...props} />, div);
-
   return { destroy };
 };
-
 export default {
   show(opts) {
     if (messageInstance) {
       messageInstance.destroy();
       messageInstance = null;
     }
-
     messageInstance = getMessageInstance({ ...opts, show: true });
   },
   hide() {

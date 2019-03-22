@@ -8,12 +8,11 @@
 function _interopDefault (ex) { return (ex && (typeof ex === 'object') && 'default' in ex) ? ex['default'] : ex; }
 
 var React = require('react');
-var React__default = _interopDefault(React);
 var PropTypes = require('prop-types');
 var reactTransitionGroup = require('react-transition-group');
 var classNames = _interopDefault(require('classnames'));
 var shared = require('@pile/shared');
-var ReactDOM = _interopDefault(require('react-dom'));
+var ReactDOM = require('react-dom');
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -273,6 +272,7 @@ function (_React$Component) {
         className: "pile-alert-content"
       }, children) : null, React.createElement("div", {
         role: "button",
+        tabIndex: 0,
         className: "d-btns pile-btn-alert",
         onClick: this.onClose,
         onKeyPress: this.onKeyPress
@@ -333,48 +333,6 @@ var defaultOpts = {
   btnText: '确定',
   callBack: function callBack() {}
 };
-/* class AlertWarp extends Component {
-  state = {
-    ...defaultOpts,
-  };
-
-  show = options => {
-    options = options || {};
-    options.show = true;
-    options.children = options.content;
-    delete options.content;
-
-    this.setState({
-      ...defaultOpts,
-      ...options,
-    });
-  };
-
-  callBack = () => {
-    const { callBack } = this.state;
-    if (callBack) {
-      callBack();
-    }
-  };
-
-  hide = () => {
-    this.setState({
-      ...defaultOpts,
-      show: false,
-    });
-  };
-
-  render() {
-    return <Alert {...this.state} callBack={this.callBack} />;
-  }
-}
-const div = document.createElement('div');
-document.body.appendChild(div);
-
-const alertBox = ReactDOM.render(<AlertWarp />, div);
-
-export default alertBox; */
-
 var messageInstance;
 
 var getMessageInstance = function createMessage(opts) {
@@ -386,13 +344,12 @@ var getMessageInstance = function createMessage(opts) {
     div.parentNode.removeChild(div);
   }
 
-  opts.children = opts.content;
-  delete opts.content;
+  var props = objectSpread({}, defaultOpts, opts, {
+    children: opts.content
+  });
 
-  var props = objectSpread({}, defaultOpts, opts);
-
-  console.log(props, 'opts');
-  ReactDOM.render(React__default.createElement(Alert$1, props), div);
+  delete props.content;
+  ReactDOM.render(React.createElement(Alert$1, props), div);
   return {
     destroy: destroy
   };
@@ -417,10 +374,7 @@ var alertBox = {
   }
 };
 
-var show = alertBox.show,
-    hide = alertBox.hide;
-Alert$1.show = show;
-Alert$1.hide = hide;
+var index = Object.assign(Alert$1, alertBox);
 
-module.exports = Alert$1;
+module.exports = index;
 //# sourceMappingURL=alert.js.map

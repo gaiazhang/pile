@@ -3,12 +3,12 @@
  * (c) 2018-2019 zhangzhipeng <zhangzhipeng@didichuxing.com>
  * Released under the MIT License.
  */
-import React__default, { createElement, Component } from 'react';
+import { createElement, Component } from 'react';
 import { oneOfType, arrayOf, node, bool, string, func, oneOf } from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import classNames from 'classnames';
 import { prefixClsProperty } from '@pile/shared';
-import ReactDOM from 'react-dom';
+import { unmountComponentAtNode, render } from 'react-dom';
 
 function _classCallCheck(instance, Constructor) {
   if (!(instance instanceof Constructor)) {
@@ -268,6 +268,7 @@ function (_React$Component) {
         className: "pile-alert-content"
       }, children) : null, createElement("div", {
         role: "button",
+        tabIndex: 0,
         className: "d-btns pile-btn-alert",
         onClick: this.onClose,
         onKeyPress: this.onKeyPress
@@ -328,48 +329,6 @@ var defaultOpts = {
   btnText: '确定',
   callBack: function callBack() {}
 };
-/* class AlertWarp extends Component {
-  state = {
-    ...defaultOpts,
-  };
-
-  show = options => {
-    options = options || {};
-    options.show = true;
-    options.children = options.content;
-    delete options.content;
-
-    this.setState({
-      ...defaultOpts,
-      ...options,
-    });
-  };
-
-  callBack = () => {
-    const { callBack } = this.state;
-    if (callBack) {
-      callBack();
-    }
-  };
-
-  hide = () => {
-    this.setState({
-      ...defaultOpts,
-      show: false,
-    });
-  };
-
-  render() {
-    return <Alert {...this.state} callBack={this.callBack} />;
-  }
-}
-const div = document.createElement('div');
-document.body.appendChild(div);
-
-const alertBox = ReactDOM.render(<AlertWarp />, div);
-
-export default alertBox; */
-
 var messageInstance;
 
 var getMessageInstance = function createMessage(opts) {
@@ -377,17 +336,16 @@ var getMessageInstance = function createMessage(opts) {
   document.body.appendChild(div);
 
   function destroy() {
-    ReactDOM.unmountComponentAtNode(div);
+    unmountComponentAtNode(div);
     div.parentNode.removeChild(div);
   }
 
-  opts.children = opts.content;
-  delete opts.content;
+  var props = objectSpread({}, defaultOpts, opts, {
+    children: opts.content
+  });
 
-  var props = objectSpread({}, defaultOpts, opts);
-
-  console.log(props, 'opts');
-  ReactDOM.render(React__default.createElement(Alert$1, props), div);
+  delete props.content;
+  render(createElement(Alert$1, props), div);
   return {
     destroy: destroy
   };
@@ -412,10 +370,7 @@ var alertBox = {
   }
 };
 
-var show = alertBox.show,
-    hide = alertBox.hide;
-Alert$1.show = show;
-Alert$1.hide = hide;
+var index = Object.assign(Alert$1, alertBox);
 
-export default Alert$1;
+export default index;
 //# sourceMappingURL=alert.esm.js.map

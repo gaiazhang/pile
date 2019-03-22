@@ -41,8 +41,11 @@
       }
   .pile-alert-box > .d-btns {
         width: 100%;
-        border-top: 1px solid #e5e5e5;
+        border-top: 1px solid #e5e5e5
       }
+  .pile-alert-box > .d-btns:focus {
+          outline:none;
+        }
   .pile-alert-box > .pile-btn-alert .btn-orange, .pile-alert-box > .pile-alert-confirm .btn-orange {
         color: #1e96fa;
         line-height: 50px;

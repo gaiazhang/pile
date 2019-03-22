@@ -89,16 +89,16 @@ class Alert extends React.Component {
             {children ? (
               <div className="pile-alert-content">{children}</div>
             ) : null}
-            {/* eslint-disable */}
+
             <div
               role="button"
+              tabIndex={0}
               className="d-btns pile-btn-alert"
               onClick={this.onClose}
               onKeyPress={this.onKeyPress}
             >
               <span className="btn-orange">{btnText}</span>
             </div>
-            {/* eslint-enable */}
           </div>
         </div>
       </CSSTransition>
